@@ -1,0 +1,6 @@
+framework module Pods_VibeCheckTests {
+  umbrella header "Pods-VibeCheckTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
