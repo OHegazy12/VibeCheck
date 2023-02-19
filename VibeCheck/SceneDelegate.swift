@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Parse
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -17,6 +18,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let _ = (scene as? UIWindowScene) else { return }
+       /* let parseConfig = ParseClientConfiguration {
+                    $0.applicationId = "GBObFJ706svjX8KgrovYzIzeKxvPODfEiM1CfYzr" // <- UPDATE
+                    $0.clientKey = "tUA9BbD0LubPQ7sP2qVVa4ENeWjlKpseWiYg6JCD" // <- UPDATE
+                    $0.server = "https://parseapi.back4app.com"
+            }
+            Parse.initialize(with: parseConfig)*/
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
