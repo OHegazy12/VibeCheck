@@ -19,10 +19,10 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        
+        initializeHideKeyboard()
     }
     
-    
+    // Logging into existing account implementation
     @IBAction func onSignIn(_ sender: Any)
     {
         let username = usernameField.text!
@@ -42,4 +42,16 @@ class LoginViewController: UIViewController {
         }
     }
 
+    // Following two functions allows user to dismiss keyboard by tapping anywhere on the screen.
+    func initializeHideKeyboard()
+    {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissMyKeyboard))
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissMyKeyboard()
+    {
+        view.endEditing(true)
+    }
+    
 }

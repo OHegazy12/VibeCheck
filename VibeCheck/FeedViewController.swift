@@ -6,8 +6,11 @@
 //
 
 import UIKit
+import Parse
+import AlamofireImage
+import MessageInputBar
 
-class FeedViewController: UIViewController
+class FeedViewController: UITableViewController, MessageInputBarDelegate
 {
-    
+        
 }
