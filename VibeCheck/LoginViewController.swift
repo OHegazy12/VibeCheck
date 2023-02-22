@@ -38,6 +38,9 @@ class LoginViewController: UIViewController {
             else
             {
                 print("Error\(error?.localizedDescription)")
+                let alert = UIAlertController(title: "Error", message: "Account info either does not exist or is incorrect.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default,handler: nil))
+                self.present(alert, animated: true, completion: nil)
             }
         }
     }

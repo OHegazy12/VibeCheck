@@ -5,4 +5,9 @@
 //  Created by Omar Hegazy on 2/16/23.
 //
 
-import Foundation
+import UIKit
+
+class PostCell : UITableViewCell
+{
+    
+}

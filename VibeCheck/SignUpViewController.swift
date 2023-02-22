@@ -40,11 +40,24 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, UIGestureReco
             return
         }
         
-        let newUser = User(username: username, password: password, email: email)
-        
-        let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let createProfileViewController = storyboard.instantiateViewController(withIdentifier: "CreateProfileViewController")
-        present(createProfileViewController, animated: true) // Pushes navigation controller to top of stack, takes user to next page.
+        //let newUser = User(username: username, password: password, email: email)
+        let user = PFUser()
+        user.username = username
+        user.email = email
+        user.password = password
+        user.signUpInBackground { (success, error) in
+            if success
+            {
+                //self.performSegue(withIdentifier: "SignUpSegue", sender: nil)
+                let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                let createProfileViewController = storyboard.instantiateViewController(withIdentifier: "CreateProfileViewController")
+                self.present(createProfileViewController, animated: true) // Pushes navigation controller to top of stack, takes user to next page.
+            }
+            else
+            {
+                print("Error: \(error?.localizedDescription)")
+            }
+        }
     }
     
     func initializeHideKeyboard()
