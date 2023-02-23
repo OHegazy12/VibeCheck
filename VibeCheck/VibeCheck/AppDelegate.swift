@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Parse
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -14,7 +15,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        Thread.sleep(forTimeInterval: 2.5) // Adds a delay to launch screen
+        Thread.sleep(forTimeInterval: 1.0) // Adds a delay to launch screen
+        
+        // Connection to backend server.
+         let parseConfig = ParseClientConfiguration
+        {
+                $0.applicationId = "GBObFJ706svjX8KgrovYzIzeKxvPODfEiM1CfYzr" // <- UPDATE
+                $0.clientKey = "tUA9BbD0LubPQ7sP2qVVa4ENeWjlKpseWiYg6JCD" // <- UPDATE
+                $0.server = "https://parseapi.back4app.com"
+        }
+             Parse.initialize(with: parseConfig)
+        
         return true
     }
 
