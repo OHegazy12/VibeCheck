@@ -8,10 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		1838039229A13D9700F9043D /* CreateProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1838039129A13D9700F9043D /* CreateProfileViewController.swift */; };
+		187687C429A70C9800ECC331 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187687C329A70C9800ECC331 /* CommentCell.swift */; };
+		188BADB329A5DCC000351199 /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188BADB229A5DCC000351199 /* PostCell.swift */; };
 		189E19CC299F247F005AB155 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189E19CB299F247F005AB155 /* FeedViewController.swift */; };
 		189E19CE299F248D005AB155 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189E19CD299F248D005AB155 /* SignUpViewController.swift */; };
-		189E19D0299F2497005AB155 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189E19CF299F2497005AB155 /* CommentCell.swift */; };
-		189E19D2299F24A4005AB155 /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189E19D1299F24A4005AB155 /* PostCell.swift */; };
 		189E19D4299F24C1005AB155 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189E19D3299F24C1005AB155 /* CameraViewController.swift */; };
 		18CC3595299E8C2C00668AF7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CC3594299E8C2C00668AF7 /* AppDelegate.swift */; };
 		18CC3597299E8C2C00668AF7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CC3596299E8C2C00668AF7 /* SceneDelegate.swift */; };
@@ -48,10 +48,10 @@
 		075F34D87DFCCE9FD4B0B172 /* Pods-VibeCheckTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VibeCheckTests.release.xcconfig"; path = "Target Support Files/Pods-VibeCheckTests/Pods-VibeCheckTests.release.xcconfig"; sourceTree = "<group>"; };
 		118FC12B31E400CD44011D62 /* Pods_VibeCheck.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VibeCheck.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1838039129A13D9700F9043D /* CreateProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProfileViewController.swift; sourceTree = "<group>"; };
+		187687C329A70C9800ECC331 /* CommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
+		188BADB229A5DCC000351199 /* PostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
 		189E19CB299F247F005AB155 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		189E19CD299F248D005AB155 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
-		189E19CF299F2497005AB155 /* CommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
-		189E19D1299F24A4005AB155 /* PostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
 		189E19D3299F24C1005AB155 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		18CC3591299E8C2C00668AF7 /* VibeCheck.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VibeCheck.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18CC3594299E8C2C00668AF7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -137,10 +137,10 @@
 				18CC35A2299E8C2F00668AF7 /* Info.plist */,
 				189E19CB299F247F005AB155 /* FeedViewController.swift */,
 				189E19CD299F248D005AB155 /* SignUpViewController.swift */,
-				189E19CF299F2497005AB155 /* CommentCell.swift */,
-				189E19D1299F24A4005AB155 /* PostCell.swift */,
 				189E19D3299F24C1005AB155 /* CameraViewController.swift */,
 				1838039129A13D9700F9043D /* CreateProfileViewController.swift */,
+				188BADB229A5DCC000351199 /* PostCell.swift */,
+				187687C329A70C9800ECC331 /* CommentCell.swift */,
 			);
 			path = VibeCheck;
 			sourceTree = "<group>";
@@ -460,15 +460,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				189E19D2299F24A4005AB155 /* PostCell.swift in Sources */,
 				1838039229A13D9700F9043D /* CreateProfileViewController.swift in Sources */,
 				18CC3599299E8C2C00668AF7 /* LoginViewController.swift in Sources */,
 				18CC3595299E8C2C00668AF7 /* AppDelegate.swift in Sources */,
 				189E19CC299F247F005AB155 /* FeedViewController.swift in Sources */,
 				18CC3597299E8C2C00668AF7 /* SceneDelegate.swift in Sources */,
+				187687C429A70C9800ECC331 /* CommentCell.swift in Sources */,
+				188BADB329A5DCC000351199 /* PostCell.swift in Sources */,
 				189E19D4299F24C1005AB155 /* CameraViewController.swift in Sources */,
 				189E19CE299F248D005AB155 /* SignUpViewController.swift in Sources */,
-				189E19D0299F2497005AB155 /* CommentCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

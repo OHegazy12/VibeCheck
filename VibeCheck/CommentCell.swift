@@ -2,7 +2,26 @@
 //  CommentCell.swift
 //  VibeCheck
 //
-//  Created by Omar Hegazy on 2/16/23.
+//  Created by Omar Hegazy on 2/22/23.
 //
 
-import Foundation
+import UIKit
+
+class CommentCell: UITableViewCell {
+    
+    
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var commentLabel: UILabel!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // Initialization code
+    }
+
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+
+        // Configure the view for the selected state
+    }
+
+}
