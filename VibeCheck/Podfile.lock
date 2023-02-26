@@ -1,37 +1,8 @@
 PODS:
-  - Alamofire (5.4.1)
-  - AlamofireImage (4.1.0):
-    - Alamofire (~> 5.1)
-  - AppAuth (1.6.0):
-    - AppAuth/Core (= 1.6.0)
-    - AppAuth/ExternalUserAgent (= 1.6.0)
-  - AppAuth/Core (1.6.0)
-  - AppAuth/ExternalUserAgent (1.6.0):
-    - AppAuth/Core
+  - Alamofire (5.6.4)
+  - AlamofireImage (4.2.0):
+    - Alamofire (~> 5.4)
   - Bolts/Tasks (1.9.1)
-  - DTSocialMediaLogin (0.1.0):
-    - FBSDKCoreKit (~> 7.0.0)
-    - FBSDKLoginKit (~> 7.0.0)
-    - GoogleSignIn (~> 5.0.2)
-    - OAuthSwift (~> 2.1.0)
-  - FBSDKCoreKit (7.0.1):
-    - FBSDKCoreKit/Basics (= 7.0.1)
-    - FBSDKCoreKit/Core (= 7.0.1)
-  - FBSDKCoreKit/Basics (7.0.1)
-  - FBSDKCoreKit/Core (7.0.1):
-    - FBSDKCoreKit/Basics
-  - FBSDKLoginKit (7.0.1):
-    - FBSDKLoginKit/Login (= 7.0.1)
-  - FBSDKLoginKit/Login (7.0.1):
-    - FBSDKCoreKit (~> 7.0.1)
-  - GoogleSignIn (5.0.2):
-    - AppAuth (~> 1.2)
-    - GTMAppAuth (~> 1.0)
-    - GTMSessionFetcher/Core (~> 1.1)
-  - GTMAppAuth (1.3.1):
-    - AppAuth/Core (~> 1.6)
-    - GTMSessionFetcher/Core (< 3.0, >= 1.5)
-  - GTMSessionFetcher/Core (1.7.2)
   - InputBarAccessoryView (5.5.0):
     - InputBarAccessoryView/Core (= 5.5.0)
   - InputBarAccessoryView/Core (5.5.0)
@@ -40,55 +11,112 @@ PODS:
   - MessageInputBar/Core (0.4.1)
   - MessageKit (3.8.0):
     - InputBarAccessoryView (~> 5.5.0)
-  - OAuthSwift (2.1.2)
-  - Parse (1.19.1):
-    - Parse/Core (= 1.19.1)
-  - Parse/Core (1.19.1):
+  - mongo-embedded-c-driver (1.13.0-4.0.4)
+  - mongo_embedded (4.0.4)
+  - mongoc_embedded (4.0.4):
+    - mongo-embedded-c-driver (~> 1.13.0-4.0.4)
+    - mongo_embedded (~> 4.0.4)
+  - MongoMobile (0.1.0):
+    - mongo_embedded (~> 4.0.4)
+    - mongoc_embedded (~> 4.0.4)
+    - MongoSwift (~> 0.1.0)
+  - MongoSwift (0.1.0):
+    - mongo-embedded-c-driver (~> 1.13.0-4.0.0)
+  - Parse (1.19.4):
+    - Parse/Core (= 1.19.4)
+  - Parse/Core (1.19.4):
     - Bolts/Tasks (= 1.9.1)
+  - Realm (10.36.0):
+    - Realm/Headers (= 10.36.0)
+  - Realm/Headers (10.36.0)
+  - RealmSwift (10.36.0):
+    - Realm (= 10.36.0)
+  - StitchAWSService (6.4.0):
+    - StitchCore (= 6.4.0)
+    - StitchCoreAWSService (= 6.4.0)
+  - StitchCore (6.4.0):
+    - StitchCoreSDK (= 6.4.0)
+  - StitchCoreAWSService (6.4.0):
+    - StitchCoreSDK (= 6.4.0)
+  - StitchCoreLocalMongoDBService (6.4.0):
+    - MongoMobile (= 0.1.0)
+    - StitchCoreSDK (= 6.4.0)
+  - StitchCoreRemoteMongoDBService (6.4.0):
+    - StitchCoreLocalMongoDBService (= 6.4.0)
+    - StitchCoreSDK (= 6.4.0)
+  - StitchCoreSDK (6.4.0):
+    - MongoSwift (= 0.1.0)
+  - StitchRemoteMongoDBService (6.4.0):
+    - StitchCore (= 6.4.0)
+    - StitchCoreRemoteMongoDBService (= 6.4.0)
+  - StitchSDK (6.4.0):
+    - StitchSDK/StitchSDK (= 6.4.0)
+  - StitchSDK/StitchAWSService (6.4.0):
+    - StitchAWSService (= 6.4.0)
+  - StitchSDK/StitchRemoteMongoDBService (6.4.0):
+    - StitchRemoteMongoDBService (= 6.4.0)
+  - StitchSDK/StitchSDK (6.4.0):
+    - StitchSDK/StitchRemoteMongoDBService
 
 DEPENDENCIES:
   - Alamofire
   - AlamofireImage (~> 4.1)
-  - DTSocialMediaLogin
   - MessageInputBar
   - MessageKit
   - Parse
+  - RealmSwift (~> 10)
+  - StitchSDK (= 6.4.0)
+  - StitchSDK/StitchAWSService (= 6.4.0)
 
 SPEC REPOS:
   trunk:
     - Alamofire
     - AlamofireImage
-    - AppAuth
     - Bolts
-    - DTSocialMediaLogin
-    - FBSDKCoreKit
-    - FBSDKLoginKit
-    - GoogleSignIn
-    - GTMAppAuth
-    - GTMSessionFetcher
     - InputBarAccessoryView
     - MessageInputBar
     - MessageKit
-    - OAuthSwift
+    - mongo-embedded-c-driver
+    - mongo_embedded
+    - mongoc_embedded
+    - MongoMobile
+    - MongoSwift
     - Parse
+    - Realm
+    - RealmSwift
+    - StitchAWSService
+    - StitchCore
+    - StitchCoreAWSService
+    - StitchCoreLocalMongoDBService
+    - StitchCoreRemoteMongoDBService
+    - StitchCoreSDK
+    - StitchRemoteMongoDBService
+    - StitchSDK
 
 SPEC CHECKSUMS:
-  Alamofire: 2291f7d21ca607c491dd17642e5d40fdcda0e65c
-  AlamofireImage: c4a2ba349885fb3064feb74d2e547bd42ce9be10
-  AppAuth: 8fca6b5563a5baef2c04bee27538025e4ceb2add
+  Alamofire: 4e95d97098eacb88856099c4fc79b526a299e48c
+  AlamofireImage: 34a2d90b0e5fe6a5605f85ae4b7b01e784c60192
   Bolts: 8c1e8aab2f603387b8b9924f57d1d64f43d3ffdc
-  DTSocialMediaLogin: 7eff3e041145e0c4f2ad7481cc4d7c61cc13dbcf
-  FBSDKCoreKit: 9cc05bec0568a5955c82eb59ae95da0fe125b88d
-  FBSDKLoginKit: ecc6fd43c81b60f5b5e9388d58f137aff4a5d00b
-  GoogleSignIn: 7137d297ddc022a7e0aa4619c86d72c909fa7213
-  GTMAppAuth: 0ff230db599948a9ad7470ca667337803b3fc4dd
-  GTMSessionFetcher: 5595ec75acf5be50814f81e9189490412bad82ba
   InputBarAccessoryView: 1d7b0a672b36e370f01f264b3907ef39d03328e3
   MessageInputBar: e81c7535347f1f7b923de7080409a535a004b6e4
   MessageKit: a1ba0c69ebead94029867853eb44dd05b9b3f453
-  OAuthSwift: b95e3a54955d762aecf996e5088f69092623819b
-  Parse: e40fdb9c7d665823b7fe9865949cac9a53eb2ce7
+  mongo-embedded-c-driver: b46360baa15fc142baae80628822f26663220bde
+  mongo_embedded: e413134eb6b60544e7278add03007f8fe384a00c
+  mongoc_embedded: 41aadbb756b07070d6f0471192a84750cb42c580
+  MongoMobile: 988e8d2fd322761d6358570dde8a2b3d44801823
+  MongoSwift: e20f86eae1beb06bbba49c2d73bb570961cc4c85
+  Parse: 6d572042e2c171414c677acabcd9bab7bbf51264
+  Realm: 3fd136cb4c83a927482a7f1612496d37beed3cf5
+  RealmSwift: 513d4dcbf5bfc4d573454088b592685fc48dd716
+  StitchAWSService: d2d2d5dd0fcc2c162ec5502b240639efe44e4d84
+  StitchCore: 344f59b617dd5be8c32f0a2fdef39fb96591fc33
+  StitchCoreAWSService: 22c10a8f81c12e39adfce8151cc10d9606d9fa14
+  StitchCoreLocalMongoDBService: 26c339ea689d9633b33e266274406e7b4c3f2786
+  StitchCoreRemoteMongoDBService: e328908dde887cb3a9e3465793b37b69cb19c0e7
+  StitchCoreSDK: 4c4b847470229535a66f8ba6b2911c2eafc0d866
+  StitchRemoteMongoDBService: f5befbafb01720c4d7193e054907fa0ebff569f0
+  StitchSDK: 198397b6400c1fdd58e3e78300fe60374c700fe9
 
-PODFILE CHECKSUM: 8286da1accc3bac8332f246bba8df98982ae7d83
+PODFILE CHECKSUM: f99142c78037f0d59e47096145f69fb7fc099878
 
 COCOAPODS: 1.11.3
