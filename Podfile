@@ -12,7 +12,9 @@ target 'VibeCheck' do
   pod 'AlamofireImage', '~> 4.1'
   pod 'MessageKit'
   pod 'MessageInputBar'
-  pod 'DTSocialMediaLogin'
+  pod 'Amplify'
+  pod 'AmplifyPlugins/AWSAPIPlugin'
+  pod 'AmplifyPlugins/AWSDataStorePlugin'
 
   target 'VibeCheckTests' do
     inherit! :search_paths

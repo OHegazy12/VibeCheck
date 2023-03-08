@@ -8,7 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		1838039229A13D9700F9043D /* CreateProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1838039129A13D9700F9043D /* CreateProfileViewController.swift */; };
+		185656ED29AEB25200663897 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185656EC29AEB25200663897 /* CommentViewController.swift */; };
+		187615E429B7E8A400BFF2B6 /* Amplify in Frameworks */ = {isa = PBXBuildFile; productRef = 187615E329B7E8A400BFF2B6 /* Amplify */; };
+		187615E729B7F30400BFF2B6 /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 187615E529B7F30400BFF2B6 /* awsconfiguration.json */; };
+		187615E829B7F30400BFF2B6 /* amplifyconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 187615E629B7F30400BFF2B6 /* amplifyconfiguration.json */; };
+		187615EA29B7F34200BFF2B6 /* Backend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187615E929B7F34200BFF2B6 /* Backend.swift */; };
 		187687C429A70C9800ECC331 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187687C329A70C9800ECC331 /* CommentCell.swift */; };
+		1879D78E29AD83D7004D3130 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1879D78D29AD83D7004D3130 /* ProfileViewController.swift */; };
 		188BADB329A5DCC000351199 /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188BADB229A5DCC000351199 /* PostCell.swift */; };
 		189E19CC299F247F005AB155 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189E19CB299F247F005AB155 /* FeedViewController.swift */; };
 		189E19CE299F248D005AB155 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189E19CD299F248D005AB155 /* SignUpViewController.swift */; };
@@ -48,7 +54,12 @@
 		075F34D87DFCCE9FD4B0B172 /* Pods-VibeCheckTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VibeCheckTests.release.xcconfig"; path = "Target Support Files/Pods-VibeCheckTests/Pods-VibeCheckTests.release.xcconfig"; sourceTree = "<group>"; };
 		118FC12B31E400CD44011D62 /* Pods_VibeCheck.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VibeCheck.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1838039129A13D9700F9043D /* CreateProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProfileViewController.swift; sourceTree = "<group>"; };
+		185656EC29AEB25200663897 /* CommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
+		187615E529B7F30400BFF2B6 /* awsconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
+		187615E629B7F30400BFF2B6 /* amplifyconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = amplifyconfiguration.json; sourceTree = "<group>"; };
+		187615E929B7F34200BFF2B6 /* Backend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Backend.swift; sourceTree = "<group>"; };
 		187687C329A70C9800ECC331 /* CommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
+		1879D78D29AD83D7004D3130 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		188BADB229A5DCC000351199 /* PostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
 		189E19CB299F247F005AB155 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		189E19CD299F248D005AB155 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
@@ -81,6 +92,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5204565B3F7BE8783A58153E /* Pods_VibeCheck.framework in Frameworks */,
+				187615E429B7E8A400BFF2B6 /* Amplify in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -103,9 +115,60 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		184B8F5C29AC35DB002C2392 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				18CC3598299E8C2C00668AF7 /* LoginViewController.swift */,
+				189E19CD299F248D005AB155 /* SignUpViewController.swift */,
+				1838039129A13D9700F9043D /* CreateProfileViewController.swift */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		184B8F5D29AC3605002C2392 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				188BADB229A5DCC000351199 /* PostCell.swift */,
+				187687C329A70C9800ECC331 /* CommentCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		184B8F5E29AC361E002C2392 /* MainFeatures */ = {
+			isa = PBXGroup;
+			children = (
+				189E19CB299F247F005AB155 /* FeedViewController.swift */,
+				189E19D3299F24C1005AB155 /* CameraViewController.swift */,
+				1879D78D29AD83D7004D3130 /* ProfileViewController.swift */,
+				185656EC29AEB25200663897 /* CommentViewController.swift */,
+			);
+			path = MainFeatures;
+			sourceTree = "<group>";
+		};
+		184B8F5F29AC363F002C2392 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				18CC3594299E8C2C00668AF7 /* AppDelegate.swift */,
+				187615E929B7F34200BFF2B6 /* Backend.swift */,
+				18CC3596299E8C2C00668AF7 /* SceneDelegate.swift */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
+		184B8F6029AC369D002C2392 /* StoryBoards */ = {
+			isa = PBXGroup;
+			children = (
+				18CC359A299E8C2C00668AF7 /* Main.storyboard */,
+				18CC359F299E8C2F00668AF7 /* LaunchScreen.storyboard */,
+			);
+			path = StoryBoards;
+			sourceTree = "<group>";
+		};
 		18CC3588299E8C2C00668AF7 = {
 			isa = PBXGroup;
 			children = (
+				187615E629B7F30400BFF2B6 /* amplifyconfiguration.json */,
+				187615E529B7F30400BFF2B6 /* awsconfiguration.json */,
 				18CC3593299E8C2C00668AF7 /* VibeCheck */,
 				18CC35AA299E8C2F00668AF7 /* VibeCheckTests */,
 				18CC35B4299E8C2F00668AF7 /* VibeCheckUITests */,
@@ -128,19 +191,13 @@
 		18CC3593299E8C2C00668AF7 /* VibeCheck */ = {
 			isa = PBXGroup;
 			children = (
-				18CC3594299E8C2C00668AF7 /* AppDelegate.swift */,
-				18CC3596299E8C2C00668AF7 /* SceneDelegate.swift */,
-				18CC3598299E8C2C00668AF7 /* LoginViewController.swift */,
 				18DB71D5299EB28800DA3C4E /* Assets.xcassets */,
-				18CC359A299E8C2C00668AF7 /* Main.storyboard */,
-				18CC359F299E8C2F00668AF7 /* LaunchScreen.storyboard */,
+				184B8F5C29AC35DB002C2392 /* Authentication */,
+				184B8F5D29AC3605002C2392 /* Cells */,
+				184B8F5E29AC361E002C2392 /* MainFeatures */,
+				184B8F5F29AC363F002C2392 /* Other */,
+				184B8F6029AC369D002C2392 /* StoryBoards */,
 				18CC35A2299E8C2F00668AF7 /* Info.plist */,
-				189E19CB299F247F005AB155 /* FeedViewController.swift */,
-				189E19CD299F248D005AB155 /* SignUpViewController.swift */,
-				189E19D3299F24C1005AB155 /* CameraViewController.swift */,
-				1838039129A13D9700F9043D /* CreateProfileViewController.swift */,
-				188BADB229A5DCC000351199 /* PostCell.swift */,
-				187687C329A70C9800ECC331 /* CommentCell.swift */,
 			);
 			path = VibeCheck;
 			sourceTree = "<group>";
@@ -197,13 +254,15 @@
 				18CC358E299E8C2C00668AF7 /* Frameworks */,
 				18CC358F299E8C2C00668AF7 /* Resources */,
 				DC19900348CACD250C482BC2 /* [CP] Embed Pods Frameworks */,
-				B69F5BBBF0664721A359F77C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = VibeCheck;
+			packageProductDependencies = (
+				187615E329B7E8A400BFF2B6 /* Amplify */,
+			);
 			productName = VibeCheck;
 			productReference = 18CC3591299E8C2C00668AF7 /* VibeCheck.app */;
 			productType = "com.apple.product-type.application";
@@ -236,7 +295,6 @@
 				18CC35AE299E8C2F00668AF7 /* Frameworks */,
 				18CC35AF299E8C2F00668AF7 /* Resources */,
 				3F0760B2E5C4B1BAB1EFBED0 /* [CP] Embed Pods Frameworks */,
-				CEC3AF4F8D13295F96703BEE /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -280,6 +338,9 @@
 				Base,
 			);
 			mainGroup = 18CC3588299E8C2C00668AF7;
+			packageReferences = (
+				187615E229B7E8A400BFF2B6 /* XCRemoteSwiftPackageReference "amplify-ios" */,
+			);
 			productRefGroup = 18CC3592299E8C2C00668AF7 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -296,7 +357,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				187615E729B7F30400BFF2B6 /* awsconfiguration.json in Resources */,
 				18CC35A1299E8C2F00668AF7 /* LaunchScreen.storyboard in Resources */,
+				187615E829B7F30400BFF2B6 /* amplifyconfiguration.json in Resources */,
 				18DB71D6299EB28800DA3C4E /* Assets.xcassets in Resources */,
 				18CC359C299E8C2C00668AF7 /* Main.storyboard in Resources */,
 			);
@@ -402,40 +465,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		B69F5BBBF0664721A359F77C /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-VibeCheck/Pods-VibeCheck-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-VibeCheck/Pods-VibeCheck-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VibeCheck/Pods-VibeCheck-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		CEC3AF4F8D13295F96703BEE /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-VibeCheck-VibeCheckUITests/Pods-VibeCheck-VibeCheckUITests-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-VibeCheck-VibeCheckUITests/Pods-VibeCheck-VibeCheckUITests-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VibeCheck-VibeCheckUITests/Pods-VibeCheck-VibeCheckUITests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		DC19900348CACD250C482BC2 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -462,13 +491,16 @@
 			files = (
 				1838039229A13D9700F9043D /* CreateProfileViewController.swift in Sources */,
 				18CC3599299E8C2C00668AF7 /* LoginViewController.swift in Sources */,
+				1879D78E29AD83D7004D3130 /* ProfileViewController.swift in Sources */,
 				18CC3595299E8C2C00668AF7 /* AppDelegate.swift in Sources */,
 				189E19CC299F247F005AB155 /* FeedViewController.swift in Sources */,
 				18CC3597299E8C2C00668AF7 /* SceneDelegate.swift in Sources */,
 				187687C429A70C9800ECC331 /* CommentCell.swift in Sources */,
 				188BADB329A5DCC000351199 /* PostCell.swift in Sources */,
+				187615EA29B7F34200BFF2B6 /* Backend.swift in Sources */,
 				189E19D4299F24C1005AB155 /* CameraViewController.swift in Sources */,
 				189E19CE299F248D005AB155 /* SignUpViewController.swift in Sources */,
+				185656ED29AEB25200663897 /* CommentViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -574,7 +606,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -628,7 +660,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -818,6 +850,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		187615E229B7E8A400BFF2B6 /* XCRemoteSwiftPackageReference "amplify-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/aws-amplify/amplify-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		187615E329B7E8A400BFF2B6 /* Amplify */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 187615E229B7E8A400BFF2B6 /* XCRemoteSwiftPackageReference "amplify-ios" */;
+			productName = Amplify;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 18CC3589299E8C2C00668AF7 /* Project object */;
 }

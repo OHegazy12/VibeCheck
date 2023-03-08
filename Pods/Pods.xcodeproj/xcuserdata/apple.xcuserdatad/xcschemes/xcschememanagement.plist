@@ -4,6 +4,20 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>AWSCore.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>5</integer>
+		</dict>
+		<key>AWSPluginsCore.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>6</integer>
+		</dict>
 		<key>Alamofire.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -18,56 +32,28 @@
 			<key>orderHint</key>
 			<integer>1</integer>
 		</dict>
-		<key>AppAuth.xcscheme</key>
+		<key>Amplify.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
 			<integer>2</integer>
 		</dict>
-		<key>Bolts.xcscheme</key>
+		<key>AmplifyPlugins.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
 			<integer>3</integer>
 		</dict>
-		<key>DTSocialMediaLogin.xcscheme</key>
+		<key>AppSyncRealTimeClient.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
 			<integer>4</integer>
 		</dict>
-		<key>FBSDKCoreKit.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-			<key>orderHint</key>
-			<integer>5</integer>
-		</dict>
-		<key>FBSDKLoginKit.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-			<key>orderHint</key>
-			<integer>6</integer>
-		</dict>
-		<key>GTMAppAuth.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-			<key>orderHint</key>
-			<integer>8</integer>
-		</dict>
-		<key>GTMSessionFetcher.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-			<key>orderHint</key>
-			<integer>9</integer>
-		</dict>
-		<key>GoogleSignIn.xcscheme</key>
+		<key>Bolts.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -79,63 +65,70 @@
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
-			<integer>10</integer>
+			<integer>8</integer>
 		</dict>
 		<key>MessageInputBar.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
-			<integer>11</integer>
+			<integer>9</integer>
 		</dict>
 		<key>MessageKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
-			<integer>12</integer>
-		</dict>
-		<key>OAuthSwift.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-			<key>orderHint</key>
-			<integer>13</integer>
+			<integer>10</integer>
 		</dict>
 		<key>Parse-Parse.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
-			<integer>15</integer>
+			<integer>12</integer>
 		</dict>
 		<key>Parse.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
-			<integer>14</integer>
+			<integer>11</integer>
 		</dict>
 		<key>Pods-VibeCheck-VibeCheckUITests.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
-			<integer>17</integer>
+			<integer>14</integer>
 		</dict>
 		<key>Pods-VibeCheck.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
-			<integer>16</integer>
+			<integer>13</integer>
 		</dict>
 		<key>Pods-VibeCheckTests.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
-			<integer>18</integer>
+			<integer>15</integer>
+		</dict>
+		<key>SQLite.swift.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>16</integer>
+		</dict>
+		<key>Starscream.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>17</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>

@@ -1,6 +1,0 @@
-framework module DTSocialMediaLogin {
-  umbrella header "DTSocialMediaLogin-umbrella.h"
-
-  export *
-  module * { export * }
-}
