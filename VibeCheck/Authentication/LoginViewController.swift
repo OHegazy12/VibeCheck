@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  LoginViewController.swift
 //  VibeCheck
 //
 //  Created by Omar Hegazy on 2/16/23.
