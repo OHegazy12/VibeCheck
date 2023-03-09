@@ -38,6 +38,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
             
             post["image"] = file
             
+            // Saves post to the server
             post.saveInBackground
             {
                 (success, error) in
@@ -48,7 +49,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
                 }
                 else
                 {
-                    print("Error: \(error?.localizedDescription)")
+                    print("Error: \(String(describing: error?.localizedDescription))")
                 }
             }
     }
@@ -71,11 +72,12 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         present(picker, animated: true, completion: nil)
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any])
+    {
         let image = info[.editedImage] as! UIImage
         
         let size = CGSize(width: 300, height: 300)
-        let scaledImage = image.af_imageScaled(to: size)
+        let scaledImage = image.af.imageScaled(to: size)
         
         imageView.image = scaledImage
         

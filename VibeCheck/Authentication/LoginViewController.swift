@@ -29,6 +29,7 @@ class LoginViewController: UIViewController {
         let username = usernameField.text!
         let password = passwordField.text!
         
+        // Allows user to log into their account any time in the future
         PFUser.logInWithUsername(inBackground: username, password: password)
         {
             // Verifies with database server to see if input matches account info in User class.
@@ -39,7 +40,7 @@ class LoginViewController: UIViewController {
             }
             else
             {
-                print("Error\(error?.localizedDescription)")
+                print("Error\(String(describing: error?.localizedDescription))")
                 let alert = UIAlertController(title: "Error", message: "Account info either does not exist or is incorrect.", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "OK", style: .default,handler: nil))
                 self.present(alert, animated: true, completion: nil)

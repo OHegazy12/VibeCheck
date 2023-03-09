@@ -24,14 +24,18 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
         tableView.dataSource = self
     
         // If post exists, load whatever comments it have.
-        if postObject != nil {
-                loadComments()
-            } else {
-                print("postObject is nil")
-            }
+        if postObject != nil
+        {
+            loadComments()
+        }
+        else
+        {
+            print("postObject is nil")
+        }
     }
     
-    func loadComments() {
+    func loadComments()
+    {
         guard let postObject = postObject else
         {
             print("Error: postObject is nil")
@@ -61,7 +65,7 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
         }
     }
     
-
+    
     @IBAction func onCreateComment(_ sender: Any)
     {
         // Creates 'Add Comment' pop up for users to type their comment in.
@@ -110,7 +114,7 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
         present(alertController, animated: true, completion: nil)
     }
     
-    // Displays number of comments in a post
+    // Sets & updates number of comments in a given post.
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
         return comments.count
@@ -143,11 +147,13 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
         }
     }
 
-    
+    // Displays comments associated with each post
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
+        // Sets a resuable cell to CommentCell subclass
         let cell = tableView.dequeueReusableCell(withIdentifier: "CommentCell", for: indexPath) as! CommentCell
         
+        // Lays out the comments in rows
         let comment = comments[indexPath.row]
         
         cell.commentTextLabel.text = comment["text"] as? String

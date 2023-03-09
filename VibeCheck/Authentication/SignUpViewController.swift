@@ -47,6 +47,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, UIGestureReco
         user.email = email
         user.password = password
         
+        // Creates a new user asynchronously
         user.signUpInBackground
         { (success, error) in
             if success
@@ -57,7 +58,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, UIGestureReco
             }
             else
             {
-                print("Error: \(error?.localizedDescription)")
+                print("Error: \(String(describing: error?.localizedDescription))")
             }
         }
     }
