@@ -117,6 +117,10 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             self.posts = posts!
             self.tableView.reloadData()
         }
+        else
+        {
+            print("Error: \(String(describing: error?.localizedDescription))")
+        }
     }
 }
     
