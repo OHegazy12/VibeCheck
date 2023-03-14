@@ -10,4 +10,5 @@ import UIKit
 class InteractionCell: UITableViewCell
 {
     @IBOutlet weak var likeButton: UIButton!
+    @IBOutlet weak var dislikeButton: UIButton!
 }

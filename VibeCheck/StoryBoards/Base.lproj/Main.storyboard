@@ -343,17 +343,32 @@
                                                         <action selector="likeButtonTapped:" destination="wxf-ZY-ba4" eventType="touchUpInside" id="VlT-NM-TeK"/>
                                                     </connections>
                                                 </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BPl-vn-VUW">
+                                                    <rect key="frame" x="177" y="15" width="60" height="43"/>
+                                                    <state key="normal" title="Button"/>
+                                                    <buttonConfiguration key="configuration" style="plain" image="dislikeButtonEmpty" title="dislikebutton">
+                                                        <directionalEdgeInsets key="contentInsets" top="0.0" leading="100" bottom="0.0" trailing="0.0"/>
+                                                    </buttonConfiguration>
+                                                    <connections>
+                                                        <action selector="disLikeButtonTapped:" destination="wxf-ZY-ba4" eventType="touchUpInside" id="YJ1-Ql-9IV"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="HrA-Dh-zUG" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="m8V-ow-a5l" secondAttribute="leadingMargin" id="543-5K-SPV"/>
                                                 <constraint firstAttribute="trailing" secondItem="HrA-Dh-zUG" secondAttribute="trailing" constant="330" id="9R3-iM-n2G"/>
+                                                <constraint firstItem="BPl-vn-VUW" firstAttribute="centerX" secondItem="m8V-ow-a5l" secondAttribute="centerX" id="9uq-Xv-9HF"/>
+                                                <constraint firstItem="BPl-vn-VUW" firstAttribute="centerY" secondItem="m8V-ow-a5l" secondAttribute="centerY" id="Fo4-vr-TiR"/>
                                                 <constraint firstItem="HrA-Dh-zUG" firstAttribute="top" secondItem="m8V-ow-a5l" secondAttribute="topMargin" constant="-16" id="KHj-DI-6G6"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="HrA-Dh-zUG" secondAttribute="bottom" constant="9" id="lUO-WI-iTI"/>
+                                                <constraint firstItem="BPl-vn-VUW" firstAttribute="leading" secondItem="HrA-Dh-zUG" secondAttribute="trailing" constant="93" id="qo7-DF-41X"/>
+                                                <constraint firstItem="BPl-vn-VUW" firstAttribute="top" secondItem="m8V-ow-a5l" secondAttribute="topMargin" constant="4" id="zYd-rV-wrQ"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
+                                            <outlet property="dislikeButton" destination="BPl-vn-VUW" id="tO5-E1-b6z"/>
                                             <outlet property="likeButton" destination="HrA-Dh-zUG" id="80u-BM-5dn"/>
                                         </connections>
                                     </tableViewCell>
@@ -740,6 +755,7 @@
         <image name="bolt.heart.fill" catalog="system" width="128" height="107"/>
         <image name="camera.circle.fill" catalog="system" width="128" height="123"/>
         <image name="camera.metering.center.weighted" catalog="system" width="128" height="93"/>
+        <image name="dislikeButtonEmpty" width="64" height="64"/>
         <image name="heart.fill" catalog="system" width="128" height="107"/>
         <image name="homekit" catalog="system" width="128" height="104"/>
         <image name="icons8-image-100" width="100" height="100"/>

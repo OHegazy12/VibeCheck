@@ -79,7 +79,27 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         else
         {
             let cell = tableView.dequeueReusableCell(withIdentifier: "InteractionCell") as! InteractionCell
+            cell.likeButton.tag = indexPath.section
             cell.likeButton.addTarget(self, action: #selector(likeButtonTapped(_:)), for: .touchUpInside)
+            if let likedPosts = UserDefaults.standard.array(forKey: "likedPosts") as? [String], likedPosts.contains(post.objectId ?? "")
+            {
+                cell.likeButton.setImage(UIImage(named: "likeButtonFilled"), for: .normal)
+            }
+            else
+            {
+                cell.likeButton.setImage(UIImage(named: "likeButtonEmpty"), for: .normal)
+            }
+            
+            cell.dislikeButton.tag = indexPath.section
+            cell.dislikeButton.addTarget(self, action: #selector(disLikeButtonTapped(_:)), for: .touchUpInside)
+            if let dislikedPosts = UserDefaults.standard.array(forKey: "dislikedPosts") as? [String], dislikedPosts.contains(post.objectId ?? "")
+            {
+                cell.dislikeButton.setImage(UIImage(named: "dislikeButtonFilled"), for: .normal)
+            }
+            else
+            {
+                cell.dislikeButton.setImage(UIImage(named: "dislikeButtonEmpty"), for: .normal)
+            }
             return cell
         }
     }
@@ -137,32 +157,88 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBAction func likeButtonTapped(_ sender: UIButton)
     {
         let point = sender.convert(CGPoint.zero, to: tableView)
-            guard let indexPath = tableView.indexPathForRow(at: point) else {
+            guard let indexPath = tableView.indexPathForRow(at: point) else
+            {
                 return
             }
             
             let post = posts[indexPath.section]
-            if let likes = post["likes"] as? [String] {
-                if likes.contains(PFUser.current()?.objectId ?? "") {
-                    post["likes"] = likes.filter { $0 != PFUser.current()?.objectId }
+            let defaults = UserDefaults.standard
+            
+            if var likedPosts = defaults.array(forKey: "likedPosts") as? [String]
+            {
+                if likedPosts.contains(post.objectId ?? "") {
+                    post["likes"] = (post["likes"] as? [String])?.filter { $0 != PFUser.current()?.objectId }
+                    likedPosts = likedPosts.filter { $0 != post.objectId }
                     let image = UIImage(named: "likeButtonEmpty")
                     sender.setImage(image, for: .normal)
                     print("Post has been unliked")
-                } else {
+                }
+                else
+                {
                     post.addUniqueObject(PFUser.current()?.objectId ?? "", forKey: "likes")
+                    likedPosts.append(post.objectId ?? "")
                     let image = UIImage(named: "likeButtonFilled")
                     sender.setImage(image, for: .normal)
                     animateLikeButton(button: sender)
                     print("Post has been liked")
                 }
-            } else {
+                defaults.set(likedPosts, forKey: "likedPosts")
+            }
+            else
+            {
                 post["likes"] = [PFUser.current()?.objectId ?? ""]
                 let image = UIImage(named: "likeButtonFilled")
                 sender.setImage(image, for: .normal)
                 animateLikeButton(button: sender)
+                defaults.set([post.objectId ?? ""], forKey: "likedPosts")
             }
             
             post.saveInBackground()
+    }
+    
+    @IBAction func disLikeButtonTapped(_ sender: UIButton)
+    {
+        let point = sender.convert(CGPoint.zero, to: tableView)
+        guard let indexPath = tableView.indexPathForRow(at: point) else
+        {
+            return
+        }
+        
+        let post = posts[indexPath.section]
+        let defaults = UserDefaults.standard
+        
+        if var dislikedPosts = defaults.array(forKey: "dislikedPosts") as? [String]
+        {
+            if dislikedPosts.contains(post.objectId ?? "")
+            {
+                post["dislikes"] = (post["dislikes"] as? [String])?.filter { $0 != PFUser.current()?.objectId }
+                dislikedPosts = dislikedPosts.filter { $0 != post.objectId }
+                let image = UIImage(named: "dislikeButtonEmpty")
+                sender.setImage(image, for: .normal)
+                print("Default stage")
+            }
+            else
+            {
+                post.addUniqueObject(PFUser.current()?.objectId ?? "", forKey: "dislikes")
+                dislikedPosts.append(post.objectId ?? "")
+                let image = UIImage(named: "dislikeButtonFilled")
+                sender.setImage(image, for: .normal)
+                animatedislikeButton(button: sender)
+                print("Post has been disliked")
+            }
+            defaults.set(dislikedPosts, forKey: "dislikedPosts")
+        }
+        else
+        {
+            post["dislikes"] = [PFUser.current()?.objectId ?? ""]
+            let image = UIImage(named: "dislikeButtonFilled")
+            sender.setImage(image, for: .normal)
+            animatedislikeButton(button: sender)
+            defaults.set([post.objectId ?? ""], forKey: "dislikedPosts")
+        }
+        
+        post.saveInBackground()
     }
     
     func animateLikeButton(button: UIButton)
@@ -175,5 +251,18 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
                 })
             })
     }
+    
+    func animatedislikeButton(button: UIButton)
+    {
+        UIView.animate(withDuration: 0.1, animations: { button.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)}, completion:
+            { _ in
+                UIView.animate(withDuration: 0.1, animations:
+                {
+                    button.transform = CGAffineTransform.identity
+                })
+            })
+    }
+    
+    
     
 }
