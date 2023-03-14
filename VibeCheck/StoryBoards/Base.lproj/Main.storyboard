@@ -323,22 +323,39 @@
                                             <outlet property="usernameLabel" destination="Bq0-oc-cwa" id="m8f-iM-zD6"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="InteractionCell" rowHeight="79.99999988079071" id="pXr-1V-xsP" userLabel="InteractionCell">
-                                        <rect key="frame" x="0.0" y="503" width="414" height="80"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="InteractionCell" rowHeight="72.99999988079071" id="pXr-1V-xsP" userLabel="InteractionCell" customClass="InteractionCell" customModule="VibeCheck" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="503" width="414" height="73"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="pXr-1V-xsP" id="m8V-ow-a5l">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="73"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" fixedFrame="YES" image="hand.thumbsup" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="8vB-4u-8mN">
-                                                    <rect key="frame" x="20" y="4.5" width="41" height="31"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <color key="tintColor" red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </imageView>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HrA-Dh-zUG">
+                                                    <rect key="frame" x="20" y="-5" width="64" height="58"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="xrm-pu-BxA"/>
+                                                    </constraints>
+                                                    <state key="normal" title="Button"/>
+                                                    <buttonConfiguration key="configuration" style="plain" image="likeButtonEmpty" title="likeButton">
+                                                        <directionalEdgeInsets key="contentInsets" top="0.0" leading="75" bottom="-22" trailing="0.0"/>
+                                                    </buttonConfiguration>
+                                                    <connections>
+                                                        <action selector="likeButtonTapped:" destination="wxf-ZY-ba4" eventType="touchUpInside" id="VlT-NM-TeK"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="HrA-Dh-zUG" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="m8V-ow-a5l" secondAttribute="leadingMargin" id="543-5K-SPV"/>
+                                                <constraint firstAttribute="trailing" secondItem="HrA-Dh-zUG" secondAttribute="trailing" constant="330" id="9R3-iM-n2G"/>
+                                                <constraint firstItem="HrA-Dh-zUG" firstAttribute="top" secondItem="m8V-ow-a5l" secondAttribute="topMargin" constant="-16" id="KHj-DI-6G6"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="HrA-Dh-zUG" secondAttribute="bottom" constant="9" id="lUO-WI-iTI"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <outlet property="likeButton" destination="HrA-Dh-zUG" id="80u-BM-5dn"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -370,7 +387,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q5l-eJ-EHY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="10564" y="798"/>
+            <point key="canvasLocation" x="10563.76811594203" y="797.54464285714278"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="SKT-oL-Kq0">
@@ -723,10 +740,10 @@
         <image name="bolt.heart.fill" catalog="system" width="128" height="107"/>
         <image name="camera.circle.fill" catalog="system" width="128" height="123"/>
         <image name="camera.metering.center.weighted" catalog="system" width="128" height="93"/>
-        <image name="hand.thumbsup" catalog="system" width="123" height="128"/>
         <image name="heart.fill" catalog="system" width="128" height="107"/>
         <image name="homekit" catalog="system" width="128" height="104"/>
         <image name="icons8-image-100" width="100" height="100"/>
+        <image name="likeButtonEmpty" width="64" height="64"/>
         <image name="message.fill" catalog="system" width="128" height="114"/>
         <image name="person.3.fill" catalog="system" width="128" height="61"/>
         <image name="person.circle" catalog="system" width="128" height="123"/>

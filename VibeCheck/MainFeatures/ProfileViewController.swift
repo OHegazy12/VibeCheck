@@ -6,13 +6,29 @@
 //
 
 import UIKit
+import Parse
+import AlamofireImage
 
-class ProfileViewController: UIViewController {
+class ProfileViewController: UIViewController
+{
 
+    @IBOutlet var usernameLabel: UILabel!
+    @IBOutlet var profileImageView: UIImageView!
+    @IBOutlet var profileBio: UILabel!
+    @IBOutlet var editButton: UIButton!
+    
+    var username: String?
+    var profileImage: UIImage?
+    var userBio: String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
+        
+        usernameLabel.text = username
+        profileImageView.image = profileImage
+        profileBio.text = userBio
     }
     
 

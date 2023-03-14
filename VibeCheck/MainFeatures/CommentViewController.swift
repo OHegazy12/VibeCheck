@@ -91,7 +91,7 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
             
             // Updates Comment class in database whenever a new comment is made
             let newComment = PFObject(className: "Comment")
-            newComment["author"] = PFUser.current() ?? NSNull()
+            newComment["author"] = PFUser.current() ?? NSNull() // NSNull is singleton
             newComment["text"] = commenttext
             newComment["post"] = self?.postObject ?? NSNull()
             newComment.saveInBackground

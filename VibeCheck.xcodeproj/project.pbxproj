@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1836C4FA29BFCAA9000BC583 /* InteractionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1836C4F929BFCAA9000BC583 /* InteractionCell.swift */; };
 		1838039229A13D9700F9043D /* CreateProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1838039129A13D9700F9043D /* CreateProfileViewController.swift */; };
 		185656ED29AEB25200663897 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185656EC29AEB25200663897 /* CommentViewController.swift */; };
 		187615E429B7E8A400BFF2B6 /* Amplify in Frameworks */ = {isa = PBXBuildFile; productRef = 187615E329B7E8A400BFF2B6 /* Amplify */; };
@@ -53,6 +54,7 @@
 /* Begin PBXFileReference section */
 		075F34D87DFCCE9FD4B0B172 /* Pods-VibeCheckTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VibeCheckTests.release.xcconfig"; path = "Target Support Files/Pods-VibeCheckTests/Pods-VibeCheckTests.release.xcconfig"; sourceTree = "<group>"; };
 		118FC12B31E400CD44011D62 /* Pods_VibeCheck.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VibeCheck.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1836C4F929BFCAA9000BC583 /* InteractionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionCell.swift; sourceTree = "<group>"; };
 		1838039129A13D9700F9043D /* CreateProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProfileViewController.swift; sourceTree = "<group>"; };
 		185656EC29AEB25200663897 /* CommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
 		187615E529B7F30400BFF2B6 /* awsconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 			children = (
 				188BADB229A5DCC000351199 /* PostCell.swift */,
 				187687C329A70C9800ECC331 /* CommentCell.swift */,
+				1836C4F929BFCAA9000BC583 /* InteractionCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -501,6 +504,7 @@
 				189E19D4299F24C1005AB155 /* CameraViewController.swift in Sources */,
 				189E19CE299F248D005AB155 /* SignUpViewController.swift in Sources */,
 				185656ED29AEB25200663897 /* CommentViewController.swift in Sources */,
+				1836C4FA29BFCAA9000BC583 /* InteractionCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

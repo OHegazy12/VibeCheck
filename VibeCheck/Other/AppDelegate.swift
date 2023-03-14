@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Thread.sleep(forTimeInterval: 1.0) // Adds a delay to launch screen
         
         // Connection to backend server.
-         let parseConfig = ParseClientConfiguration
+        let parseConfig = ParseClientConfiguration
         {
                 $0.applicationId = "GBObFJ706svjX8KgrovYzIzeKxvPODfEiM1CfYzr" // <- UPDATE
                 $0.clientKey = "tUA9BbD0LubPQ7sP2qVVa4ENeWjlKpseWiYg6JCD" // <- UPDATE

@@ -76,11 +76,12 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
              return cell
          }
         
-         else
-         {
-             let cell = tableView.dequeueReusableCell(withIdentifier: "InteractionCell")!
-             return cell
-         }
+        else
+        {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "InteractionCell") as! InteractionCell
+            cell.likeButton.addTarget(self, action: #selector(likeButtonTapped(_:)), for: .touchUpInside)
+            return cell
+        }
     }
     
     @IBOutlet weak var tableView: UITableView!
@@ -96,8 +97,6 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             tableView.dataSource = self
             
             tableView.keyboardDismissMode = .interactive
-
-            let center = NotificationCenter.default
             // Do any additional setup after loading the view.
         }
         
@@ -135,5 +134,46 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         delegate.window?.rootViewController = loginVC
     }
 
+    @IBAction func likeButtonTapped(_ sender: UIButton)
+    {
+        let point = sender.convert(CGPoint.zero, to: tableView)
+            guard let indexPath = tableView.indexPathForRow(at: point) else {
+                return
+            }
+            
+            let post = posts[indexPath.section]
+            if let likes = post["likes"] as? [String] {
+                if likes.contains(PFUser.current()?.objectId ?? "") {
+                    post["likes"] = likes.filter { $0 != PFUser.current()?.objectId }
+                    let image = UIImage(named: "likeButtonEmpty")
+                    sender.setImage(image, for: .normal)
+                    print("Post has been unliked")
+                } else {
+                    post.addUniqueObject(PFUser.current()?.objectId ?? "", forKey: "likes")
+                    let image = UIImage(named: "likeButtonFilled")
+                    sender.setImage(image, for: .normal)
+                    animateLikeButton(button: sender)
+                    print("Post has been liked")
+                }
+            } else {
+                post["likes"] = [PFUser.current()?.objectId ?? ""]
+                let image = UIImage(named: "likeButtonFilled")
+                sender.setImage(image, for: .normal)
+                animateLikeButton(button: sender)
+            }
+            
+            post.saveInBackground()
+    }
+    
+    func animateLikeButton(button: UIButton)
+    {
+        UIView.animate(withDuration: 0.1, animations: { button.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)}, completion:
+            { _ in
+                UIView.animate(withDuration: 0.1, animations:
+                {
+                    button.transform = CGAffineTransform.identity
+                })
+            })
+    }
     
 }
