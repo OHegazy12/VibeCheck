@@ -2,23 +2,6 @@ PODS:
   - Alamofire (5.6.4)
   - AlamofireImage (4.2.0):
     - Alamofire (~> 5.4)
-  - Amplify (1.29.0):
-    - Amplify/Default (= 1.29.0)
-  - Amplify/Default (1.29.0)
-  - AmplifyPlugins/AWSAPIPlugin (1.29.0):
-    - AppSyncRealTimeClient (~> 3.0)
-    - AWSCore (~> 2.30.1)
-    - AWSPluginsCore (= 1.29.0)
-  - AmplifyPlugins/AWSDataStorePlugin (1.29.0):
-    - AWSCore (~> 2.30.1)
-    - AWSPluginsCore (= 1.29.0)
-    - SQLite.swift (= 0.13.2)
-  - AppSyncRealTimeClient (3.0.0):
-    - Starscream (~> 4.0.4)
-  - AWSCore (2.30.4)
-  - AWSPluginsCore (1.29.0):
-    - Amplify (= 1.29.0)
-    - AWSCore (~> 2.30.1)
   - Bolts/Tasks (1.9.1)
   - InputBarAccessoryView (5.5.0):
     - InputBarAccessoryView/Core (= 5.5.0)
@@ -32,17 +15,10 @@ PODS:
     - Parse/Core (= 1.19.4)
   - Parse/Core (1.19.4):
     - Bolts/Tasks (= 1.9.1)
-  - SQLite.swift (0.13.2):
-    - SQLite.swift/standard (= 0.13.2)
-  - SQLite.swift/standard (0.13.2)
-  - Starscream (4.0.4)
 
 DEPENDENCIES:
   - Alamofire
   - AlamofireImage (~> 4.1)
-  - Amplify
-  - AmplifyPlugins/AWSAPIPlugin
-  - AmplifyPlugins/AWSDataStorePlugin
   - MessageInputBar
   - MessageKit
   - Parse
@@ -51,35 +27,21 @@ SPEC REPOS:
   trunk:
     - Alamofire
     - AlamofireImage
-    - Amplify
-    - AmplifyPlugins
-    - AppSyncRealTimeClient
-    - AWSCore
-    - AWSPluginsCore
     - Bolts
     - InputBarAccessoryView
     - MessageInputBar
     - MessageKit
     - Parse
-    - SQLite.swift
-    - Starscream
 
 SPEC CHECKSUMS:
   Alamofire: 4e95d97098eacb88856099c4fc79b526a299e48c
   AlamofireImage: 34a2d90b0e5fe6a5605f85ae4b7b01e784c60192
-  Amplify: d0c5ec982b3448d158980577fe73a3aa6d27d984
-  AmplifyPlugins: 20fce06296f5946bdc2d3aab93f3b81f813abb03
-  AppSyncRealTimeClient: ec19a24f635611b193eb98a2da573abcf98b793b
-  AWSCore: 19b8233fe2d0ed3ccf5cff833a615814282cdc90
-  AWSPluginsCore: a3033b4838dd83e62efc3c7eee660e897485441c
   Bolts: 8c1e8aab2f603387b8b9924f57d1d64f43d3ffdc
   InputBarAccessoryView: 1d7b0a672b36e370f01f264b3907ef39d03328e3
   MessageInputBar: e81c7535347f1f7b923de7080409a535a004b6e4
   MessageKit: a1ba0c69ebead94029867853eb44dd05b9b3f453
   Parse: 6d572042e2c171414c677acabcd9bab7bbf51264
-  SQLite.swift: 4fc2be46c36392e3b87afe6fe7f1801c1daa07ef
-  Starscream: 5178aed56b316f13fa3bc55694e583d35dd414d9
 
-PODFILE CHECKSUM: fd0f271221481333b1ae5869154bbc6179cf0b4d
+PODFILE CHECKSUM: 65a7a8004d02e013043594847c8d8cf4f2935337
 
 COCOAPODS: 1.12.0
