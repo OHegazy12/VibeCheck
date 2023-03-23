@@ -9,6 +9,7 @@ import UIKit
 import Parse
 import Amplify
 
+
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -19,14 +20,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Thread.sleep(forTimeInterval: 1.0) // Adds a delay to launch screen
         
         // Connection to backend server.
-        let parseConfig = ParseClientConfiguration
+      /*  let parseConfig = ParseClientConfiguration
         {
                 $0.applicationId = "GBObFJ706svjX8KgrovYzIzeKxvPODfEiM1CfYzr" // <- UPDATE
                 $0.clientKey = "tUA9BbD0LubPQ7sP2qVVa4ENeWjlKpseWiYg6JCD" // <- UPDATE
                 $0.server = "https://parseapi.back4app.com"
         }
-             Parse.initialize(with: parseConfig)
+             Parse.initialize(with: parseConfig) */
              Backend.initialize()
+        
+        let parseConfig = ParseClientConfiguration
+        {
+            $0.applicationId = "8352d078c128ca7422ba60ef59e9a37be740ddc3620fa732d514721c95adc802"
+            $0.clientKey = nil
+            $0.server = "https://vibecheck-capstone.herokuapp.com/parse"
+        }
+    
+        Parse.initialize(with: parseConfig)
+        
+       //Hash password heroku: $2a$12$iEqdDQNubEmBaG0warXmyedHUCfIRELae.yD8LDWyEe3qYoOxPPTe (Kaoscat1738)
         
         return true
     }

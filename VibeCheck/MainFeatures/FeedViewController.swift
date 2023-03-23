@@ -47,10 +47,10 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell") as! PostCell
         
         
-         if indexPath.row == 0
+        if (indexPath.row == 0)
          {
-             let user = post["author"] as! PFUser
-             cell.usernameLabel.text = user.username
+             let user = post["author"] as? PFUser
+             cell.usernameLabel.text = user?.username
          
              cell.captionLabel.text = post["caption"] as? String
          
@@ -167,12 +167,19 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             
             if var likedPosts = defaults.array(forKey: "likedPosts") as? [String]
             {
+                if let dislikedPosts = post["dislikes"] as? [String], dislikedPosts.contains(PFUser.current()?.objectId ?? "")
+                {
+                    print("Can't dislike a post you already liked.")
+                    return
+                }
+                
                 if likedPosts.contains(post.objectId ?? "") {
                     post["likes"] = (post["likes"] as? [String])?.filter { $0 != PFUser.current()?.objectId }
                     likedPosts = likedPosts.filter { $0 != post.objectId }
                     let image = UIImage(named: "likeButtonEmpty")
                     sender.setImage(image, for: .normal)
                     print("Post has been unliked")
+                    
                 }
                 else
                 {
@@ -182,8 +189,10 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
                     sender.setImage(image, for: .normal)
                     animateLikeButton(button: sender)
                     print("Post has been liked")
+                    
                 }
                 defaults.set(likedPosts, forKey: "likedPosts")
+
             }
             else
             {
@@ -192,8 +201,10 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
                 sender.setImage(image, for: .normal)
                 animateLikeButton(button: sender)
                 defaults.set([post.objectId ?? ""], forKey: "likedPosts")
+                
             }
             
+        
             post.saveInBackground()
     }
     
@@ -210,6 +221,12 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         if var dislikedPosts = defaults.array(forKey: "dislikedPosts") as? [String]
         {
+            if let likedPosts = post["likes"] as? [String], likedPosts.contains(PFUser.current()?.objectId ?? "")
+            {
+                print("Can't like a post you already disliked")
+                return
+            }
+            
             if dislikedPosts.contains(post.objectId ?? "")
             {
                 post["dislikes"] = (post["dislikes"] as? [String])?.filter { $0 != PFUser.current()?.objectId }
@@ -255,14 +272,13 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     func animatedislikeButton(button: UIButton)
     {
         UIView.animate(withDuration: 0.1, animations: { button.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)}, completion:
-            { _ in
-                UIView.animate(withDuration: 0.1, animations:
-                {
-                    button.transform = CGAffineTransform.identity
-                })
+        { _ in
+            UIView.animate(withDuration: 0.1, animations:
+            {
+                button.transform = CGAffineTransform.identity
             })
+        })
     }
-    
     
     
 }

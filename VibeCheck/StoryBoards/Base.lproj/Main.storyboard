@@ -378,7 +378,7 @@
                         <viewLayoutGuide key="safeArea" id="OxY-MJ-9f1"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" id="Rxd-6N-ewK">
+                    <navigationItem key="navigationItem" title="VibeCheck" id="Rxd-6N-ewK">
                         <barButtonItem key="leftBarButtonItem" image="camera.circle.fill" catalog="system" id="rgu-np-vum" userLabel="CreatePost">
                             <connections>
                                 <segue destination="hG3-uk-q0U" kind="presentation" id="Cws-Ac-iWz"/>
@@ -516,7 +516,7 @@
             </objects>
             <point key="canvasLocation" x="3857" y="2660"/>
         </scene>
-        <!--View Controller-->
+        <!--Dating-->
         <scene sceneID="fRE-Cd-ZrY">
             <objects>
                 <viewController id="k3I-Dw-joU" sceneMemberID="viewController">
@@ -526,13 +526,13 @@
                         <viewLayoutGuide key="safeArea" id="N2L-TZ-5kG"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" id="Xcf-15-sfw"/>
+                    <navigationItem key="navigationItem" title="Dating" id="Xcf-15-sfw"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zMj-4b-LDS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3857" y="3745"/>
         </scene>
-        <!--View Controller-->
+        <!--Messages-->
         <scene sceneID="HIZ-8f-U8Y">
             <objects>
                 <viewController id="DlA-Qk-NFc" sceneMemberID="viewController">
@@ -542,7 +542,7 @@
                         <viewLayoutGuide key="safeArea" id="dWw-Xn-3eR"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" id="j48-1r-3WS"/>
+                    <navigationItem key="navigationItem" title="Messages" id="j48-1r-3WS"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wtk-ZR-ejt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -582,7 +582,7 @@
             </objects>
             <point key="canvasLocation" x="6938" y="2660"/>
         </scene>
-        <!--View Controller-->
+        <!--Notifications-->
         <scene sceneID="kDt-c3-oED">
             <objects>
                 <viewController id="3ua-6F-lds" sceneMemberID="viewController">
@@ -592,7 +592,7 @@
                         <viewLayoutGuide key="safeArea" id="zpP-K3-uMy"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" id="7OU-Hu-Upy"/>
+                    <navigationItem key="navigationItem" title="Notifications" id="7OU-Hu-Upy"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qkf-g3-aa3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -642,13 +642,13 @@
                         <viewLayoutGuide key="safeArea" id="Epa-HV-9Pl"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" id="4eA-Ci-2fJ"/>
+                    <navigationItem key="navigationItem" title="Profile" id="4eA-Ci-2fJ"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GT5-xA-RX5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="10142" y="3745"/>
         </scene>
-        <!--View Controller-->
+        <!--Community-->
         <scene sceneID="sId-BT-Lx3">
             <objects>
                 <viewController id="rNi-aT-7h6" sceneMemberID="viewController">
@@ -658,7 +658,7 @@
                         <viewLayoutGuide key="safeArea" id="uR6-es-14T"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" id="ndJ-C0-UNQ"/>
+                    <navigationItem key="navigationItem" title="Community" id="ndJ-C0-UNQ"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kAk-Wb-jcp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
