@@ -10,10 +10,6 @@
 		1836C4FA29BFCAA9000BC583 /* InteractionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1836C4F929BFCAA9000BC583 /* InteractionCell.swift */; };
 		1838039229A13D9700F9043D /* CreateProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1838039129A13D9700F9043D /* CreateProfileViewController.swift */; };
 		185656ED29AEB25200663897 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185656EC29AEB25200663897 /* CommentViewController.swift */; };
-		187615E429B7E8A400BFF2B6 /* Amplify in Frameworks */ = {isa = PBXBuildFile; productRef = 187615E329B7E8A400BFF2B6 /* Amplify */; };
-		187615E729B7F30400BFF2B6 /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 187615E529B7F30400BFF2B6 /* awsconfiguration.json */; };
-		187615E829B7F30400BFF2B6 /* amplifyconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 187615E629B7F30400BFF2B6 /* amplifyconfiguration.json */; };
-		187615EA29B7F34200BFF2B6 /* Backend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187615E929B7F34200BFF2B6 /* Backend.swift */; };
 		187687C429A70C9800ECC331 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187687C329A70C9800ECC331 /* CommentCell.swift */; };
 		1879D78E29AD83D7004D3130 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1879D78D29AD83D7004D3130 /* ProfileViewController.swift */; };
 		188BADB329A5DCC000351199 /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188BADB229A5DCC000351199 /* PostCell.swift */; };
@@ -57,9 +53,6 @@
 		1836C4F929BFCAA9000BC583 /* InteractionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionCell.swift; sourceTree = "<group>"; };
 		1838039129A13D9700F9043D /* CreateProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProfileViewController.swift; sourceTree = "<group>"; };
 		185656EC29AEB25200663897 /* CommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
-		187615E529B7F30400BFF2B6 /* awsconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
-		187615E629B7F30400BFF2B6 /* amplifyconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = amplifyconfiguration.json; sourceTree = "<group>"; };
-		187615E929B7F34200BFF2B6 /* Backend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Backend.swift; sourceTree = "<group>"; };
 		187687C329A70C9800ECC331 /* CommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
 		1879D78D29AD83D7004D3130 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		188BADB229A5DCC000351199 /* PostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
@@ -94,7 +87,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				5204565B3F7BE8783A58153E /* Pods_VibeCheck.framework in Frameworks */,
-				187615E429B7E8A400BFF2B6 /* Amplify in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -152,7 +144,6 @@
 			isa = PBXGroup;
 			children = (
 				18CC3594299E8C2C00668AF7 /* AppDelegate.swift */,
-				187615E929B7F34200BFF2B6 /* Backend.swift */,
 				18CC3596299E8C2C00668AF7 /* SceneDelegate.swift */,
 			);
 			path = Other;
@@ -170,8 +161,6 @@
 		18CC3588299E8C2C00668AF7 = {
 			isa = PBXGroup;
 			children = (
-				187615E629B7F30400BFF2B6 /* amplifyconfiguration.json */,
-				187615E529B7F30400BFF2B6 /* awsconfiguration.json */,
 				18CC3593299E8C2C00668AF7 /* VibeCheck */,
 				18CC35AA299E8C2F00668AF7 /* VibeCheckTests */,
 				18CC35B4299E8C2F00668AF7 /* VibeCheckUITests */,
@@ -264,7 +253,6 @@
 			);
 			name = VibeCheck;
 			packageProductDependencies = (
-				187615E329B7E8A400BFF2B6 /* Amplify */,
 			);
 			productName = VibeCheck;
 			productReference = 18CC3591299E8C2C00668AF7 /* VibeCheck.app */;
@@ -342,7 +330,6 @@
 			);
 			mainGroup = 18CC3588299E8C2C00668AF7;
 			packageReferences = (
-				187615E229B7E8A400BFF2B6 /* XCRemoteSwiftPackageReference "amplify-ios" */,
 			);
 			productRefGroup = 18CC3592299E8C2C00668AF7 /* Products */;
 			projectDirPath = "";
@@ -360,9 +347,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				187615E729B7F30400BFF2B6 /* awsconfiguration.json in Resources */,
 				18CC35A1299E8C2F00668AF7 /* LaunchScreen.storyboard in Resources */,
-				187615E829B7F30400BFF2B6 /* amplifyconfiguration.json in Resources */,
 				18DB71D6299EB28800DA3C4E /* Assets.xcassets in Resources */,
 				18CC359C299E8C2C00668AF7 /* Main.storyboard in Resources */,
 			);
@@ -500,7 +485,6 @@
 				18CC3597299E8C2C00668AF7 /* SceneDelegate.swift in Sources */,
 				187687C429A70C9800ECC331 /* CommentCell.swift in Sources */,
 				188BADB329A5DCC000351199 /* PostCell.swift in Sources */,
-				187615EA29B7F34200BFF2B6 /* Backend.swift in Sources */,
 				189E19D4299F24C1005AB155 /* CameraViewController.swift in Sources */,
 				189E19CE299F248D005AB155 /* SignUpViewController.swift in Sources */,
 				185656ED29AEB25200663897 /* CommentViewController.swift in Sources */,
@@ -854,25 +838,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		187615E229B7E8A400BFF2B6 /* XCRemoteSwiftPackageReference "amplify-ios" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/aws-amplify/amplify-ios";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.0.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		187615E329B7E8A400BFF2B6 /* Amplify */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 187615E229B7E8A400BFF2B6 /* XCRemoteSwiftPackageReference "amplify-ios" */;
-			productName = Amplify;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 18CC3589299E8C2C00668AF7 /* Project object */;
 }
