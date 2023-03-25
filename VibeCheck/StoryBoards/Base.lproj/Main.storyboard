@@ -331,12 +331,9 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HrA-Dh-zUG">
-                                                    <rect key="frame" x="20" y="-5" width="64" height="58"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="xrm-pu-BxA"/>
-                                                    </constraints>
+                                                    <rect key="frame" x="37" y="11" width="132" height="32"/>
                                                     <state key="normal" title="Button"/>
-                                                    <buttonConfiguration key="configuration" style="plain" image="likeButtonEmpty" title="likeButton">
+                                                    <buttonConfiguration key="configuration" style="plain" image="likeButtonEmpty.png" title="likeButton">
                                                         <directionalEdgeInsets key="contentInsets" top="0.0" leading="75" bottom="-22" trailing="0.0"/>
                                                     </buttonConfiguration>
                                                     <connections>
@@ -344,9 +341,9 @@
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BPl-vn-VUW">
-                                                    <rect key="frame" x="177" y="15" width="60" height="43"/>
+                                                    <rect key="frame" x="177" y="22" width="262" height="29"/>
                                                     <state key="normal" title="Button"/>
-                                                    <buttonConfiguration key="configuration" style="plain" image="dislikeButtonEmpty" title="dislikebutton">
+                                                    <buttonConfiguration key="configuration" style="plain" image="dislikeButtonEmpty.png" title="dislikebutton">
                                                         <directionalEdgeInsets key="contentInsets" top="0.0" leading="100" bottom="0.0" trailing="0.0"/>
                                                     </buttonConfiguration>
                                                     <connections>
@@ -355,14 +352,14 @@
                                                 </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="HrA-Dh-zUG" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="m8V-ow-a5l" secondAttribute="leadingMargin" id="543-5K-SPV"/>
-                                                <constraint firstAttribute="trailing" secondItem="HrA-Dh-zUG" secondAttribute="trailing" constant="330" id="9R3-iM-n2G"/>
-                                                <constraint firstItem="BPl-vn-VUW" firstAttribute="centerX" secondItem="m8V-ow-a5l" secondAttribute="centerX" id="9uq-Xv-9HF"/>
-                                                <constraint firstItem="BPl-vn-VUW" firstAttribute="centerY" secondItem="m8V-ow-a5l" secondAttribute="centerY" id="Fo4-vr-TiR"/>
-                                                <constraint firstItem="HrA-Dh-zUG" firstAttribute="top" secondItem="m8V-ow-a5l" secondAttribute="topMargin" constant="-16" id="KHj-DI-6G6"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="HrA-Dh-zUG" secondAttribute="bottom" constant="9" id="lUO-WI-iTI"/>
-                                                <constraint firstItem="BPl-vn-VUW" firstAttribute="leading" secondItem="HrA-Dh-zUG" secondAttribute="trailing" constant="93" id="qo7-DF-41X"/>
-                                                <constraint firstItem="BPl-vn-VUW" firstAttribute="top" secondItem="m8V-ow-a5l" secondAttribute="topMargin" constant="4" id="zYd-rV-wrQ"/>
+                                                <constraint firstItem="BPl-vn-VUW" firstAttribute="leading" secondItem="m8V-ow-a5l" secondAttribute="leading" constant="177" id="B0i-DN-AUo"/>
+                                                <constraint firstItem="BPl-vn-VUW" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="HrA-Dh-zUG" secondAttribute="trailing" constant="8" symbolic="YES" id="BKU-Dl-CWM"/>
+                                                <constraint firstItem="BPl-vn-VUW" firstAttribute="top" secondItem="m8V-ow-a5l" secondAttribute="topMargin" constant="11" id="dQd-T2-nxe"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="HrA-Dh-zUG" secondAttribute="bottom" constant="19" id="gft-YF-9PC"/>
+                                                <constraint firstItem="HrA-Dh-zUG" firstAttribute="leading" secondItem="m8V-ow-a5l" secondAttribute="leadingMargin" constant="17" id="ize-Sn-UbD"/>
+                                                <constraint firstAttribute="trailing" secondItem="BPl-vn-VUW" secondAttribute="trailing" constant="-25" id="qJy-XA-WSq"/>
+                                                <constraint firstItem="HrA-Dh-zUG" firstAttribute="top" secondItem="m8V-ow-a5l" secondAttribute="topMargin" id="skM-Tg-Is2"/>
+                                                <constraint firstItem="BPl-vn-VUW" firstAttribute="centerY" secondItem="m8V-ow-a5l" secondAttribute="centerY" id="u8D-Gw-piM"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -755,11 +752,11 @@
         <image name="bolt.heart.fill" catalog="system" width="128" height="107"/>
         <image name="camera.circle.fill" catalog="system" width="128" height="123"/>
         <image name="camera.metering.center.weighted" catalog="system" width="128" height="93"/>
-        <image name="dislikeButtonEmpty" width="64" height="64"/>
+        <image name="dislikeButtonEmpty.png" width="64" height="64"/>
         <image name="heart.fill" catalog="system" width="128" height="107"/>
         <image name="homekit" catalog="system" width="128" height="104"/>
         <image name="icons8-image-100" width="100" height="100"/>
-        <image name="likeButtonEmpty" width="64" height="64"/>
+        <image name="likeButtonEmpty.png" width="64" height="64"/>
         <image name="message.fill" catalog="system" width="128" height="114"/>
         <image name="person.3.fill" catalog="system" width="128" height="61"/>
         <image name="person.circle" catalog="system" width="128" height="123"/>

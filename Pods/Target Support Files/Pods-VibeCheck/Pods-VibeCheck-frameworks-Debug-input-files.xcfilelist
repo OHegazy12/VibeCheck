@@ -1,15 +1,8 @@
 ${PODS_ROOT}/Target Support Files/Pods-VibeCheck/Pods-VibeCheck-frameworks.sh
-${BUILT_PRODUCTS_DIR}/AWSCore/AWSCore.framework
-${BUILT_PRODUCTS_DIR}/AWSPluginsCore/AWSPluginsCore.framework
 ${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework
 ${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework
-${BUILT_PRODUCTS_DIR}/Amplify/Amplify.framework
-${BUILT_PRODUCTS_DIR}/AmplifyPlugins/AmplifyPlugins.framework
-${BUILT_PRODUCTS_DIR}/AppSyncRealTimeClient/AppSyncRealTimeClient.framework
 ${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework
 ${BUILT_PRODUCTS_DIR}/InputBarAccessoryView/InputBarAccessoryView.framework
 ${BUILT_PRODUCTS_DIR}/MessageInputBar/MessageInputBar.framework
 ${BUILT_PRODUCTS_DIR}/MessageKit/MessageKit.framework
 ${BUILT_PRODUCTS_DIR}/Parse/Parse.framework
-${BUILT_PRODUCTS_DIR}/SQLite.swift/SQLite.framework
-${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework

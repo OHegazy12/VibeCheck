@@ -83,22 +83,22 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             cell.likeButton.addTarget(self, action: #selector(likeButtonTapped(_:)), for: .touchUpInside)
             if let likedPosts = UserDefaults.standard.array(forKey: "likedPosts") as? [String], likedPosts.contains(post.objectId ?? "")
             {
-                cell.likeButton.setImage(UIImage(named: "likeButtonFilled"), for: .normal)
+                cell.likeButton.setImage(UIImage(named: "likeButtonFilled.png"), for: .normal)
             }
             else
             {
-                cell.likeButton.setImage(UIImage(named: "likeButtonEmpty"), for: .normal)
+                cell.likeButton.setImage(UIImage(named: "likeButtonEmpty.png"), for: .normal)
             }
             
             cell.dislikeButton.tag = indexPath.section
             cell.dislikeButton.addTarget(self, action: #selector(disLikeButtonTapped(_:)), for: .touchUpInside)
             if let dislikedPosts = UserDefaults.standard.array(forKey: "dislikedPosts") as? [String], dislikedPosts.contains(post.objectId ?? "")
             {
-                cell.dislikeButton.setImage(UIImage(named: "dislikeButtonFilled"), for: .normal)
+                cell.dislikeButton.setImage(UIImage(named: "dislikeButtonFilled.png"), for: .normal)
             }
             else
             {
-                cell.dislikeButton.setImage(UIImage(named: "dislikeButtonEmpty"), for: .normal)
+                cell.dislikeButton.setImage(UIImage(named: "dislikeButtonEmpty.png"), for: .normal)
             }
             return cell
         }
@@ -176,7 +176,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
                 if likedPosts.contains(post.objectId ?? "") {
                     post["likes"] = (post["likes"] as? [String])?.filter { $0 != PFUser.current()?.objectId }
                     likedPosts = likedPosts.filter { $0 != post.objectId }
-                    let image = UIImage(named: "likeButtonEmpty")
+                    let image = UIImage(named: "likeButtonEmpty.png")
                     sender.setImage(image, for: .normal)
                     print("Post has been unliked")
                     
@@ -185,7 +185,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
                 {
                     post.addUniqueObject(PFUser.current()?.objectId ?? "", forKey: "likes")
                     likedPosts.append(post.objectId ?? "")
-                    let image = UIImage(named: "likeButtonFilled")
+                    let image = UIImage(named: "likeButtonFilled.png")
                     sender.setImage(image, for: .normal)
                     animateLikeButton(button: sender)
                     print("Post has been liked")
@@ -197,7 +197,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             else
             {
                 post["likes"] = [PFUser.current()?.objectId ?? ""]
-                let image = UIImage(named: "likeButtonFilled")
+                let image = UIImage(named: "likeButtonFilled.png")
                 sender.setImage(image, for: .normal)
                 animateLikeButton(button: sender)
                 defaults.set([post.objectId ?? ""], forKey: "likedPosts")
@@ -231,7 +231,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             {
                 post["dislikes"] = (post["dislikes"] as? [String])?.filter { $0 != PFUser.current()?.objectId }
                 dislikedPosts = dislikedPosts.filter { $0 != post.objectId }
-                let image = UIImage(named: "dislikeButtonEmpty")
+                let image = UIImage(named: "dislikeButtonEmpty.png")
                 sender.setImage(image, for: .normal)
                 print("Default stage")
             }
@@ -239,7 +239,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             {
                 post.addUniqueObject(PFUser.current()?.objectId ?? "", forKey: "dislikes")
                 dislikedPosts.append(post.objectId ?? "")
-                let image = UIImage(named: "dislikeButtonFilled")
+                let image = UIImage(named: "dislikeButtonFilled.png")
                 sender.setImage(image, for: .normal)
                 animatedislikeButton(button: sender)
                 print("Post has been disliked")
@@ -249,7 +249,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         else
         {
             post["dislikes"] = [PFUser.current()?.objectId ?? ""]
-            let image = UIImage(named: "dislikeButtonFilled")
+            let image = UIImage(named: "dislikeButtonFilled.png")
             sender.setImage(image, for: .normal)
             animatedislikeButton(button: sender)
             defaults.set([post.objectId ?? ""], forKey: "dislikedPosts")

@@ -16,6 +16,10 @@
 		189E19CC299F247F005AB155 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189E19CB299F247F005AB155 /* FeedViewController.swift */; };
 		189E19CE299F248D005AB155 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189E19CD299F248D005AB155 /* SignUpViewController.swift */; };
 		189E19D4299F24C1005AB155 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189E19D3299F24C1005AB155 /* CameraViewController.swift */; };
+		18CB8D1229CF6A3800FC81C0 /* Amplify in Frameworks */ = {isa = PBXBuildFile; productRef = 18CB8D1129CF6A3800FC81C0 /* Amplify */; };
+		18CB8D1429CF6C7600FC81C0 /* Backend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CB8D1329CF6C7600FC81C0 /* Backend.swift */; };
+		18CB8D1729CF6D4F00FC81C0 /* amplifyconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 18CB8D1529CF6D4F00FC81C0 /* amplifyconfiguration.json */; };
+		18CB8D1829CF6D4F00FC81C0 /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 18CB8D1629CF6D4F00FC81C0 /* awsconfiguration.json */; };
 		18CC3595299E8C2C00668AF7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CC3594299E8C2C00668AF7 /* AppDelegate.swift */; };
 		18CC3597299E8C2C00668AF7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CC3596299E8C2C00668AF7 /* SceneDelegate.swift */; };
 		18CC3599299E8C2C00668AF7 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CC3598299E8C2C00668AF7 /* LoginViewController.swift */; };
@@ -59,6 +63,9 @@
 		189E19CB299F247F005AB155 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		189E19CD299F248D005AB155 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		189E19D3299F24C1005AB155 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
+		18CB8D1329CF6C7600FC81C0 /* Backend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Backend.swift; sourceTree = "<group>"; };
+		18CB8D1529CF6D4F00FC81C0 /* amplifyconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = amplifyconfiguration.json; sourceTree = "<group>"; };
+		18CB8D1629CF6D4F00FC81C0 /* awsconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
 		18CC3591299E8C2C00668AF7 /* VibeCheck.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VibeCheck.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18CC3594299E8C2C00668AF7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		18CC3596299E8C2C00668AF7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -87,6 +94,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5204565B3F7BE8783A58153E /* Pods_VibeCheck.framework in Frameworks */,
+				18CB8D1229CF6A3800FC81C0 /* Amplify in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -145,6 +153,7 @@
 			children = (
 				18CC3594299E8C2C00668AF7 /* AppDelegate.swift */,
 				18CC3596299E8C2C00668AF7 /* SceneDelegate.swift */,
+				18CB8D1329CF6C7600FC81C0 /* Backend.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -161,6 +170,8 @@
 		18CC3588299E8C2C00668AF7 = {
 			isa = PBXGroup;
 			children = (
+				18CB8D1529CF6D4F00FC81C0 /* amplifyconfiguration.json */,
+				18CB8D1629CF6D4F00FC81C0 /* awsconfiguration.json */,
 				18CC3593299E8C2C00668AF7 /* VibeCheck */,
 				18CC35AA299E8C2F00668AF7 /* VibeCheckTests */,
 				18CC35B4299E8C2F00668AF7 /* VibeCheckUITests */,
@@ -253,6 +264,7 @@
 			);
 			name = VibeCheck;
 			packageProductDependencies = (
+				18CB8D1129CF6A3800FC81C0 /* Amplify */,
 			);
 			productName = VibeCheck;
 			productReference = 18CC3591299E8C2C00668AF7 /* VibeCheck.app */;
@@ -330,6 +342,7 @@
 			);
 			mainGroup = 18CC3588299E8C2C00668AF7;
 			packageReferences = (
+				18CB8D1029CF6A3800FC81C0 /* XCRemoteSwiftPackageReference "amplify-ios" */,
 			);
 			productRefGroup = 18CC3592299E8C2C00668AF7 /* Products */;
 			projectDirPath = "";
@@ -347,9 +360,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18CB8D1829CF6D4F00FC81C0 /* awsconfiguration.json in Resources */,
 				18CC35A1299E8C2F00668AF7 /* LaunchScreen.storyboard in Resources */,
 				18DB71D6299EB28800DA3C4E /* Assets.xcassets in Resources */,
 				18CC359C299E8C2C00668AF7 /* Main.storyboard in Resources */,
+				18CB8D1729CF6D4F00FC81C0 /* amplifyconfiguration.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -483,6 +498,7 @@
 				18CC3595299E8C2C00668AF7 /* AppDelegate.swift in Sources */,
 				189E19CC299F247F005AB155 /* FeedViewController.swift in Sources */,
 				18CC3597299E8C2C00668AF7 /* SceneDelegate.swift in Sources */,
+				18CB8D1429CF6C7600FC81C0 /* Backend.swift in Sources */,
 				187687C429A70C9800ECC331 /* CommentCell.swift in Sources */,
 				188BADB329A5DCC000351199 /* PostCell.swift in Sources */,
 				189E19D4299F24C1005AB155 /* CameraViewController.swift in Sources */,
@@ -838,6 +854,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		18CB8D1029CF6A3800FC81C0 /* XCRemoteSwiftPackageReference "amplify-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/aws-amplify/amplify-ios";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		18CB8D1129CF6A3800FC81C0 /* Amplify */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 18CB8D1029CF6A3800FC81C0 /* XCRemoteSwiftPackageReference "amplify-ios" */;
+			productName = Amplify;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 18CC3589299E8C2C00668AF7 /* Project object */;
 }
