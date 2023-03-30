@@ -40,7 +40,8 @@ class CreateProfileViewController: UIViewController, UITextFieldDelegate, UIImag
     // Creates profile when button is tapped
     @IBAction func createProfileButtonTapped(_ sender: Any)
     {
-        navigateToFeedViewController()
+        //navigateToFeedViewController()
+        saveProfile()
     }
     
     func navigateToFeedViewController()
@@ -113,5 +114,31 @@ class CreateProfileViewController: UIViewController, UITextFieldDelegate, UIImag
         dismiss(animated: true, completion: nil)
     }
     
-    
+    func saveProfile()
+    {
+        // Create a Parse object for the user's profile
+        let profile = PFObject(className: "Profile")
+        
+        // Set the profile picture image as a Parse file
+        if let imageData = profilePictureImageView.image?.pngData() {
+            let file = PFFileObject(name: "profile_picture.png", data: imageData)
+            profile["profilePicture"] = file
+        }
+        
+        // Set the date of birth as a Date object
+        if let dateString = dateTextField.text, let date = DateFormatter().date(from: dateString) {
+            profile["dateOfBirth"] = date
+        }
+        
+        // Save the profile object
+        profile.saveInBackground { (success, error) in
+            if success {
+                print("Profile saved successfully")
+                self.navigateToFeedViewController()
+            } else {
+                print("Error saving profile: \(error?.localizedDescription ?? "Unknown error")")
+            }
+        }
+    }
+
 }

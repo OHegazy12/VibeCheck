@@ -9,37 +9,47 @@ import UIKit
 import Parse
 import AlamofireImage
 
-class ProfileViewController: UIViewController
-{
+class ProfileViewController: UIViewController {
 
-    @IBOutlet var usernameLabel: UILabel!
-    @IBOutlet var profileImageView: UIImageView!
-    @IBOutlet var profileBio: UILabel!
-    @IBOutlet var editButton: UIButton!
-    
-    var username: String?
-    var profileImage: UIImage?
-    var userBio: String?
+    @IBOutlet weak var profilePictureImageView: UIImageView!
+    @IBOutlet weak var usernameLabel: UILabel!
+    @IBOutlet weak var birthdateLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view.
-        
-        usernameLabel.text = username
-        profileImageView.image = profileImage
-        profileBio.text = userBio
+        // Load the user's profile data
+        loadProfileData()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func loadProfileData() {
+        guard let currentUser = PFUser.current() else {
+            print("No current user found")
+            return
+        }
+        
+        // Load the user's profile picture
+        if let profilePicture = currentUser["profilePicture"] as? PFFileObject {
+            profilePicture.getDataInBackground { (data, error) in
+                if let data = data {
+                    self.profilePictureImageView.image = UIImage(data: data)
+                } else {
+                    print("Error loading profile picture: \(error?.localizedDescription ?? "Unknown error")")
+                }
+            }
+        }
+        
+        // Load the user's username
+        if let username = currentUser.username {
+            usernameLabel.text = username
+        }
+        
+        // Load the user's birthdate
+        if let dateOfBirth = currentUser["dateOfBirth"] as? Date {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateStyle = .medium
+            birthdateLabel.text = dateFormatter.string(from: dateOfBirth)
+        }
     }
-    */
 
 }

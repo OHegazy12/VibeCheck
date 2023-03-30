@@ -7,12 +7,27 @@
 
 import UIKit
 import Parse
+import Amplify
+import AWSCognitoAuthPlugin
+import AWSS3StoragePlugin
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         // Thread.sleep(forTimeInterval: 1.0) // Adds a delay to launch screen
+        
+        do {
+                try Amplify.add(plugin: AWSCognitoAuthPlugin())
+                try Amplify.add(plugin: AWSS3StoragePlugin())
+                try Amplify.configure()
+                print("Amplify configured with Auth and Storage plugins")
+                print("Amplify configured.")
+            } catch {
+                print("Failed to initialize Amplify with \(error)")
+            }
+        
+        
         
         let parseConfig = ParseClientConfiguration
         {
@@ -22,9 +37,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     
         Parse.initialize(with: parseConfig)
-        
-        // initialize Amplify
-        Backend.initialize()
         
        //Hash password heroku: $2a$12$iEqdDQNubEmBaG0warXmyedHUCfIRELae.yD8LDWyEe3qYoOxPPTe (Kaoscat1738)
         

@@ -4,7 +4,6 @@
 //
 //  Created by Omar Hegazy on 2/16/23.
 //
-
 import UIKit
 import Parse
 import AlamofireImage
@@ -37,7 +36,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
-    // Displays the posts' properties, such as username, caption, and image. 
+    // Displays the posts' properties, such as username, caption, and image.
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         let post = posts[indexPath.section]

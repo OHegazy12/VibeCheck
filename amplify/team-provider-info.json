@@ -1,15 +1,23 @@
 {
   "dev": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-vibecheck-dev-135100-authRole",
-      "UnauthRoleArn": "arn:aws:iam::164177553775:role/amplify-vibecheck-dev-135100-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::164177553775:role/amplify-vibecheck-dev-135100-authRole",
+      "AuthRoleName": "amplify-vibecheck-dev-225537-authRole",
+      "UnauthRoleArn": "arn:aws:iam::164177553775:role/amplify-vibecheck-dev-225537-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::164177553775:role/amplify-vibecheck-dev-225537-authRole",
       "Region": "us-east-1",
-      "DeploymentBucketName": "amplify-vibecheck-dev-135100-deployment",
-      "UnauthRoleName": "amplify-vibecheck-dev-135100-unauthRole",
-      "StackName": "amplify-vibecheck-dev-135100",
-      "StackId": "arn:aws:cloudformation:us-east-1:164177553775:stack/amplify-vibecheck-dev-135100/9b8e8fb0-cb35-11ed-9e27-0a538cc42741",
-      "AmplifyAppId": "d3nia6x4uowzn3"
+      "DeploymentBucketName": "amplify-vibecheck-dev-225537-deployment",
+      "UnauthRoleName": "amplify-vibecheck-dev-225537-unauthRole",
+      "StackName": "amplify-vibecheck-dev-225537",
+      "StackId": "arn:aws:cloudformation:us-east-1:164177553775:stack/amplify-vibecheck-dev-225537/db107b10-cc4a-11ed-a60d-0a35621ce4f9",
+      "AmplifyAppId": "d2d0hmmpr2gwi8"
+    },
+    "categories": {
+      "auth": {
+        "vibecheck3a9b5c16": {}
+      },
+      "storage": {
+        "s38dcdc633": {}
+      }
     }
   }
 }

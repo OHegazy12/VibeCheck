@@ -8,6 +8,7 @@
 import UIKit
 import AlamofireImage
 import Parse
+import Amplify
 
 class CameraViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate
 {
@@ -35,7 +36,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
             
             let imageData = uploadImage.pngData()
             let file = PFFileObject(data: imageData!)
-            
+        
             post["image"] = file
             
             // Saves post to the server
@@ -53,6 +54,8 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
                 }
             }
     }
+    
+
     
     @IBAction func onCameraButton(_ sender: Any)
     {
