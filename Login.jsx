@@ -9,14 +9,17 @@ export const Login = (props) => {
     //     console.log(email);
     // }
 
+    // login button
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log(email)
         try{
+            console.log('Button pressed.')
             const response = await (await fetch('http://localhost:3000/api/login', {method:'POST', 
             headers:{'Content-Type': 'application/json'}, 
-            body: JSON.stringify({email, pass, name}), 
+            body: JSON.stringify({email, pass}), 
             mode:'cors'})).json();
+            console.log('Is it working?')
             console.log(response)
         }catch (error){
         console.log(error)
