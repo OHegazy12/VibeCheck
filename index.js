@@ -1,22 +1,31 @@
 const express = require('express');
 const mongoose = require('mongoose');
 
+const fs = require('fs');
+
+const fileUpload = require('express-fileupload');
+const cors = require('cors');
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 
-// // import routes.js to index.js
-// const routes = require('./routes/routes');
-// app.use('/api', routes)
+app.use(fileUpload());
+// app.use(express.urlencoded({extended: false}))
 
-//Get all Method ----- NEED TO DEFINE IT RIGHT
-app.get('/getAll', (req, res) => {
-    res.send('Get All API')
-})
+// import routes.js to index.js
+const routes = require('./routes/routes');
+app.use('/api', routes)
 
 // server is set to port 3000
 app.listen(3000, () => {
     console.log(`Server Started at ${3000}`)
+})
+
+
+//Default endpoint
+app.get('/', (req, res) => {
+    res.send('Default / page!')
 })
 
 // importing the contents of the .env file
