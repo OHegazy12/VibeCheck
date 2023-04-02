@@ -21,7 +21,7 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
             tableView.dataSource = self
 
             // Listen for post like events
-            NotificationCenter.default.addObserver(self, selector: #selector(didLikePost(_:)), name: NSNotification.Name("PostLiked"), object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(didLikePost(_:)), name: NSNotification.Name("PostLikedByOtherUser"), object: nil)
             
             // Listen for comment events
             NotificationCenter.default.addObserver(self, selector: #selector(madeCommentOnPost(_:)), name: NSNotification.Name("CommentMade"), object: nil)
@@ -72,22 +72,29 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
 
             cell.usernameLabel.text = fromUser.username
 
-            if post != nil {
-                cell.messageLabel.text = "\(String(describing: fromUser.username)) liked your post"
-            } else {
-                cell.messageLabel.text = "\(String(describing: fromUser.username))left a comment!"
+            if let username = fromUser.username
+            {
+                if post != nil
+                {
+                    cell.messageLabel.text = "\(username) liked your post."
+                } else
+                {
+                    cell.messageLabel.text = "\(username)left a comment!"
+                }
             }
 
             return cell
         }
 
-    // Called when a post is liked
-    @objc func didLikePost(_ notification: Notification) {
+    @objc func didLikePost(_ notification: Notification)
+    {
         guard let post = notification.object as? PFObject,
-              let postOwner = post["user"] as? PFUser,
-              let liker = notification.userInfo?["liker"] as? PFUser,
-              postOwner.objectId != liker.objectId else {
-            return
+            let postOwner = post["user"] as? PFUser,
+            let liker = notification.userInfo?["liker"] as? PFUser,
+            postOwner.objectId != liker.objectId,
+            postOwner.objectId != PFUser.current()?.objectId else
+        {
+                return
         }
 
         // Create a new notification object
@@ -97,22 +104,27 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         notificationObject["post"] = post
 
         notificationObject.saveInBackground { (success, error) in
-            if success {
+            if success
+            {
                 print("Successfully created notification")
-            } else if let error = error {
+            } else if let error = error
+            {
                 print("Error creating notification: \(error.localizedDescription)")
             }
         }
     }
 
     // Called when a comment is made
-    @objc func madeCommentOnPost(_ notification: Notification) {
+    @objc func madeCommentOnPost(_ notification: Notification)
+    {
         guard let comment = notification.object as? PFObject,
-              let post = comment["post"] as? PFObject,
-              let postOwner = post["user"] as? PFUser,
-              let commenter = notification.userInfo?["commenter"] as? PFUser,
-              postOwner.objectId != commenter.objectId else {
-            return
+            let post = comment["post"] as? PFObject,
+            let postOwner = post["user"] as? PFUser,
+            let commenter = notification.userInfo?["commenter"] as? PFUser,
+            postOwner.objectId != commenter.objectId,
+            postOwner.objectId != PFUser.current()?.objectId else
+        {
+                return
         }
 
         // Create a new notification object
@@ -122,14 +134,18 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
         notificationObject["post"] = post
 
         notificationObject.saveInBackground { (success, error) in
-            if success {
+            if success
+            {
                 print("Successfully created notification")
-            } else if let error = error {
+            } else if let error = error
+            {
                 print("Error creating notification: \(error.localizedDescription)")
             }
         }
     }
-        deinit {
-            NotificationCenter.default.removeObserver(self)
-        }
+
+    deinit
+    {
+        NotificationCenter.default.removeObserver(self)
+    }
 }

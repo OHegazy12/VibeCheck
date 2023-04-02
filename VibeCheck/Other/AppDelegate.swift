@@ -7,9 +7,9 @@
 
 import UIKit
 import Parse
-import Amplify
-import AWSCognitoAuthPlugin
-import AWSS3StoragePlugin
+import AWSS3
+import AWSCore
+import AWSCognito
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,17 +17,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         // Thread.sleep(forTimeInterval: 1.0) // Adds a delay to launch screen
         
-        do {
-                try Amplify.add(plugin: AWSCognitoAuthPlugin())
-                try Amplify.add(plugin: AWSS3StoragePlugin())
-                try Amplify.configure()
-                print("Amplify configured with Auth and Storage plugins")
-                print("Amplify configured.")
-            } catch {
-                print("Failed to initialize Amplify with \(error)")
-            }
-        
-        
+        Backend.initialize()
+        self.initializeS3()
         
         let parseConfig = ParseClientConfiguration
         {
@@ -39,6 +30,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Parse.initialize(with: parseConfig)
         
        //Hash password heroku: $2a$12$iEqdDQNubEmBaG0warXmyedHUCfIRELae.yD8LDWyEe3qYoOxPPTe (Kaoscat1738)
+        
+        //Cognito Pool ID: us-east-1:a9a44cd5-d132-4423-9944-ed541e75b48e
         
         return true
     }
@@ -57,5 +50,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
 
-
+    func initializeS3() {
+            let poolId = "us-east-1:a9a44cd5-d132-4423-9944-ed541e75b48e"
+            let credentialsProvider = AWSCognitoCredentialsProvider(
+                regionType: .USEast1, //other regionType according to your location.
+                identityPoolId: poolId
+            )
+            let configuration = AWSServiceConfiguration(region: .USEast1, credentialsProvider: credentialsProvider)
+            AWSServiceManager.default().defaultServiceConfiguration = configuration
+        }
 }

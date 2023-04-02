@@ -8,7 +8,6 @@
 import UIKit
 import AlamofireImage
 import Parse
-import Amplify
 
 class CameraViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate
 {
@@ -53,8 +52,12 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
                     print("Error: \(String(describing: error?.localizedDescription))")
                 }
             }
+        
+            let fileName = UUID().uuidString + ".png"
     }
     
+    
+
 
     
     @IBAction func onCameraButton(_ sender: Any)
