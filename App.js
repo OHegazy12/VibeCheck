@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import './App.css';
 import { Login } from "./Login";
 import { Register } from "./Register";
-import { Profile } from "./Profile";  // added this line to text profile page
+// import { Profile } from "./Profile";  // added this line to text profile page
 
 function App() {
   const [currentForm, setCurrentForm] = useState('login'); // initializes a state variable called currentForm using the useState hook. 
