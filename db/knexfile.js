@@ -21,6 +21,8 @@ module.exports = {
       tableName: 'knex_migrations'
     }
   },
+
+
 };
 
 console.log(process.env.PGADMIN_DB_NAME)

@@ -81,10 +81,10 @@ router.post('/createUser', async (req, res) => {
             following,
             saved_lst
         }).returning('id')
-        res.send('Added new user')
+        return res.send('Added new user')
     } catch (error) {
         console.log(error);
-        res.send(error.detail)
+        return res.send(error.detail)
     }
 })
 
@@ -135,10 +135,10 @@ router.post('/signUp', async (req, res) => {
             // saved_lst
         }).returning('id')
         console.log(id)
-        res.json({ 'response': 'Added new user' })
+        return res.json({ 'response': 'Added new user' })
     } catch (error) {
         console.log(error);
-        res.json({ error: error.detail })
+        return res.json({ error: error.detail })
     }
     // res.send('Signing up')
 })
@@ -150,19 +150,25 @@ router.post('/login', async (req, res) => {
             email,
             pass,
         } = req.body
+
         var user = (await db('users').where('email_address', email))[0]
+        console.log(user)
+        if (user === undefined) {
+            return res.status(401).json({ 'response': 'Your username or password is incorrect' })
+        }
         var salt = user.password_hash.split('#')[1]
         console.log(user.password_hash, user.password_hash.split('#'))
 
+
         var isSamePassword = checkPassword(pass, user.password_hash, salt)
         if (!isSamePassword) {
-            res.status(401).json({ 'response': 'Your username or password is incorrect' })
+            return res.status(401).json({ 'response': 'Your username or password is incorrect' })
         }
         console.log(user)
-        res.status(200).json({ 'response': 'Logging in' })
+        return res.status(200).json({ 'response': 'Logging in' })
     } catch (error) {
         console.log(error);
-        res.json({ error: error.detail })
+        return res.json({ error: error.detail })
     }
 })
 // Functions -----------------------------------------------------------------------
@@ -185,6 +191,7 @@ function checkPassword(pw_plaintext, stored_hash, salt) {
 
 //Make Post
 router.post('/createPost', async (req, res) => {
+    console.log(req.body)
     try {
         const {
             type,
@@ -212,10 +219,10 @@ router.post('/createPost', async (req, res) => {
             comments_lst,
             posted_at
         }).returning('post_id')
-        res.send('Added new post')
+        return res.send('Added new post')
     } catch (error) {
         console.log(error);
-        res.send(error.detail)
+        return res.send(error.detail)
     }
 })
 
@@ -240,10 +247,10 @@ router.post('/createComment', async (req, res) => {
             comments_lst,
             posted_at
         }).returning('comment_id')
-        res.send('Added new comment')
+        return res.send('Added new comment')
     } catch (error) {
         console.log(error);
-        res.send(error.detail)
+        return res.send(error.detail)
     }
 })
 
