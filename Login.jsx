@@ -4,26 +4,23 @@ export const Login = (props) => {
     const [email, setEmail] = useState('');
     const [pass, setPass] = useState('');
 
-    // const handleSubmit = (e) => {
-    //     e.preventDefault();//submitting a form will cause the page to refresh, we can stop that by calling e.preventDefault()
-    //     console.log(email);
-    // }
-
     // login button
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log(email)
-        try{
+        try {
             console.log('Button pressed.')
-            const response = await (await fetch('http://localhost:3000/api/login', {method:'POST', 
-            headers:{'Content-Type': 'application/json'}, 
-            body: JSON.stringify({email, pass}), 
-            mode:'cors'})).json();
+            const response = await (await fetch('http://localhost:3000/api/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, pass }),
+                mode: 'cors'
+            })).json();
             console.log('Is it working?')
             console.log(response)
-        }catch (error){
-        console.log(error)
-    }
+        } catch (error) {
+            console.log(error)
+        }
     }
 
 
@@ -36,7 +33,7 @@ export const Login = (props) => {
             <h2>Login</h2>
             <form className="login-form" onSubmit={handleSubmit}>
                 <label htmlFor="email">Email</label>
-                <input value={email} onChange={(e) => setEmail(e.target.value)}type="email" placeholder="youremail@gmail.com" id="email" name="email" />
+                <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="youremail@gmail.com" id="email" name="email" />
                 <label htmlFor="password">Password</label>
                 <input value={pass} onChange={(e) => setPass(e.target.value)} type="password" placeholder="********" id="password" name="password" />
                 <button type="submit">Log In</button>
