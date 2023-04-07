@@ -156,55 +156,55 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBAction func likeButtonTapped(_ sender: UIButton)
     {
         let point = sender.convert(CGPoint.zero, to: tableView)
-            guard let indexPath = tableView.indexPathForRow(at: point) else
+        guard let indexPath = tableView.indexPathForRow(at: point) else
+        {
+            return
+        }
+        
+        let post = posts[indexPath.section]
+        let defaults = UserDefaults.standard
+        
+        let postButtonState = PostButtonState.shared
+        if postButtonState.isPostDisliked(post.objectId ?? "")
+        {
+            print("Can't like a post you already disliked.")
+            return
+        }
+        
+        if postButtonState.isPostLiked(post.objectId ?? "")
+        {
+            post["likes"] = (post["likes"] as? [String])?.filter { $0 != PFUser.current()?.objectId }
+            postButtonState.toggleLikeButton(forPostId: post.objectId ?? "")
+            let image = UIImage(named: "likeButtonEmpty.png")
+            sender.setImage(image, for: .normal)
+            print("Post has been unliked")
+        } else
+        {
+            post.addUniqueObject(PFUser.current()?.objectId ?? "", forKey: "likes")
+            postButtonState.toggleLikeButton(forPostId: post.objectId ?? "")
+            let image = UIImage(named: "likeButtonFilled.png")
+            sender.setImage(image, for: .normal)
+            animateLikeButton(button: sender)
+            print("Post has been liked")
+        }
+        
+        defaults.set(Array(postButtonState.likedPosts), forKey: "likedPosts")
+        
+        // Update the like button state for the current user
+        if let currentUser = PFUser.current(), let likedPosts = currentUser["likedPosts"] as? [String]
+        {
+            if likedPosts.contains(post.objectId ?? "")
             {
-                return
-            }
-            
-            let post = posts[indexPath.section]
-            let defaults = UserDefaults.standard
-            
-            if var likedPosts = defaults.array(forKey: "likedPosts") as? [String]
-            {
-                if let dislikedPosts = post["dislikes"] as? [String], dislikedPosts.contains(PFUser.current()?.objectId ?? "")
-                {
-                    print("Can't dislike a post you already liked.")
-                    return
-                }
-                
-                if likedPosts.contains(post.objectId ?? "") {
-                    post["likes"] = (post["likes"] as? [String])?.filter { $0 != PFUser.current()?.objectId }
-                    likedPosts = likedPosts.filter { $0 != post.objectId }
-                    let image = UIImage(named: "likeButtonEmpty.png")
-                    sender.setImage(image, for: .normal)
-                    print("Post has been unliked")
-                    
-                }
-                else
-                {
-                    post.addUniqueObject(PFUser.current()?.objectId ?? "", forKey: "likes")
-                    likedPosts.append(post.objectId ?? "")
-                    let image = UIImage(named: "likeButtonFilled.png")
-                    sender.setImage(image, for: .normal)
-                    animateLikeButton(button: sender)
-                    print("Post has been liked")
-                    
-                }
-                defaults.set(likedPosts, forKey: "likedPosts")
-
-            }
-            else
-            {
-                post["likes"] = [PFUser.current()?.objectId ?? ""]
                 let image = UIImage(named: "likeButtonFilled.png")
                 sender.setImage(image, for: .normal)
-                animateLikeButton(button: sender)
-                defaults.set([post.objectId ?? ""], forKey: "likedPosts")
-                
+            } else
+            {
+                let image = UIImage(named: "likeButtonEmpty.png")
+                sender.setImage(image, for: .normal)
             }
-            
+        }
         
-            post.saveInBackground()
+        post.saveInBackground()
     }
     
     @IBAction func disLikeButtonTapped(_ sender: UIButton)
@@ -217,43 +217,36 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         let post = posts[indexPath.section]
         let defaults = UserDefaults.standard
+        let postId = post.objectId ?? ""
+        let postButtonState = PostButtonState.shared
         
-        if var dislikedPosts = defaults.array(forKey: "dislikedPosts") as? [String]
+        if postButtonState.isPostDisliked(postId)
         {
-            if let likedPosts = post["likes"] as? [String], likedPosts.contains(PFUser.current()?.objectId ?? "")
+            postButtonState.toggleDislikeButton(forPostId: postId)
+            sender.setImage(UIImage(named: "dislikeButtonEmpty.png"), for: .normal)
+            print("Post has been undisliked")
+        } else
+        {
+            if postButtonState.isPostLiked(postId)
             {
                 print("Can't like a post you already disliked")
                 return
             }
             
-            if dislikedPosts.contains(post.objectId ?? "")
-            {
-                post["dislikes"] = (post["dislikes"] as? [String])?.filter { $0 != PFUser.current()?.objectId }
-                dislikedPosts = dislikedPosts.filter { $0 != post.objectId }
-                let image = UIImage(named: "dislikeButtonEmpty.png")
-                sender.setImage(image, for: .normal)
-                print("Default stage")
-            }
-            else
-            {
-                post.addUniqueObject(PFUser.current()?.objectId ?? "", forKey: "dislikes")
-                dislikedPosts.append(post.objectId ?? "")
-                let image = UIImage(named: "dislikeButtonFilled.png")
-                sender.setImage(image, for: .normal)
-                animatedislikeButton(button: sender)
-                print("Post has been disliked")
-            }
-            defaults.set(dislikedPosts, forKey: "dislikedPosts")
-        }
-        else
-        {
-            post["dislikes"] = [PFUser.current()?.objectId ?? ""]
-            let image = UIImage(named: "dislikeButtonFilled.png")
-            sender.setImage(image, for: .normal)
+            postButtonState.toggleDislikeButton(forPostId: postId)
+            sender.setImage(UIImage(named: "dislikeButtonFilled.png"), for: .normal)
             animatedislikeButton(button: sender)
-            defaults.set([post.objectId ?? ""], forKey: "dislikedPosts")
+            print("Post has been disliked")
+            
+            if postButtonState.isPostLiked(postId)
+            {
+                postButtonState.toggleLikeButton(forPostId: postId)
+                let likeButton = tableView.cellForRow(at: indexPath)?.viewWithTag(3) as! UIButton
+                likeButton.setImage(UIImage(named: "likeButtonEmpty.png"), for: .normal)
+            }
         }
         
+        defaults.set(Array(postButtonState.dislikedPosts), forKey: "dislikedPosts")
         post.saveInBackground()
     }
     

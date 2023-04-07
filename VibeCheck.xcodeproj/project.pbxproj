@@ -7,20 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		181286D929E0AFA10041CA41 /* PostButtonState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181286D829E0AFA10041CA41 /* PostButtonState.swift */; };
 		1836C4FA29BFCAA9000BC583 /* InteractionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1836C4F929BFCAA9000BC583 /* InteractionCell.swift */; };
 		1838039229A13D9700F9043D /* CreateProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1838039129A13D9700F9043D /* CreateProfileViewController.swift */; };
 		185656ED29AEB25200663897 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185656EC29AEB25200663897 /* CommentViewController.swift */; };
 		187687C429A70C9800ECC331 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187687C329A70C9800ECC331 /* CommentCell.swift */; };
-		1876BF5129D6415300D5258E /* Backend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1876BF5029D6415300D5258E /* Backend.swift */; };
-		1876BF5429D6430700D5258E /* AWSAPIPlugin in Frameworks */ = {isa = PBXBuildFile; productRef = 1876BF5329D6430700D5258E /* AWSAPIPlugin */; };
-		1876BF5629D6430700D5258E /* AWSCognitoAuthPlugin in Frameworks */ = {isa = PBXBuildFile; productRef = 1876BF5529D6430700D5258E /* AWSCognitoAuthPlugin */; };
-		1876BF5829D6430700D5258E /* AWSDataStorePlugin in Frameworks */ = {isa = PBXBuildFile; productRef = 1876BF5729D6430700D5258E /* AWSDataStorePlugin */; };
-		1876BF5A29D6430700D5258E /* AWSLocationGeoPlugin in Frameworks */ = {isa = PBXBuildFile; productRef = 1876BF5929D6430700D5258E /* AWSLocationGeoPlugin */; };
-		1876BF5C29D6430700D5258E /* AWSPinpointAnalyticsPlugin in Frameworks */ = {isa = PBXBuildFile; productRef = 1876BF5B29D6430700D5258E /* AWSPinpointAnalyticsPlugin */; };
-		1876BF5E29D6430700D5258E /* AWSPinpointPushNotificationsPlugin in Frameworks */ = {isa = PBXBuildFile; productRef = 1876BF5D29D6430700D5258E /* AWSPinpointPushNotificationsPlugin */; };
-		1876BF6029D6430700D5258E /* AWSPluginsCore in Frameworks */ = {isa = PBXBuildFile; productRef = 1876BF5F29D6430700D5258E /* AWSPluginsCore */; };
-		1876BF6229D6430700D5258E /* AWSS3StoragePlugin in Frameworks */ = {isa = PBXBuildFile; productRef = 1876BF6129D6430700D5258E /* AWSS3StoragePlugin */; };
-		1876BF6429D6430700D5258E /* Amplify in Frameworks */ = {isa = PBXBuildFile; productRef = 1876BF6329D6430700D5258E /* Amplify */; };
 		18787FB429D210C100F6D530 /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18787FB329D210C100F6D530 /* NotificationCell.swift */; };
 		1879D78E29AD83D7004D3130 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1879D78D29AD83D7004D3130 /* ProfileViewController.swift */; };
 		188BADB329A5DCC000351199 /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188BADB229A5DCC000351199 /* PostCell.swift */; };
@@ -37,8 +28,6 @@
 		18CC35B6299E8C2F00668AF7 /* VibeCheckUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CC35B5299E8C2F00668AF7 /* VibeCheckUITests.swift */; };
 		18CC35B8299E8C2F00668AF7 /* VibeCheckUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CC35B7299E8C2F00668AF7 /* VibeCheckUITestsLaunchTests.swift */; };
 		18DB71D6299EB28800DA3C4E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18DB71D5299EB28800DA3C4E /* Assets.xcassets */; };
-		18FC78C229D13DDB00ECBAC8 /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 18FC78C029D13DDA00ECBAC8 /* awsconfiguration.json */; };
-		18FC78C329D13DDB00ECBAC8 /* amplifyconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 18FC78C129D13DDB00ECBAC8 /* amplifyconfiguration.json */; };
 		5204565B3F7BE8783A58153E /* Pods_VibeCheck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 118FC12B31E400CD44011D62 /* Pods_VibeCheck.framework */; };
 		BE64A017BE160C61B0387916 /* Pods_VibeCheckTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C90FDCDD8F96DA348BE93F68 /* Pods_VibeCheckTests.framework */; };
 		CE9354B1BC851D2C554D1628 /* Pods_VibeCheck_VibeCheckUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 805CBE4FB6FA5C4043CB1876 /* Pods_VibeCheck_VibeCheckUITests.framework */; };
@@ -64,11 +53,11 @@
 /* Begin PBXFileReference section */
 		075F34D87DFCCE9FD4B0B172 /* Pods-VibeCheckTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VibeCheckTests.release.xcconfig"; path = "Target Support Files/Pods-VibeCheckTests/Pods-VibeCheckTests.release.xcconfig"; sourceTree = "<group>"; };
 		118FC12B31E400CD44011D62 /* Pods_VibeCheck.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VibeCheck.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		181286D829E0AFA10041CA41 /* PostButtonState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostButtonState.swift; sourceTree = "<group>"; };
 		1836C4F929BFCAA9000BC583 /* InteractionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionCell.swift; sourceTree = "<group>"; };
 		1838039129A13D9700F9043D /* CreateProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProfileViewController.swift; sourceTree = "<group>"; };
 		185656EC29AEB25200663897 /* CommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
 		187687C329A70C9800ECC331 /* CommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
-		1876BF5029D6415300D5258E /* Backend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Backend.swift; sourceTree = "<group>"; };
 		18787FB329D210C100F6D530 /* NotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
 		1879D78D29AD83D7004D3130 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		188BADB229A5DCC000351199 /* PostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
@@ -89,8 +78,6 @@
 		18CC35B5299E8C2F00668AF7 /* VibeCheckUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VibeCheckUITests.swift; sourceTree = "<group>"; };
 		18CC35B7299E8C2F00668AF7 /* VibeCheckUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VibeCheckUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		18DB71D5299EB28800DA3C4E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		18FC78C029D13DDA00ECBAC8 /* awsconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
-		18FC78C129D13DDB00ECBAC8 /* amplifyconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = amplifyconfiguration.json; sourceTree = "<group>"; };
 		52E2C9A24EC151424F489A2F /* Pods-VibeCheck.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VibeCheck.debug.xcconfig"; path = "Target Support Files/Pods-VibeCheck/Pods-VibeCheck.debug.xcconfig"; sourceTree = "<group>"; };
 		805CBE4FB6FA5C4043CB1876 /* Pods_VibeCheck_VibeCheckUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VibeCheck_VibeCheckUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE1BFCE4CC590BC4BC54D69B /* Pods-VibeCheck-VibeCheckUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VibeCheck-VibeCheckUITests.release.xcconfig"; path = "Target Support Files/Pods-VibeCheck-VibeCheckUITests/Pods-VibeCheck-VibeCheckUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -105,16 +92,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1876BF5429D6430700D5258E /* AWSAPIPlugin in Frameworks */,
-				1876BF6429D6430700D5258E /* Amplify in Frameworks */,
-				1876BF5C29D6430700D5258E /* AWSPinpointAnalyticsPlugin in Frameworks */,
-				1876BF5A29D6430700D5258E /* AWSLocationGeoPlugin in Frameworks */,
 				5204565B3F7BE8783A58153E /* Pods_VibeCheck.framework in Frameworks */,
-				1876BF6029D6430700D5258E /* AWSPluginsCore in Frameworks */,
-				1876BF5629D6430700D5258E /* AWSCognitoAuthPlugin in Frameworks */,
-				1876BF5E29D6430700D5258E /* AWSPinpointPushNotificationsPlugin in Frameworks */,
-				1876BF5829D6430700D5258E /* AWSDataStorePlugin in Frameworks */,
-				1876BF6229D6430700D5258E /* AWSS3StoragePlugin in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -175,7 +153,7 @@
 			children = (
 				18CC3594299E8C2C00668AF7 /* AppDelegate.swift */,
 				18CC3596299E8C2C00668AF7 /* SceneDelegate.swift */,
-				1876BF5029D6415300D5258E /* Backend.swift */,
+				181286D829E0AFA10041CA41 /* PostButtonState.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -192,8 +170,6 @@
 		18CC3588299E8C2C00668AF7 = {
 			isa = PBXGroup;
 			children = (
-				18FC78C129D13DDB00ECBAC8 /* amplifyconfiguration.json */,
-				18FC78C029D13DDA00ECBAC8 /* awsconfiguration.json */,
 				18CC3593299E8C2C00668AF7 /* VibeCheck */,
 				18CC35AA299E8C2F00668AF7 /* VibeCheckTests */,
 				18CC35B4299E8C2F00668AF7 /* VibeCheckUITests */,
@@ -286,15 +262,6 @@
 			);
 			name = VibeCheck;
 			packageProductDependencies = (
-				1876BF5329D6430700D5258E /* AWSAPIPlugin */,
-				1876BF5529D6430700D5258E /* AWSCognitoAuthPlugin */,
-				1876BF5729D6430700D5258E /* AWSDataStorePlugin */,
-				1876BF5929D6430700D5258E /* AWSLocationGeoPlugin */,
-				1876BF5B29D6430700D5258E /* AWSPinpointAnalyticsPlugin */,
-				1876BF5D29D6430700D5258E /* AWSPinpointPushNotificationsPlugin */,
-				1876BF5F29D6430700D5258E /* AWSPluginsCore */,
-				1876BF6129D6430700D5258E /* AWSS3StoragePlugin */,
-				1876BF6329D6430700D5258E /* Amplify */,
 			);
 			productName = VibeCheck;
 			productReference = 18CC3591299E8C2C00668AF7 /* VibeCheck.app */;
@@ -372,7 +339,6 @@
 			);
 			mainGroup = 18CC3588299E8C2C00668AF7;
 			packageReferences = (
-				1876BF5229D6430700D5258E /* XCRemoteSwiftPackageReference "amplify-ios" */,
 			);
 			productRefGroup = 18CC3592299E8C2C00668AF7 /* Products */;
 			projectDirPath = "";
@@ -390,9 +356,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				18FC78C229D13DDB00ECBAC8 /* awsconfiguration.json in Resources */,
 				18CC35A1299E8C2F00668AF7 /* LaunchScreen.storyboard in Resources */,
-				18FC78C329D13DDB00ECBAC8 /* amplifyconfiguration.json in Resources */,
 				18DB71D6299EB28800DA3C4E /* Assets.xcassets in Resources */,
 				18CC359C299E8C2C00668AF7 /* Main.storyboard in Resources */,
 			);
@@ -528,6 +492,7 @@
 				18CC3595299E8C2C00668AF7 /* AppDelegate.swift in Sources */,
 				189E19CC299F247F005AB155 /* FeedViewController.swift in Sources */,
 				18787FB429D210C100F6D530 /* NotificationCell.swift in Sources */,
+				181286D929E0AFA10041CA41 /* PostButtonState.swift in Sources */,
 				18CC3597299E8C2C00668AF7 /* SceneDelegate.swift in Sources */,
 				187687C429A70C9800ECC331 /* CommentCell.swift in Sources */,
 				188BADB329A5DCC000351199 /* PostCell.swift in Sources */,
@@ -536,7 +501,6 @@
 				189E19CE299F248D005AB155 /* SignUpViewController.swift in Sources */,
 				185656ED29AEB25200663897 /* CommentViewController.swift in Sources */,
 				1836C4FA29BFCAA9000BC583 /* InteractionCell.swift in Sources */,
-				1876BF5129D6415300D5258E /* Backend.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -886,65 +850,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		1876BF5229D6430700D5258E /* XCRemoteSwiftPackageReference "amplify-ios" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/aws-amplify/amplify-ios";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		1876BF5329D6430700D5258E /* AWSAPIPlugin */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 1876BF5229D6430700D5258E /* XCRemoteSwiftPackageReference "amplify-ios" */;
-			productName = AWSAPIPlugin;
-		};
-		1876BF5529D6430700D5258E /* AWSCognitoAuthPlugin */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 1876BF5229D6430700D5258E /* XCRemoteSwiftPackageReference "amplify-ios" */;
-			productName = AWSCognitoAuthPlugin;
-		};
-		1876BF5729D6430700D5258E /* AWSDataStorePlugin */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 1876BF5229D6430700D5258E /* XCRemoteSwiftPackageReference "amplify-ios" */;
-			productName = AWSDataStorePlugin;
-		};
-		1876BF5929D6430700D5258E /* AWSLocationGeoPlugin */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 1876BF5229D6430700D5258E /* XCRemoteSwiftPackageReference "amplify-ios" */;
-			productName = AWSLocationGeoPlugin;
-		};
-		1876BF5B29D6430700D5258E /* AWSPinpointAnalyticsPlugin */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 1876BF5229D6430700D5258E /* XCRemoteSwiftPackageReference "amplify-ios" */;
-			productName = AWSPinpointAnalyticsPlugin;
-		};
-		1876BF5D29D6430700D5258E /* AWSPinpointPushNotificationsPlugin */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 1876BF5229D6430700D5258E /* XCRemoteSwiftPackageReference "amplify-ios" */;
-			productName = AWSPinpointPushNotificationsPlugin;
-		};
-		1876BF5F29D6430700D5258E /* AWSPluginsCore */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 1876BF5229D6430700D5258E /* XCRemoteSwiftPackageReference "amplify-ios" */;
-			productName = AWSPluginsCore;
-		};
-		1876BF6129D6430700D5258E /* AWSS3StoragePlugin */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 1876BF5229D6430700D5258E /* XCRemoteSwiftPackageReference "amplify-ios" */;
-			productName = AWSS3StoragePlugin;
-		};
-		1876BF6329D6430700D5258E /* Amplify */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 1876BF5229D6430700D5258E /* XCRemoteSwiftPackageReference "amplify-ios" */;
-			productName = Amplify;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 18CC3589299E8C2C00668AF7 /* Project object */;
 }

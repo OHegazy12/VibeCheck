@@ -7,18 +7,12 @@
 
 import UIKit
 import Parse
-import AWSS3
-import AWSCore
-import AWSCognito
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         // Thread.sleep(forTimeInterval: 1.0) // Adds a delay to launch screen
-        
-        Backend.initialize()
-        self.initializeS3()
         
         let parseConfig = ParseClientConfiguration
         {
@@ -49,14 +43,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
-
-    func initializeS3() {
-            let poolId = "us-east-1:a9a44cd5-d132-4423-9944-ed541e75b48e"
-            let credentialsProvider = AWSCognitoCredentialsProvider(
-                regionType: .USEast1, //other regionType according to your location.
-                identityPoolId: poolId
-            )
-            let configuration = AWSServiceConfiguration(region: .USEast1, credentialsProvider: credentialsProvider)
-            AWSServiceManager.default().defaultServiceConfiguration = configuration
-        }
 }
