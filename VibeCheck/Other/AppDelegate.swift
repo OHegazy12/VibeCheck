@@ -7,6 +7,12 @@
 
 import UIKit
 import Parse
+import Amplify
+import AWSCognitoAuthPlugin
+import AWSS3StoragePlugin
+import AWSS3
+import AWSCognito
+import AWSCore
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -25,9 +31,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
        //Hash password heroku: $2a$12$iEqdDQNubEmBaG0warXmyedHUCfIRELae.yD8LDWyEe3qYoOxPPTe (Kaoscat1738)
         
-        //Cognito Pool ID: us-east-1:a9a44cd5-d132-4423-9944-ed541e75b48e
+        do
+        {
+            //Amplify.Logging.logLevel = .verbose
+            try Amplify.add(plugin: AWSCognitoAuthPlugin())
+            try Amplify.add(plugin: AWSS3StoragePlugin())
+            try Amplify.configure()
+            print("Amplify configured with Auth and Storage plugins")
+        } catch
+        {
+            print("An error occurred setting up Amplify: \(error)")
+        }
+        
+        self.initializeS3()
         
         return true
+    }
+    
+    func initializeS3() {
+        let poolId = "us-east-1:d82995fe-5700-43ec-b958-55a47cff0c93" // 3-1
+        let credentialsProvider = AWSCognitoCredentialsProvider(regionType: .USEast1, identityPoolId: poolId)
+        let configuration = AWSServiceConfiguration(region: .USEast1, credentialsProvider: credentialsProvider)
+        AWSServiceManager.default().defaultServiceConfiguration = configuration
+        
     }
 
     // MARK: UISceneSession Lifecycle

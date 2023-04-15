@@ -40,7 +40,6 @@ class CreateProfileViewController: UIViewController, UITextFieldDelegate, UIImag
     // Creates profile when button is tapped
     @IBAction func createProfileButtonTapped(_ sender: Any)
     {
-        //navigateToFeedViewController()
         saveProfile()
     }
     

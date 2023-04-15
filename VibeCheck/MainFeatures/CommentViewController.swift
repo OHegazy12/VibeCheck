@@ -34,6 +34,7 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
         }
     }
     
+    // Function for loading existing comments on a given post.
     func loadComments()
     {
         guard let postObject = postObject else
@@ -65,7 +66,7 @@ class CommentViewController: UIViewController, UITableViewDataSource, UITableVie
         }
     }
     
-    
+    // Allows users to make a comment on a post
     @IBAction func onCreateComment(_ sender: Any)
     {
         // Creates 'Add Comment' pop up for users to type their comment in.

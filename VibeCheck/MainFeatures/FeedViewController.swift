@@ -36,7 +36,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
-    // Displays the posts' properties, such as username, caption, and image.
+    // Displays the posts' properties, such as username, caption, comments, likes/dislikes and image associated with the post.
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         let post = posts[indexPath.section]
@@ -153,6 +153,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         delegate.window?.rootViewController = loginVC
     }
 
+    // Allows users to like the post
     @IBAction func likeButtonTapped(_ sender: UIButton)
     {
         let point = sender.convert(CGPoint.zero, to: tableView)
@@ -207,6 +208,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         post.saveInBackground()
     }
     
+    // Allows the user to dislike the post
     @IBAction func disLikeButtonTapped(_ sender: UIButton)
     {
         let point = sender.convert(CGPoint.zero, to: tableView)

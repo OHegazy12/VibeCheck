@@ -8,6 +8,9 @@
 import UIKit
 import AlamofireImage
 import Parse
+import Amplify
+import AWSCognitoAuthPlugin
+import AWSS3StoragePlugin
 
 class CameraViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate
 {
@@ -15,18 +18,18 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     
     @IBOutlet weak var captionField: UITextField!
     
-    @IBAction func onSubmitPostButton(_ sender: Any)
-    {
-        // Handles upload screen.
-        guard let uploadImage = imageView.image, let postBio = captionField.text, !postBio.isEmpty
-        else
-        {
-            let alert = UIAlertController(title: "Error", message: "Please fill out all required fields.", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
-            return
-        }
-        
+    @IBAction func onSubmitPostButton(_ sender: Any) {
+        Task { @MainActor in
+            // Handles upload screen.
+            guard let uploadImage = imageView.image, let postBio = captionField.text, !postBio.isEmpty
+            else
+            {
+                let alert = UIAlertController(title: "Error", message: "Please fill out all required fields.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+                return
+            }
+            
             // Updates Post class whenever a new post is made
             let post = PFObject(className: "Posts")
             
@@ -35,7 +38,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
             
             let imageData = uploadImage.pngData()
             let file = PFFileObject(data: imageData!)
-        
+            
             post["image"] = file
             
             // Saves post to the server
@@ -52,12 +55,33 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
                     print("Error: \(String(describing: error?.localizedDescription))")
                 }
             }
-        
-            let fileName = UUID().uuidString + ".png"
+            
+            //let fileName = UUID().uuidString + ".png"
+            
+            func uploadData() async throws
+            {
+                print("Function is being called.")
+                let dataString = "Example file contents"
+                let data = Data(dataString.utf8)
+                let uploadTask = Amplify.Storage.uploadData(
+                    key: "ExampleKey",
+                    data: data
+                )
+                Task {
+                    for await progress in await uploadTask.progress
+                    {
+                        print("Progress: \(progress)")
+                    }
+                        print("Error: Could Not Upload!")
+                }
+                let value = try await uploadTask.value
+                    print("Completed: \(value)")
+                    print("uploadData() completed")
+            }
+            
+            try await uploadData()
+        }
     }
-    
-    
-
 
     
     @IBAction func onCameraButton(_ sender: Any)

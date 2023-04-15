@@ -63,29 +63,31 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
             return notifications.count
         }
 
-        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
+        {
             let cell = tableView.dequeueReusableCell(withIdentifier: "NotificationCell", for: indexPath) as! NotificationCell
-
-            let notification = notifications[indexPath.row]
+            
+            let notification = notifications[indexPath.section]
             let fromUser = notification["fromUser"] as! PFUser
             let post = notification["post"] as? PFObject
-
+            
             cell.usernameLabel.text = fromUser.username
-
+            
             if let username = fromUser.username
             {
-                if post != nil
+                if let _ = post
                 {
                     cell.messageLabel.text = "\(username) liked your post."
                 } else
                 {
-                    cell.messageLabel.text = "\(username)left a comment!"
+                    cell.messageLabel.text = "\(username) left a comment!"
                 }
             }
-
+            
             return cell
         }
 
+    // Called when a user likes a post
     @objc func didLikePost(_ notification: Notification)
     {
         guard let post = notification.object as? PFObject,
@@ -94,13 +96,13 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
             postOwner.objectId != liker.objectId,
             postOwner.objectId != PFUser.current()?.objectId else
         {
-                return
+            return
         }
 
         // Create a new notification object
         let notificationObject = PFObject(className: "Notification")
         notificationObject["user"] = postOwner
-        notificationObject["fromUser"] = liker
+        notificationObject["fromUser"] = liker // set the actual liker instead of the current user
         notificationObject["post"] = post
 
         notificationObject.saveInBackground { (success, error) in
@@ -124,13 +126,13 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
             postOwner.objectId != commenter.objectId,
             postOwner.objectId != PFUser.current()?.objectId else
         {
-                return
+            return
         }
 
         // Create a new notification object
         let notificationObject = PFObject(className: "Notification")
         notificationObject["user"] = postOwner
-        notificationObject["fromUser"] = commenter
+        notificationObject["fromUser"] = commenter // set the actual commenter instead of the current user
         notificationObject["post"] = post
 
         notificationObject.saveInBackground { (success, error) in
@@ -143,7 +145,6 @@ class NotificationViewController: UIViewController, UITableViewDelegate, UITable
             }
         }
     }
-
     deinit
     {
         NotificationCenter.default.removeObserver(self)

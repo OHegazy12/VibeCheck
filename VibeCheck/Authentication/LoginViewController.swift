@@ -8,11 +8,12 @@
 import UIKit
 import Parse
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController
+{
     
     @IBOutlet weak var usernameField: UITextField!
-
-
+    
+    
     @IBOutlet weak var passwordField: UITextField!
     
     
@@ -47,7 +48,7 @@ class LoginViewController: UIViewController {
             }
         }
     }
-
+    
     // Following two functions allows user to dismiss keyboard by tapping anywhere on the screen.
     func initializeHideKeyboard()
     {
