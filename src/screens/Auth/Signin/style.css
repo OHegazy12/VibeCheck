@@ -1,0 +1,38 @@
+.signinContainer {
+font-size:24px ;
+font-weight: 900;
+width: 100%;
+background-image:url(../../../assets/background/planets.png) ;
+background-position: center;
+background-repeat: no-repeat;
+background-size: cover;
+display: flex;
+flex: 1;
+justify-content: center;
+align-items: center;
+}
+
+.siginBox{
+border: 1px solid white;
+padding: 20px;
+border-radius: 20px;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+}
+
+.buttonBox{
+    display: flex;
+    width: 200px;
+    justify-content: space-between;
+    
+}
+
+
+
+
+
+
+
+
