@@ -1,4 +1,3 @@
-//
 //  DirectMessagingViewController.swift
 //  VibeCheck
 //
@@ -36,26 +35,26 @@ class DirectMessagingViewController: UIViewController, UITableViewDelegate, UITa
     @IBOutlet var myTable: UITableView!
     
     override func viewDidLoad()
-    {
-        super.viewDidLoad()
-        
-        myTable.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        myTable.delegate = self
-        myTable.dataSource = self
-        
-        // Get current user
-        currentUser = PFUser.current()
-        
-        // Query for other users
-        let query = PFUser.query()
-        query?.whereKey("objectId", notEqualTo: currentUser.objectId!)
-        query?.findObjectsInBackground(block: { (users, error) in
-            if let users = users as? [PFUser] {
-                self.otherUsers = users
-                self.myTable.reloadData()
-            } else {
-                print("Error querying for users: \(error?.localizedDescription ?? "")")
-            }
-        })
-    }
-}
+       {
+           super.viewDidLoad()
+           
+           myTable.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+           myTable.delegate = self
+           myTable.dataSource = self
+           
+           // Get current user
+           currentUser = PFUser.current()
+           
+           // Query for other users
+           let query = PFUser.query()
+           query?.whereKey("objectId", notEqualTo: currentUser.objectId!)
+           query?.findObjectsInBackground(block: { (users, error) in
+               if let users = users as? [PFUser] {
+                   self.otherUsers = users
+                   self.myTable.reloadData()
+               } else {
+                   print("Error querying for users: \(error?.localizedDescription ?? "")")
+               }
+           })
+       }
+   }

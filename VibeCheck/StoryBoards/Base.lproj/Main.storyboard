@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -75,7 +75,7 @@
             <objects>
                 <viewController storyboardIdentifier="SignUpViewController" id="dLI-jE-Ti8" customClass="SignUpViewController" customModule="VibeCheck" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="h5z-fa-vZp">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="886"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="838"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="SignUpPage" translatesAutoresizingMaskIntoConstraints="NO" id="8pm-yu-xGr">
@@ -261,7 +261,7 @@
             <objects>
                 <viewController storyboardIdentifier="FeedViewController" title="FeedViewController" id="wxf-ZY-ba4" customClass="FeedViewController" customModule="VibeCheck" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="BBF-Qf-iAh">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="886"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="838"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="MainFeed" translatesAutoresizingMaskIntoConstraints="NO" id="D5r-Zi-bix">
@@ -446,7 +446,7 @@
             <objects>
                 <viewController storyboardIdentifier="CameraViewController" id="hG3-uk-q0U" customClass="CameraViewController" customModule="VibeCheck" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wRg-qi-Mg5">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="886"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="838"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="CreatePost" translatesAutoresizingMaskIntoConstraints="NO" id="UXz-pw-wro">
@@ -518,7 +518,7 @@
             <objects>
                 <viewController id="k3I-Dw-joU" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ZbI-Gb-Sr4">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="886"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="838"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="N2L-TZ-5kG"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -529,43 +529,38 @@
             </objects>
             <point key="canvasLocation" x="3857" y="3745"/>
         </scene>
-        <!--DirectMessagingViewController-->
-        <scene sceneID="HIZ-8f-U8Y">
+        <!--Messages-->
+        <scene sceneID="de1-tV-6Sz">
             <objects>
-                <viewController storyboardIdentifier="DirectMessagingViewController" title="DirectMessagingViewController" id="DlA-Qk-NFc" customClass="DirectMessagingViewController" customModule="VibeCheck" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="b5W-oG-muR">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="886"/>
+                <viewController id="AUD-f9-OK8" customClass="DirectMessagingViewController" customModule="VibeCheck" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="fj8-px-Wcc">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="838"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="8aT-KZ-ncR">
-                                <rect key="frame" x="0.0" y="56" width="414" height="791"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="0X5-5x-diU">
+                                <rect key="frame" x="0.0" y="56" width="414" height="782"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                         </subviews>
-                        <viewLayoutGuide key="safeArea" id="dWw-Xn-3eR"/>
+                        <viewLayoutGuide key="safeArea" id="nLk-eP-RkI"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="dWw-Xn-3eR" firstAttribute="bottom" secondItem="8aT-KZ-ncR" secondAttribute="bottom" id="Riy-Jd-dug"/>
-                            <constraint firstItem="8aT-KZ-ncR" firstAttribute="top" secondItem="dWw-Xn-3eR" secondAttribute="top" id="Uqt-av-uZd"/>
-                            <constraint firstItem="8aT-KZ-ncR" firstAttribute="leading" secondItem="dWw-Xn-3eR" secondAttribute="leading" id="kNn-qb-xPm"/>
-                            <constraint firstItem="dWw-Xn-3eR" firstAttribute="trailing" secondItem="8aT-KZ-ncR" secondAttribute="trailing" id="kcv-K9-siY"/>
-                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Messages" id="j48-1r-3WS"/>
+                    <navigationItem key="navigationItem" title="Messages" id="8DH-vC-1Ua"/>
                     <connections>
-                        <outlet property="myTable" destination="8aT-KZ-ncR" id="V84-4h-feF"/>
+                        <outlet property="myTable" destination="0X5-5x-diU" id="e3u-xV-Yj2"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="wtk-ZR-ejt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="c6Z-fc-HZ3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5366.666666666667" y="3744.6428571428569"/>
+            <point key="canvasLocation" x="5437.68115942029" y="3736.6071428571427"/>
         </scene>
         <!--NotificationViewController-->
         <scene sceneID="ij1-P3-aoi">
             <objects>
                 <viewController storyboardIdentifier="NotificationViewController" title="NotificationViewController" id="XnT-Wb-4W6" customClass="NotificationViewController" customModule="VibeCheck" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gfX-VS-TCV">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="886"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="838"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="zJZ-RL-0Uv">
@@ -636,7 +631,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="DlA-Qk-NFc" kind="relationship" relationship="rootViewController" id="I72-fc-jyR"/>
+                        <segue destination="AUD-f9-OK8" kind="relationship" relationship="rootViewController" id="bNv-K3-wpb"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l43-8K-Ssy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -699,7 +694,7 @@
             <objects>
                 <viewController storyboardIdentifier="ProfileViewController" title="ProfileViewController" id="MCl-Y9-mkc" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="m0J-Rt-SHs">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="886"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="838"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="Epa-HV-9Pl"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -715,7 +710,7 @@
             <objects>
                 <viewController id="rNi-aT-7h6" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Xu2-ex-Tv7">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="886"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="838"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="uR6-es-14T"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>

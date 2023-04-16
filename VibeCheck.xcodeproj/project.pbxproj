@@ -10,6 +10,7 @@
 		181286D929E0AFA10041CA41 /* PostButtonState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181286D829E0AFA10041CA41 /* PostButtonState.swift */; };
 		1836C4FA29BFCAA9000BC583 /* InteractionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1836C4F929BFCAA9000BC583 /* InteractionCell.swift */; };
 		1838039229A13D9700F9043D /* CreateProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1838039129A13D9700F9043D /* CreateProfileViewController.swift */; };
+		184212C329EBBB7700A1F475 /* DirectMessagingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184212C229EBBB7700A1F475 /* DirectMessagingViewController.swift */; };
 		185656ED29AEB25200663897 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185656EC29AEB25200663897 /* CommentViewController.swift */; };
 		187687C429A70C9800ECC331 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187687C329A70C9800ECC331 /* CommentCell.swift */; };
 		18787FB429D210C100F6D530 /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18787FB329D210C100F6D530 /* NotificationCell.swift */; };
@@ -21,7 +22,6 @@
 		18829C5F29E5EA30001ED53C /* amplifyconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 18829C5D29E5EA30001ED53C /* amplifyconfiguration.json */; };
 		18829C6E29E617F3001ED53C /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18829C6D29E617F3001ED53C /* ProfileViewController.swift */; };
 		188BADB329A5DCC000351199 /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188BADB229A5DCC000351199 /* PostCell.swift */; };
-		188CABDB29E50A8200ED8B6A /* DirectMessagingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188CABDA29E50A8200ED8B6A /* DirectMessagingViewController.swift */; };
 		189E19CC299F247F005AB155 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189E19CB299F247F005AB155 /* FeedViewController.swift */; };
 		189E19CE299F248D005AB155 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189E19CD299F248D005AB155 /* SignUpViewController.swift */; };
 		189E19D4299F24C1005AB155 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189E19D3299F24C1005AB155 /* CameraViewController.swift */; };
@@ -63,6 +63,7 @@
 		181286D829E0AFA10041CA41 /* PostButtonState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostButtonState.swift; sourceTree = "<group>"; };
 		1836C4F929BFCAA9000BC583 /* InteractionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionCell.swift; sourceTree = "<group>"; };
 		1838039129A13D9700F9043D /* CreateProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProfileViewController.swift; sourceTree = "<group>"; };
+		184212C229EBBB7700A1F475 /* DirectMessagingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectMessagingViewController.swift; sourceTree = "<group>"; };
 		185656EC29AEB25200663897 /* CommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
 		187687C329A70C9800ECC331 /* CommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
 		18787FB329D210C100F6D530 /* NotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
@@ -71,7 +72,6 @@
 		18829C5D29E5EA30001ED53C /* amplifyconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = amplifyconfiguration.json; sourceTree = "<group>"; };
 		18829C6D29E617F3001ED53C /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		188BADB229A5DCC000351199 /* PostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
-		188CABDA29E50A8200ED8B6A /* DirectMessagingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectMessagingViewController.swift; sourceTree = "<group>"; };
 		189E19CB299F247F005AB155 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		189E19CD299F248D005AB155 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		189E19D3299F24C1005AB155 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
@@ -157,9 +157,9 @@
 				189E19D3299F24C1005AB155 /* CameraViewController.swift */,
 				185656EC29AEB25200663897 /* CommentViewController.swift */,
 				18A4823229D3A2F600D08A25 /* NotificationViewController.swift */,
-				188CABDA29E50A8200ED8B6A /* DirectMessagingViewController.swift */,
 				18829C5329E51BA2001ED53C /* ChatViewController.swift */,
 				18829C6D29E617F3001ED53C /* ProfileViewController.swift */,
+				184212C229EBBB7700A1F475 /* DirectMessagingViewController.swift */,
 			);
 			path = MainFeatures;
 			sourceTree = "<group>";
@@ -273,6 +273,7 @@
 				18CC358E299E8C2C00668AF7 /* Frameworks */,
 				18CC358F299E8C2C00668AF7 /* Resources */,
 				DC19900348CACD250C482BC2 /* [CP] Embed Pods Frameworks */,
+				184212C129EB384100A1F475 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -403,6 +404,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		184212C129EB384100A1F475 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif which swiftlint >/dev/null; then \n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
 		26FC3098A04BC6306A5105F0 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -511,6 +529,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1838039229A13D9700F9043D /* CreateProfileViewController.swift in Sources */,
+				184212C329EBBB7700A1F475 /* DirectMessagingViewController.swift in Sources */,
 				18CC3599299E8C2C00668AF7 /* LoginViewController.swift in Sources */,
 				18CC3595299E8C2C00668AF7 /* AppDelegate.swift in Sources */,
 				189E19CC299F247F005AB155 /* FeedViewController.swift in Sources */,
@@ -525,7 +544,6 @@
 				18A4823329D3A2F600D08A25 /* NotificationViewController.swift in Sources */,
 				189E19CE299F248D005AB155 /* SignUpViewController.swift in Sources */,
 				185656ED29AEB25200663897 /* CommentViewController.swift in Sources */,
-				188CABDB29E50A8200ED8B6A /* DirectMessagingViewController.swift in Sources */,
 				1836C4FA29BFCAA9000BC583 /* InteractionCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

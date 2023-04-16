@@ -16,7 +16,6 @@ struct Message: MessageType
     var messageId: String
     var sentDate: Date
     var kind: MessageKind
-    var conversationId: String
 }
 
 class ChatViewController: MessagesViewController, MessagesDataSource, MessagesLayoutDelegate, MessagesDisplayDelegate, InputBarAccessoryViewDelegate
@@ -37,13 +36,10 @@ class ChatViewController: MessagesViewController, MessagesDataSource, MessagesLa
                 self.otherUser = user
                 
                 // Retrieve previous messages from Parse
-                let conversationId = "\(self.currentUser.objectId!)\(self.otherUser.objectId!)"
                 let messageQuery = PFQuery(className: "Message")
-                messageQuery.whereKey("conversationId", equalTo: conversationId)
                 messageQuery.whereKey("sender", equalTo: self.currentUser)
                 messageQuery.whereKey("recipient", equalTo: self.otherUser!)
                 let recipientQuery = PFQuery(className: "Message")
-                recipientQuery.whereKey("conversationId", equalTo: conversationId)
                 recipientQuery.whereKey("sender", equalTo: self.otherUser!)
                 recipientQuery.whereKey("recipient", equalTo: self.currentUser)
                 let query = PFQuery.orQuery(withSubqueries: [messageQuery, recipientQuery])
@@ -62,7 +58,7 @@ class ChatViewController: MessagesViewController, MessagesDataSource, MessagesLa
                                 messageSender = Sender(senderId: sender.objectId!, displayName: "Unknown")
                                 print("Error fetching sender: \(error.localizedDescription)")
                             }
-                            let message = Message(sender: messageSender, messageId: message.objectId!, sentDate: sentDate, kind: messageKind, conversationId: conversationId)
+                            let message = Message(sender: messageSender, messageId: message.objectId!, sentDate: sentDate, kind: messageKind)
                             self.messages.append(message)
                             print("Fetched previous messages!")
                         }
@@ -108,29 +104,25 @@ class ChatViewController: MessagesViewController, MessagesDataSource, MessagesLa
     @objc func sendButtonPressed()
     {
         let messageText = inputBar.inputTextView.text.trimmingCharacters(in: .whitespacesAndNewlines)
-            guard !messageText.isEmpty else {
-                return
-            }
-            
-        let message = Message(sender: currentSender(), messageId: UUID().uuidString, sentDate: Date(), kind: .text(inputBar.inputTextView.text ?? ""), conversationId: "\(currentUser.objectId!)\(otherUser.objectId!)")
-            messages.append(message)
-            messagesCollectionView.reloadData()
-            messagesCollectionView.scrollToLastItem(animated: true)
-            inputBar.inputTextView.text = ""
-            print("Message sent!")
-            
-            // Save the message to Parse
-            let parseMessage = PFObject(className: "Message")
-            parseMessage["sender"] = currentUser
-            parseMessage["recipient"] = otherUser
-            parseMessage["text"] = messageText
-            parseMessage.saveInBackground { (success, error) in
-                if success {
-                    print("Message saved!")
-                } else {
-                    print("Error saving message: \(error?.localizedDescription ?? "unknown error")")
-                }
-            }
+        guard !messageText.isEmpty else
+        {
+            return
+        }
+        
+        let message = Message(sender: currentSender(), messageId: UUID().uuidString, sentDate: Date(), kind: .text(messageText))
+        messages.append(message)
+        inputBar.inputTextView.text = ""
+        messagesCollectionView.reloadData()
+        messagesCollectionView.scrollToLastItem(animated: true)
+        print("Message sent!")
+        
+        // Save the message to Parse
+        let parseMessage = PFObject(className: "Message")
+        parseMessage["sender"] = currentUser
+        parseMessage["recipient"] = otherUser
+        parseMessage["text"] = messageText
+        parseMessage.saveInBackground()
+        print("Message saved!")
     }
     
     func inputBar(_ inputBar: InputBarAccessoryView, textViewTextDidChangeTo text: String)
