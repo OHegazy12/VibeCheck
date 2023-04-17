@@ -12,10 +12,10 @@
 // ***NOTE: Need to delete knex_migrations and knex_migrations_lock tables before your migration works properly
 // -----------------------------------------------
 
-exports.up = function (knex) {
+exports.up = async function (knex) {
     // create the user schema
-    return knex.schema.createTable('users', (table) => {
-        table.uuid('id').defaultTo(knex.raw("gen_random_uuid()")).unique();
+    await knex.schema.createTable('users', (table) => {
+        table.uuid('id').defaultTo(knex.raw("gen_random_uuid()")).unique().primary();
         table.string('email_address').notNullable().unique();
         table.string('username').notNullable().unique();
         table.string('password_hash').notNullable();
@@ -28,10 +28,15 @@ exports.up = function (knex) {
         table.specificType('following', 'text[]');  // might need to swap the type from text[] to uuid
         table.specificType('saved_lst', 'text[]');
         table.timestamps(true, true);
-    }).createTable('posts', (table) => {
+    });
+
+    await knex.schema.createTable('posts', (table) => {
         table.enum('type', ['friends', 'community']).notNullable();
         table.uuid('post_id').defaultTo(knex.raw("gen_random_uuid()")).notNullable();
-        table.uuid('posted_by').references('id').inTable('users');
+
+        table.uuid('posted_by');
+        table.foreign('posted_by').references('users.id');
+
         table.string('img_link').defaultTo(null);
         table.string('topic');
         table.string('title').notNullable();
@@ -41,9 +46,14 @@ exports.up = function (knex) {
         table.specificType('comments_lst', 'text[]');  // stores the unique uuid of a comment
         table.datetime('posted_at').notNullable();  // when the post was made
         table.timestamps(true, true);
-    }).createTable('comments', (table) => {
+    });
+
+    await knex.schema.createTable('comments', (table) => {
         table.uuid('comment_id').defaultTo(knex.raw("gen_random_uuid()")).notNullable();
-        table.uuid('posted_by').references('id').inTable('users');
+
+        table.uuid('posted_by');
+        table.foreign('posted_by').references('users.id');
+
         table.string('body_text').notNullable();
         table.specificType('likes_lst', 'text[]');
         table.specificType('dislikes_lst', 'text[]');
@@ -57,6 +67,8 @@ exports.up = function (knex) {
  * @param { import("knex").Knex } knex
  * @returns { Promise<void> }
  */
-exports.down = function (knex) {
-    return knex.schema.dropTable('comment').dropTable('post').dropTable('users');
+exports.down = async function (knex) {
+    await knex.schema.dropTable('comments');
+    await knex.schema.dropTable('posts');
+    await knex.schema.dropTable('users');
 };

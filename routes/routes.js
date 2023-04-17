@@ -11,6 +11,7 @@ const db = require('../db/db');
 const fs = require('fs');
 const { ImgurClient } = require('imgur');
 const bcrypt = require('bcryptjs');
+const jwt = require("jsonwebtoken")
 
 // will be used later to format when something was posted
 // const moment = require('moment');    // moment().format('lll');  // Mar 30, 2023 10:49 PM
@@ -101,8 +102,40 @@ router.post('/uploadImg', async (req, res) => {
         image: sampleFile.data.toString('base64'),
         type: 'stream',
     });
+    client.deleteImage();
     console.log(response.data.link);    // this is the reference for the imgur link containing the image
     return response.data.link;
+})
+
+router.delete('/deleteAccount', async (req, res) => {
+    // delete account
+    await db('users').where('id', req.body.id).delete()
+    return res.status(200)
+})
+
+router.delete('/deletePost', async (req, res) => {
+    var x = await db('posts').select('img_link').where('post_id', req.body.id)
+    // if post has an image
+    if (x.length) {
+        for (const img of x) {
+            var img_hash = img.img_link.split('/')[3]
+            // delete image
+            await client.deleteImage(img_hash)
+        }
+    }
+    // delete post
+    await db('posts').where('post_id', req.body.id).delete()
+    return res.status(200)
+})
+
+router.delete('/deleteComment', async (req, res) => {
+    // delete comment
+    await db('comments').where('comment_id', req.body.id).delete()
+    return res.status(200)
+})
+
+router.delete('/communityFeed', async (req, res) => {
+    return await db('posts').where('type', community)
 })
 
 //Sign Up
@@ -165,6 +198,9 @@ router.post('/login', async (req, res) => {
             return res.status(401).json({ 'response': 'Your username or password is incorrect' })
         }
         console.log(user)
+        // token verification
+        const token = jwt.sign(user, process.env.JWT_S)
+        res.json({ token: token })
         return res.status(200).json({ 'response': 'Logging in' })
     } catch (error) {
         console.log(error);
@@ -195,7 +231,6 @@ router.post('/createPost', async (req, res) => {
     try {
         const {
             type,
-            post_id,
             posted_by,
             img_link,
             topic,
@@ -208,7 +243,6 @@ router.post('/createPost', async (req, res) => {
         console.log(req.body)
         const [id] = await db('posts').insert({
             type,
-            post_id,
             posted_by,
             img_link,
             topic,
@@ -230,7 +264,6 @@ router.post('/createPost', async (req, res) => {
 router.post('/createComment', async (req, res) => {
     try {
         const {
-            comment_id,
             posted_by,
             body_text,
             likes_lst,
@@ -239,7 +272,6 @@ router.post('/createComment', async (req, res) => {
             posted_at } = req.body
         console.log(req.body)
         const [id] = await db('comments').insert({
-            comment_id,
             posted_by,
             body_text,
             likes_lst,
