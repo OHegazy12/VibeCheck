@@ -183,7 +183,7 @@ router.post('/login', async (req, res) => {
             email,
             pass,
         } = req.body
-
+        // Check email address
         var user = (await db('users').where('email_address', email))[0]
         console.log(user)
         if (user === undefined) {
@@ -192,16 +192,20 @@ router.post('/login', async (req, res) => {
         var salt = user.password_hash.split('#')[1]
         console.log(user.password_hash, user.password_hash.split('#'))
 
-
+        // Check password
         var isSamePassword = checkPassword(pass, user.password_hash, salt)
         if (!isSamePassword) {
             return res.status(401).json({ 'response': 'Your username or password is incorrect' })
         }
         console.log(user)
-        // token verification
-        const token = jwt.sign(user, process.env.JWT_S)
+
+        // token verification  
+        const token = jwt.sign(user, process.env.JWT_ACCESS_TOKEN, { expiresIn: "1d" })
         res.json({ token: token })
+
+        // Username & password correct --> Logging in
         return res.status(200).json({ 'response': 'Logging in' })
+        // return res.redirect('/profile')
     } catch (error) {
         console.log(error);
         return res.json({ error: error.detail })
