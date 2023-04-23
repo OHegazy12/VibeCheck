@@ -4,13 +4,27 @@ const theme = {
     primaryColor:'#DAF7A6', 
     secondaryColor:'#FFC300',
     whiteColor:'#FFFFFF',
-    grayColor:'#CCCCCC'
+    grayColor:'#CCCCCC',
+    blackColor: '#000000'
 }
 const THEME = createTheme({
     palette:{
         primary:{main: theme.primaryColor},
         secondary:{main: theme.secondaryColor},
-        info:{main: theme.whiteColor}
+        info:{main: theme.whiteColor},
+        dark:{main: theme.blackColor }
+    },
+    typography:{
+        h3: { 
+            color: theme.whiteColor
+        }
+    },
+    components:{
+        MuiFormLabel:{
+            styleOverrides:{root:{
+                color: theme.whiteColor
+            }}
+        }        
     }
 })
 

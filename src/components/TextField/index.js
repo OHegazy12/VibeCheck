@@ -1,9 +1,9 @@
 import { TextField } from '@mui/material'
 import React from 'react'
 
-function MuiTextField({label, onChange, variant}) {
+function MuiTextField({...rest}) {
   return (
-    <TextField label={label} variant={variant} onChange={onChange} />
+    <TextField {...rest} />
   )
 }
 

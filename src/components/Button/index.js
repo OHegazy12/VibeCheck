@@ -1,7 +1,7 @@
 import { Button } from '@mui/material'
 import React from 'react'
 
-function MuiButton({ label, variant,onClick,color }) { 
+function MuiButton({ label, ...rest}) { 
   // console.log(props)
   // const { label, variant } = props
 
@@ -21,7 +21,7 @@ function MuiButton({ label, variant,onClick,color }) {
   //function Button(arg) {}
 
   return (
-    <Button variant={variant} onClick={onClick} color={color} >{label}</Button>
+    <Button {...rest} >{label || "text"}</Button>
   )
 }
 
