@@ -23,7 +23,6 @@ class ChatViewController: MessagesViewController, MessagesDataSource, MessagesLa
     let currentUser = PFUser.current()!
     var otherUser: PFUser!
     var messages = [MessageType]()
-    var inputBar = InputBarAccessoryView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,16 +73,11 @@ class ChatViewController: MessagesViewController, MessagesDataSource, MessagesLa
         messagesCollectionView.messagesDataSource = self
         messagesCollectionView.messagesLayoutDelegate = self
         messagesCollectionView.messagesDisplayDelegate = self
-        view.addSubview(inputBar)
-        inputBar.delegate = self
-        inputBar.inputTextView.placeholder = "Type a message..."
-        inputBar.sendButton.setTitle("Send", for: .normal)
-        inputBar.sendButton.setTitleColor(view.tintColor, for: .normal)
-        inputBar.sendButton.addTarget(self, action: #selector(sendButtonPressed), for: .touchUpInside)
-        inputBar.translatesAutoresizingMaskIntoConstraints = false
-        inputBar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-        inputBar.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        inputBar.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        messageInputBar.delegate = self
+        messageInputBar.inputTextView.placeholder = "Type a message..."
+        messageInputBar.sendButton.setTitle("Send", for: .normal)
+        messageInputBar.sendButton.setTitleColor(view.tintColor, for: .normal)
+        messageInputBar.sendButton.addTarget(self, action: #selector(sendButtonPressed), for: .touchUpInside)
     }
     
     func currentSender() -> SenderType
@@ -101,17 +95,15 @@ class ChatViewController: MessagesViewController, MessagesDataSource, MessagesLa
         return messages[indexPath.section]
     }
     
-    @objc func sendButtonPressed()
-    {
-        let messageText = inputBar.inputTextView.text.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard !messageText.isEmpty else
-        {
+    @objc func sendButtonPressed() {
+        let messageText = messageInputBar.inputTextView.text.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !messageText.isEmpty else {
             return
         }
         
         let message = Message(sender: currentSender(), messageId: UUID().uuidString, sentDate: Date(), kind: .text(messageText))
         messages.append(message)
-        inputBar.inputTextView.text = ""
+        messageInputBar.inputTextView.text = ""
         messagesCollectionView.reloadData()
         messagesCollectionView.scrollToLastItem(animated: true)
         print("Message sent!")
@@ -121,10 +113,15 @@ class ChatViewController: MessagesViewController, MessagesDataSource, MessagesLa
         parseMessage["sender"] = currentUser
         parseMessage["recipient"] = otherUser
         parseMessage["text"] = messageText
-        parseMessage.saveInBackground()
-        print("Message saved!")
+        parseMessage.saveInBackground { (success, error) in
+            if success {
+                print("Message saved!")
+            } else if let error = error {
+                print("Error saving message: \(error.localizedDescription)")
+            }
+        }
     }
-    
+
     func inputBar(_ inputBar: InputBarAccessoryView, textViewTextDidChangeTo text: String)
     {
         if text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty

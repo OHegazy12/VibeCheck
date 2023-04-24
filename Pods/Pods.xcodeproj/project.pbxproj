@@ -15,6 +15,7 @@
 			dependencies = (
 			);
 			name = SwiftLint;
+			productName = SwiftLint;
 		};
 /* End PBXAggregateTarget section */
 
@@ -1531,10 +1532,10 @@
 		9C2F77662DA554097F00BCE400A6A4A7 /* PFPolygon.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = PFPolygon.m; path = Parse/Parse/PFPolygon.m; sourceTree = "<group>"; };
 		9C2FF4F62FC733F05E899300D11DAC6C /* AWSFMDatabase+Private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "AWSFMDatabase+Private.h"; path = "AWSCore/FMDB/AWSFMDatabase+Private.h"; sourceTree = "<group>"; };
 		9CB49EEB98AB7B6EB6E64165FA126D0A /* Protected.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Protected.swift; path = Source/Protected.swift; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9D9DF357A2AC5AB5A85986A43E519753 /* AWSService.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AWSService.h; path = AWSCore/Service/AWSService.h; sourceTree = "<group>"; };
 		9E2990262CEE1A127D54F0AABAB895AE /* InputBarButtonItem.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = InputBarButtonItem.swift; path = Sources/Controls/InputBarButtonItem.swift; sourceTree = "<group>"; };
-		9EFB9D26050B642B0B6E566CC8E6496E /* en.lproj */ = {isa = PBXFileReference; includeInIndex = 1; name = en.lproj; path = Parse/Parse/Resources/en.lproj; sourceTree = "<group>"; };
+		9EFB9D26050B642B0B6E566CC8E6496E /* en.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = en.lproj; path = Parse/Parse/Resources/en.lproj; sourceTree = "<group>"; };
 		9F5DB88B931797003C3E0F1CC3700436 /* AWSSTS.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AWSSTS.h; path = AWSCore/STS/AWSSTS.h; sourceTree = "<group>"; };
 		9F62B1FFABF7B9B121454F1D0214C8C6 /* Pods-VibeCheck-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-VibeCheck-acknowledgements.plist"; sourceTree = "<group>"; };
 		9F7D7C0C58CE4E7AB71B8A4F69986AB7 /* PlayButtonView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PlayButtonView.swift; path = Sources/Views/PlayButtonView.swift; sourceTree = "<group>"; };
@@ -2066,7 +2067,6 @@
 				481A69E3D8D95F1F2CEAB7503F4CE61A /* Validation.swift */,
 				E38145A9011BB1D6B9AFCC1B048AC2DF /* Support Files */,
 			);
-			name = Alamofire;
 			path = Alamofire;
 			sourceTree = "<group>";
 		};
@@ -2135,7 +2135,6 @@
 				F6241C6ECE057CAD547C51AFA2805B88 /* AWSCognitoUtil.m */,
 				1DD61C40D2B5ED1A06B28EF71E87C3B0 /* Support Files */,
 			);
-			name = AWSCognito;
 			path = AWSCognito;
 			sourceTree = "<group>";
 		};
@@ -2226,7 +2225,6 @@
 				2F4F1BF7AE8430ECE73672A70B9DCFB7 /* Support Files */,
 				C9062007FA71D921D023EC89BB10B6B3 /* Tasks */,
 			);
-			name = Bolts;
 			path = Bolts;
 			sourceTree = "<group>";
 		};
@@ -2831,7 +2829,6 @@
 				4978264FBCD2E77F54922A22968FC569 /* NSValueTransformer+AWSMTLPredefinedTransformerAdditions.m */,
 				93FBA5B1C6BFB5948D656C72D96575A4 /* Support Files */,
 			);
-			name = AWSCore;
 			path = AWSCore;
 			sourceTree = "<group>";
 		};
@@ -2840,7 +2837,6 @@
 			children = (
 				545B81089BE3E293208A9891EC07805B /* Support Files */,
 			);
-			name = SwiftLint;
 			path = SwiftLint;
 			sourceTree = "<group>";
 		};
@@ -2935,7 +2931,6 @@
 				E67AAB2521532FFBE72067DFC03038DA /* Resources */,
 				492243BF6E69BC63D03F14F643C8EF05 /* Support Files */,
 			);
-			name = MessageKit;
 			path = MessageKit;
 			sourceTree = "<group>";
 		};
@@ -2992,7 +2987,6 @@
 				352FBF9A5C8AF23FD2E56341EB3AFE5F /* Core */,
 				9EF98FAAAA6008F82D6A6DBE0640C237 /* Support Files */,
 			);
-			name = InputBarAccessoryView;
 			path = InputBarAccessoryView;
 			sourceTree = "<group>";
 		};
@@ -3075,7 +3069,6 @@
 				48750896B8C6F170B80545B50FADA453 /* UIImageView+AlamofireImage.swift */,
 				C8A0EB6680A968B30BAADE7CA8512F49 /* Support Files */,
 			);
-			name = AlamofireImage;
 			path = AlamofireImage;
 			sourceTree = "<group>";
 		};
@@ -3100,7 +3093,6 @@
 				60AE9EA950D30C03CA4DFD964BF9826E /* Core */,
 				B1E0A78F5231CF0017608501366D92EB /* Support Files */,
 			);
-			name = Parse;
 			path = Parse;
 			sourceTree = "<group>";
 		};
@@ -3118,7 +3110,6 @@
 				F70891F040EE2200FC3D3E5D80BE91F1 /* Core */,
 				743C42C88EC6C14AAA4B91273F944F91 /* Support Files */,
 			);
-			name = MessageInputBar;
 			path = MessageInputBar;
 			sourceTree = "<group>";
 		};
@@ -3845,6 +3836,14 @@
 			attributes = {
 				LastSwiftUpdateCheck = 1300;
 				LastUpgradeCheck = 1300;
+				TargetAttributes = {
+					7B28C4D8238B984881411C5F51BC30D6 = {
+						LastSwiftMigration = "";
+					};
+					EAAA1AD3A8A1B59AB91319EE40752C6D = {
+						LastSwiftMigration = "";
+					};
+				};
 			};
 			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 14.0";

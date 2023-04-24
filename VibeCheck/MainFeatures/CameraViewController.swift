@@ -8,9 +8,6 @@
 import UIKit
 import AlamofireImage
 import Parse
-import Amplify
-import AWSCognitoAuthPlugin
-import AWSS3StoragePlugin
 
 class CameraViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate
 {
@@ -55,34 +52,8 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
                     print("Error: \(String(describing: error?.localizedDescription))")
                 }
             }
-            
-            //let fileName = UUID().uuidString + ".png"
-            
-            func uploadData() async throws
-            {
-                print("Function is being called.")
-                let dataString = "Example file contents"
-                let data = Data(dataString.utf8)
-                let uploadTask = Amplify.Storage.uploadData(
-                    key: "ExampleKey",
-                    data: data
-                )
-                Task {
-                    for await progress in await uploadTask.progress
-                    {
-                        print("Progress: \(progress)")
-                    }
-                        print("Error: Could Not Upload!")
-                }
-                let value = try await uploadTask.value
-                    print("Completed: \(value)")
-                    print("uploadData() completed")
-            }
-            
-            try await uploadData()
         }
     }
-
     
     @IBAction func onCameraButton(_ sender: Any)
     {
