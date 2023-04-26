@@ -12,6 +12,10 @@ const fs = require('fs');
 const { ImgurClient } = require('imgur');
 const bcrypt = require('bcryptjs');
 const jwt = require("jsonwebtoken")
+const cookieParser = require('cookie-parser');
+router.use(cookieParser());
+const { cookieJwtAuth } = require('../middleware/authorization');
+
 
 // will be used later to format when something was posted
 // const moment = require('moment');    // moment().format('lll');  // Mar 30, 2023 10:49 PM
@@ -26,31 +30,6 @@ const client = new ImgurClient({
 //Default endpoint
 router.get('/', (req, res) => {
     res.send('Hello world!')
-})
-
-//Post Method
-router.post('/post', (req, res) => {
-    res.send('Post API')
-})
-
-//Get all Method
-router.get('/getAll', (req, res) => {
-    res.send('Get All API')
-})
-
-//Get by ID Method
-router.get('/getOne/:id', (req, res) => {
-    res.send('Get by ID API')
-})
-
-//Update by ID Method
-router.patch('/update/:id', (req, res) => {
-    res.send('Update by ID API')
-})
-
-//Delete by ID Method
-router.delete('/delete/:id', (req, res) => {
-    res.send('Delete by ID API')
 })
 
 //Create user
@@ -90,7 +69,7 @@ router.post('/createUser', async (req, res) => {
 })
 
 // upload an image and retrieve an imgur link from it
-router.post('/uploadImg', async (req, res) => {
+router.post('/uploadImg', cookieJwtAuth, async (req, res) => {
     if (!req.files) {
         return res.sendStatus(400).send('No files were uploaded.')
     }
@@ -107,13 +86,13 @@ router.post('/uploadImg', async (req, res) => {
     return response.data.link;
 })
 
-router.delete('/deleteAccount', async (req, res) => {
+router.delete('/deleteAccount', cookieJwtAuth, async (req, res) => {
     // delete account
-    await db('users').where('id', req.body.id).delete()
+    await db('users').where('id', req.user.user_id).delete()
     return res.status(200)
 })
 
-router.delete('/deletePost', async (req, res) => {
+router.delete('/deletePost', cookieJwtAuth, async (req, res) => {
     var x = await db('posts').select('img_link').where('post_id', req.body.id)
     // if post has an image
     if (x.length) {
@@ -128,13 +107,13 @@ router.delete('/deletePost', async (req, res) => {
     return res.status(200)
 })
 
-router.delete('/deleteComment', async (req, res) => {
+router.delete('/deleteComment', cookieJwtAuth, async (req, res) => {
     // delete comment
     await db('comments').where('comment_id', req.body.id).delete()
     return res.status(200)
 })
 
-router.delete('/communityFeed', async (req, res) => {
+router.get('/communityFeed', cookieJwtAuth, async (req, res) => {
     return await db('posts').where('type', community)
 })
 
@@ -183,34 +162,47 @@ router.post('/login', async (req, res) => {
             email,
             pass,
         } = req.body
+        // console.log(req.body.email)
         // Check email address
         var user = (await db('users').where('email_address', email))[0]
-        console.log(user)
+        // console.log(user)
         if (user === undefined) {
             return res.status(401).json({ 'response': 'Your username or password is incorrect' })
         }
         var salt = user.password_hash.split('#')[1]
-        console.log(user.password_hash, user.password_hash.split('#'))
+        // console.log(user.password_hash, user.password_hash.split('#'))
 
         // Check password
         var isSamePassword = checkPassword(pass, user.password_hash, salt)
         if (!isSamePassword) {
             return res.status(401).json({ 'response': 'Your username or password is incorrect' })
         }
-        console.log(user)
+        // console.log(user)
 
         // token verification  
-        const token = jwt.sign(user, process.env.JWT_ACCESS_TOKEN, { expiresIn: "1d" })
-        res.json({ token: token })
+        var user_id = user.id
+        const token = jwt.sign({ user_id }, process.env.JWT_ACCESS_TOKEN, { expiresIn: "1d" })
+        res.cookie("token", token, {
+            httpOnly: true,
+        });
+        console.log("Login route", token)
 
         // Username & password correct --> Logging in
         return res.status(200).json({ 'response': 'Logging in' })
-        // return res.redirect('/profile')
+
     } catch (error) {
         console.log(error);
         return res.json({ error: error.detail })
     }
 })
+
+router.get("/loggedInTest", cookieJwtAuth, async (req, res) => {
+
+    console.log(req.user.user_id)
+    res.send("Logged in")
+
+})
+
 // Functions -----------------------------------------------------------------------
 function hashAndSalt(pw_plaintext) {
     var salt = bcrypt.genSaltSync(10);
@@ -230,12 +222,12 @@ function checkPassword(pw_plaintext, stored_hash, salt) {
 }
 
 //Make Post
-router.post('/createPost', async (req, res) => {
+router.post('/createPost', cookieJwtAuth, async (req, res) => {
     console.log(req.body)
     try {
         const {
             type,
-            posted_by,
+            // posted_by,
             img_link,
             topic,
             title,
@@ -245,6 +237,7 @@ router.post('/createPost', async (req, res) => {
             comments_lst,
             posted_at } = req.body
         console.log(req.body)
+        posted_by = req.user.user_id
         const [id] = await db('posts').insert({
             type,
             posted_by,
@@ -265,16 +258,17 @@ router.post('/createPost', async (req, res) => {
 })
 
 //Make Post
-router.post('/createComment', async (req, res) => {
+router.post('/createComment', cookieJwtAuth, async (req, res) => {
     try {
         const {
-            posted_by,
+            // posted_by,
             body_text,
             likes_lst,
             dislikes_lst,
             comments_lst,
             posted_at } = req.body
         console.log(req.body)
+        posted_by = req.user.user_id
         const [id] = await db('comments').insert({
             posted_by,
             body_text,
