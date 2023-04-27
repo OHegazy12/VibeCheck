@@ -8,6 +8,7 @@ justify-content: center;
 align-items: center;
 flex-direction: column;
 position: relative;
+margin-top: 80px;
 }
 .profileContainer::before{
     z-index: -1;
@@ -17,52 +18,38 @@ position: relative;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    position: absolute;
+    position: fixed;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
-    }
+}
 
+.ProfileSection{
+    display: flex;
+    flex-direction: row;
+    padding: 80px 0px;
+    height: 100%;
+    align-items: flex-start;
+}
 .ProfileScreen{
     height: 100%;
     width: 100%;
     display: flex;
-    justify-content: center;
+    flex: 2;
+    align-items: center;
+    flex-direction: column;
+    /* padding: 40px 0px; */
 
 }
-.ProfileBox{
-    background-color: white;
-    height: 180px;
-    width: 400px;
-    margin: 20px;
+.ProfileExtra{
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    /* background-color: black; */
+    min-width: 320px;
     padding: 20px;
-    display: flex;
-    align-items: center;
-    border-radius: 20px;
-    box-shadow: 0px 2px 2px black;
-}
-.ProfileDetails{
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    width: 100%;
-    padding: 0 15px;
+    /* position: sticky; */
 
 }
-.ProfileReach{
-    display: flex;
-    justify-content: space-between;
-    flex-direction: row;
-}
-.ProfileInfo{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    height: 50px;
-    min-width: 50px;    
-    margin: 10px 0;
-    border-radius: 10px;
-    padding: 10px;
-}
+
