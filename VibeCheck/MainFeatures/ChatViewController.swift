@@ -26,7 +26,7 @@ class ChatViewController: MessagesViewController, MessagesDataSource, MessagesLa
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Set up the other user
         let query = PFUser.query()
         query?.whereKey("objectId", notEqualTo: currentUser.objectId!)
@@ -61,14 +61,14 @@ class ChatViewController: MessagesViewController, MessagesDataSource, MessagesLa
                             self.messages.append(message)
                             print("Fetched previous messages!")
                         }
-
+                        
                         self.messagesCollectionView.reloadData()
                         self.messagesCollectionView.scrollToLastItem(animated: false)
                     }
                 }
             }
         })
-
+        
         // Configure the messages collection view and input bar
         messagesCollectionView.messagesDataSource = self
         messagesCollectionView.messagesLayoutDelegate = self
@@ -89,7 +89,7 @@ class ChatViewController: MessagesViewController, MessagesDataSource, MessagesLa
     {
         return messages.count
     }
-
+    
     func messageForItem(at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageType
     {
         return messages[indexPath.section]
@@ -101,7 +101,8 @@ class ChatViewController: MessagesViewController, MessagesDataSource, MessagesLa
             return
         }
         
-        let message = Message(sender: currentSender(), messageId: UUID().uuidString, sentDate: Date(), kind: .text(messageText))
+        let messageId = "\(currentUser.objectId!)-\(otherUser.objectId!)-\(Int(Date().timeIntervalSince1970))"
+        let message = Message(sender: currentSender(), messageId: messageId, sentDate: Date(), kind: .text(messageText))
         messages.append(message)
         messageInputBar.inputTextView.text = ""
         messagesCollectionView.reloadData()
@@ -113,6 +114,7 @@ class ChatViewController: MessagesViewController, MessagesDataSource, MessagesLa
         parseMessage["sender"] = currentUser
         parseMessage["recipient"] = otherUser
         parseMessage["text"] = messageText
+        parseMessage["messageId"] = messageId
         parseMessage.saveInBackground { (success, error) in
             if success {
                 print("Message saved!")
@@ -122,6 +124,7 @@ class ChatViewController: MessagesViewController, MessagesDataSource, MessagesLa
         }
     }
 
+    
     func inputBar(_ inputBar: InputBarAccessoryView, textViewTextDidChangeTo text: String)
     {
         if text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty

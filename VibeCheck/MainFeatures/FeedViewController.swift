@@ -45,7 +45,6 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell") as! PostCell
         
-        
         if (indexPath.row == 0)
          {
              let user = post["author"] as? PFUser
@@ -273,6 +272,4 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             })
         })
     }
-    
-    
 }

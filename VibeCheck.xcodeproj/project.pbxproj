@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		181286D929E0AFA10041CA41 /* PostButtonState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181286D829E0AFA10041CA41 /* PostButtonState.swift */; };
+		182B6E7A29FDD77300F2C293 /* APICaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182B6E7929FDD77300F2C293 /* APICaller.swift */; };
 		1836C4FA29BFCAA9000BC583 /* InteractionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1836C4F929BFCAA9000BC583 /* InteractionCell.swift */; };
 		1838039229A13D9700F9043D /* CreateProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1838039129A13D9700F9043D /* CreateProfileViewController.swift */; };
 		184212C329EBBB7700A1F475 /* DirectMessagingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184212C229EBBB7700A1F475 /* DirectMessagingViewController.swift */; };
@@ -56,6 +57,7 @@
 		075F34D87DFCCE9FD4B0B172 /* Pods-VibeCheckTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VibeCheckTests.release.xcconfig"; path = "Target Support Files/Pods-VibeCheckTests/Pods-VibeCheckTests.release.xcconfig"; sourceTree = "<group>"; };
 		118FC12B31E400CD44011D62 /* Pods_VibeCheck.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VibeCheck.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		181286D829E0AFA10041CA41 /* PostButtonState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostButtonState.swift; sourceTree = "<group>"; };
+		182B6E7929FDD77300F2C293 /* APICaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICaller.swift; sourceTree = "<group>"; };
 		1836C4F929BFCAA9000BC583 /* InteractionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionCell.swift; sourceTree = "<group>"; };
 		1838039129A13D9700F9043D /* CreateProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProfileViewController.swift; sourceTree = "<group>"; };
 		184212C229EBBB7700A1F475 /* DirectMessagingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectMessagingViewController.swift; sourceTree = "<group>"; };
@@ -119,6 +121,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		182B6E7829FDD76600F2C293 /* Backend */ = {
+			isa = PBXGroup;
+			children = (
+				182B6E7929FDD77300F2C293 /* APICaller.swift */,
+			);
+			path = Backend;
+			sourceTree = "<group>";
+		};
 		184B8F5C29AC35DB002C2392 /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
@@ -146,10 +156,10 @@
 				189E19CB299F247F005AB155 /* FeedViewController.swift */,
 				189E19D3299F24C1005AB155 /* CameraViewController.swift */,
 				185656EC29AEB25200663897 /* CommentViewController.swift */,
-				18A4823229D3A2F600D08A25 /* NotificationViewController.swift */,
 				18829C5329E51BA2001ED53C /* ChatViewController.swift */,
-				18829C6D29E617F3001ED53C /* ProfileViewController.swift */,
 				184212C229EBBB7700A1F475 /* DirectMessagingViewController.swift */,
+				18A4823229D3A2F600D08A25 /* NotificationViewController.swift */,
+				18829C6D29E617F3001ED53C /* ProfileViewController.swift */,
 			);
 			path = MainFeatures;
 			sourceTree = "<group>";
@@ -198,6 +208,7 @@
 		18CC3593299E8C2C00668AF7 /* VibeCheck */ = {
 			isa = PBXGroup;
 			children = (
+				182B6E7829FDD76600F2C293 /* Backend */,
 				18DB71D5299EB28800DA3C4E /* Assets.xcassets */,
 				184B8F5C29AC35DB002C2392 /* Authentication */,
 				184B8F5D29AC3605002C2392 /* Cells */,
@@ -523,6 +534,7 @@
 				188BADB329A5DCC000351199 /* PostCell.swift in Sources */,
 				189E19D4299F24C1005AB155 /* CameraViewController.swift in Sources */,
 				18829C5429E51BA2001ED53C /* ChatViewController.swift in Sources */,
+				182B6E7A29FDD77300F2C293 /* APICaller.swift in Sources */,
 				18A4823329D3A2F600D08A25 /* NotificationViewController.swift in Sources */,
 				189E19CE299F248D005AB155 /* SignUpViewController.swift in Sources */,
 				185656ED29AEB25200663897 /* CommentViewController.swift in Sources */,
