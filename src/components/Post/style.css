@@ -1,0 +1,31 @@
+.PostBox{
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+    background-color: white;
+    padding: 20px;
+    width: 400px;
+    border-radius: 20px;
+    box-shadow: 0px 2px 2px black;
+    align-items: center;
+}
+
+.PostBody{
+    width: 100%;
+    margin: 5px 0px;
+
+}
+.PostImage{
+    width: 100%;
+    height: 300px;
+    border-radius: 10px;
+    background-color: black;
+    margin-top: 10px;
+}
+.PostFooter{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    margin: 5px 0px;
+}
