@@ -109,7 +109,7 @@ function Profile() {
             numberOfFollowings={100}
             numberOfFollowers={200}
           />
-
+          {/* Map over the user post array and render the post component for each post */}
           {UserPost.map((data) => {
             return (
               <Post

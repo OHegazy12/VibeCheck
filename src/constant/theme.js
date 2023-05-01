@@ -1,42 +1,57 @@
-import { ThemeProvider, createTheme } from '@mui/material'
-import React from 'react'
+import { ThemeProvider, createTheme } from "@mui/material";
+import React from "react";
 const theme = {
-    primaryColor:'#DAF7A6', 
-    secondaryColor:'#FFC300',
-    whiteColor:'#FFFFFF',
-    grayColor:'#CCCCCC',
-    blackColor: '#000000'
-}
+  primaryColor: "#DAF7A6",
+  secondaryColor: "#FFC300",
+  whiteColor: "#FFFFFF",
+  grayColor: "#CCCCCC",
+  blackColor: "#000000",
+};
 const THEME = createTheme({
-    palette:{
-        primary:{main: theme.primaryColor},
-        secondary:{main: theme.secondaryColor},
-        info:{main: theme.whiteColor},
-        dark:{main: theme.blackColor }
+  palette: {
+    primary: { main: theme.primaryColor },
+    secondary: { main: theme.secondaryColor },
+    light: {
+      main: theme.whiteColor,
+      light: theme.whiteColor,
+      contrastText: theme.grayColor,
+      dark: theme.whiteColor,
     },
-    typography:{
-        h3: { 
-            color: theme.whiteColor
-        }
+    dark: { main: theme.blackColor },
+  },
+  typography: {
+    h3: {
+      color: theme.whiteColor,
     },
-    components:{
-        MuiFormLabel:{
-            styleOverrides:{root:{
-                color: theme.whiteColor
-            }}
-        }        
-    }
-})
+  },
+  components: {
+    MuiFormLabel: {
+      styleOverrides: {
+        root: {
+          // color: theme.whiteColor
+        },
+      },
+    },
+    MuiTextField: {
+      styleOverrides: {
+        root: {
+          ".MuiOutlinedInput-notchedOutline": {
+            borderColor: theme.grayColor,
+          },
+          ".MuiInputLabel-outlined": {
+            color: theme.grayColor,
+          },
+        },
+      },
+    },
+  },
+});
 
 function useTheme() {
-
-  return theme
+  return theme;
 }
-export function MuiThemeProvider({children}) {
+export function MuiThemeProvider({ children }) {
+  return <ThemeProvider theme={THEME}>{children}</ThemeProvider>;
+}
 
-    return (
-        <ThemeProvider theme={THEME}>{children}</ThemeProvider>
-    )
-  }
-
-export default useTheme
+export default useTheme;

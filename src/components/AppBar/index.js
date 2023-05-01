@@ -35,15 +35,16 @@ function MuiAppBar() {
 
   return (
     <Box sx={{ flexGrow: 1, width: "100%" }}>
-      <AppBar position="fixed" color="info">
+      <AppBar position="fixed" color="light">
         <Toolbar>
-          <IconButton size="large" edge="start" color="inherit" sx={{ mr: 2 }}>
+          <IconButton size="large" edge="start" color="dark" sx={{ mr: 2 }}>
             <MenuIcon />
           </IconButton>
           <Typography
             variant="h6"
             noWrap
             component="div"
+            color="black"
             sx={{ display: { xs: "none", sm: "block" }, width: "150px" }}
           >
             VibeCheck

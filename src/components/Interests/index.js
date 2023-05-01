@@ -3,6 +3,7 @@ import "./style.css";
 import { Avatar, Chip, Typography } from "@mui/material";
 import { AddBoxOutlined } from "@mui/icons-material";
 import MuiButton from "../Button";
+import UserHeader from "../UserHeader";
 
 function Interests({ InterestData }) {
   const [more, setMore] = useState(3);
@@ -13,23 +14,12 @@ function Interests({ InterestData }) {
       </Typography>
       {InterestData.map((data) => {
         return (
-          <div className="UserInformation">
-            <Avatar
-              alt="ProfilePicture"
-              sx={{
-                width: 35,
-                height: 35,
-                backgroundColor: "transparent",
-                color: "#000000",
-              }}
-            >
-              {data.icon}
-            </Avatar>
-            <div className="UserInformationDetail">
-              <Typography variant="subtitle1">{data.name}</Typography>
-            </div>
-            {data.badge && <Chip variant="success" label={data.badge} />}
-          </div>
+          <UserHeader
+            avatar={data.icon}
+            name={data.name}
+            tag={data.badge}
+            tagVariant="success"
+          />
         );
       })}
 
