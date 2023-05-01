@@ -1,5 +1,4 @@
 const express = require('express');
-const mongoose = require('mongoose');
 
 const fs = require('fs');
 
@@ -10,17 +9,56 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+const PORT = 3001;
+
+// ------------- WebSocket Stuff -------------
+// NOT READY YET
+const httpServer = require('http').createServer(app);
+const { Server } = require("socket.io")
+
+
+const io = new Server(httpServer,
+    {
+        cors: {
+            origin: '*',
+            // methods: ["PUT", "GET", "POST", "DELETE", "OPTIONS"],
+            // credentials: false
+        }
+    })
+
+// Serve static files from the "public" directory
+app.use(express.static('public'));
+
+// Handle incoming WebSocket connections
+io.on('connection', (socket) => {
+    console.log('a user connected');
+
+    // Handle incoming messages
+    socket.on('message', (data) => {
+        console.log(`received message: ${data}`);
+        // Broadcast the message to all connected clients
+        io.emit('message', data);
+    });
+
+    // Handle disconnections
+    socket.on('disconnect', () => {
+        console.log('user disconnected');
+    });
+});
+// ------------- End WebSocket Stuff -------------
+
+// Start the server and listen for incoming connections
+httpServer.listen(PORT, () => {
+    console.log(`Server started on port ${PORT}`);
+});
+
+
 app.use(fileUpload());
 // app.use(express.urlencoded({extended: false}))
 
 // import routes.js to index.js
 const routes = require('./routes/routes');
 app.use('/api', routes)
-
-// server is set to port 3000
-app.listen(3000, () => {
-    console.log(`Server Started at ${3000}`)
-})
 
 
 //Default endpoint
@@ -31,16 +69,3 @@ app.get('/', (req, res) => {
 // importing the contents of the .env file
 require('dotenv').config();
 
-const mongoString = process.env.DATABASE_URL
-
-mongoose.connect(mongoString);
-const database = mongoose.connection
-
-//  throw a success or an error message depending on whether our database connection is successful or fails.
-database.on('error', (error) => {
-    console.log(error)
-})
-
-database.once('connected', () => {
-    console.log('Database Connected');
-})

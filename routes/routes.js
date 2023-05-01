@@ -16,10 +16,6 @@ const cookieParser = require('cookie-parser');
 router.use(cookieParser());
 const { cookieJwtAuth } = require('../middleware/authorization');
 
-
-// will be used later to format when something was posted
-// const moment = require('moment');    // moment().format('lll');  // Mar 30, 2023 10:49 PM
-
 // all credentials with a refresh token, in order to get access tokens automatically
 const client = new ImgurClient({
     clientId: process.env.CLIENT_ID,
@@ -133,8 +129,11 @@ router.post('/signUp', async (req, res) => {
             post_count,
             following,
             saved_lst } = req.body
+        if (email.length == 0 || name.length == 0 || pass.length == 0) {
+            return res.json({ error: 'Can\'t have empty credentials' })
+        }
         const [id] = await db('users').insert({
-            email_address: email,   // insert email var into email_address col of database
+            email_address: email.toLowerCase(),   // insert email var into email_address col of database
             username: name,
             password_hash: hashAndSalt(pass),
             // first_name,  // not used for demo, uncomment later
@@ -154,6 +153,44 @@ router.post('/signUp', async (req, res) => {
     }
     // res.send('Signing up')
 })
+
+//Additional profile creation page -- NOT DONE
+router.post('/ProfileCreation', async (req, res) => {
+    //~~~~~~~~~~~~~
+    // TEMPORARY LINE - CURRENTLY HARDCODED
+    // delete once we figure out how to pass email from sign up page to profile creation page without cookie
+    // code wont work unless you have 333@gmail.com in database before you run profile creation
+    email = '123@gmail.com'
+    //~~~~~~~~~~~~~
+    // How do you ensure you're passing the right email. HTTP cannot retain from previous page
+    var user = (await db('users').where('email_address', email))[0]
+    // console.log(user)
+    if (user.first_name == null && user.last_name == null && user.date_of_birth == null) {
+        console.log('New user, redirect to profile creation')
+    }
+
+    try {
+        const {
+            firstname,
+            lastname,
+            dob
+        } = req.body
+        const [id] = await db('users').where('email_address', email).update({
+            first_name: firstname,
+            last_name: lastname,
+            date_of_birth: dob
+            // }).then((rowCount) => {
+            //     console.log(`Updated ${rowCount} row(s)`);
+        }).returning('id')
+        console.log(id)
+        return res.json({ 'response': 'Added first name, last name, and DoB' })
+    } catch (error) {
+        console.log(error);
+        return res.json({ error: error.detail })
+    }
+
+})
+
 
 //Login
 router.post('/login', async (req, res) => {
@@ -203,7 +240,7 @@ router.get("/loggedInTest", cookieJwtAuth, async (req, res) => {
 
 })
 
-// Functions -----------------------------------------------------------------------
+
 function hashAndSalt(pw_plaintext) {
     var salt = bcrypt.genSaltSync(10);
     var hash = bcrypt.hashSync(pw_plaintext, salt);
@@ -257,7 +294,7 @@ router.post('/createPost', cookieJwtAuth, async (req, res) => {
     }
 })
 
-//Make Post
+//Make comment
 router.post('/createComment', cookieJwtAuth, async (req, res) => {
     try {
         const {
@@ -283,5 +320,24 @@ router.post('/createComment', cookieJwtAuth, async (req, res) => {
         return res.send(error.detail)
     }
 })
+
+//NOT DONE YET - NEED FURTHER TESTING
+//Display stuff on profile page
+router.get('/profile', cookieJwtAuth, async (req, res) => {
+    _id = req.user.user_id
+
+    db.select('*').from('posts').where('posted_by', req.user.user_id).then((rows) => {
+        // Send rows to the frontend
+        console.log(rows);
+        res.send(rows);
+        console.log('Posts sent!')
+    })
+        .catch((err) => {
+            console.log(err);
+            res.status(500).send('Internal server error');
+        });
+
+})
+
 
 module.exports = router;
