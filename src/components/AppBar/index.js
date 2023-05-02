@@ -28,6 +28,7 @@ import {
 import React from "react";
 import "./style.css";
 import { Link, useLocation } from "react-router-dom";
+import MuiTextField from "../TextField";
 
 function MuiAppBar() {
   const { state, pathname } = useLocation();
@@ -128,7 +129,7 @@ function MuiAppBar() {
               <MoreIcon />
             </IconButton>
           </Box>
-          <TextField
+          <MuiTextField
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">

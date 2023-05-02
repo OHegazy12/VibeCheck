@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./style.css";
-import { Avatar, Chip, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import { AddBoxOutlined } from "@mui/icons-material";
 import MuiButton from "../Button";
 import UserHeader from "../UserHeader";
@@ -15,10 +15,9 @@ function Interests({ InterestData }) {
       {InterestData.map((data) => {
         return (
           <UserHeader
-            avatar={data.icon}
+            leftIcon={data.icon}
             name={data.name}
-            tag={data.badge}
-            tagVariant="success"
+            badge={data.badge}
           />
         );
       })}

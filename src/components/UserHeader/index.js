@@ -3,9 +3,27 @@ import "./style.css";
 import { Avatar, Chip, IconButton, Typography } from "@mui/material";
 import { People, PersonAdd, Share } from "@mui/icons-material";
 
-function UserHeader({ avatar, name, location, rightIcon, tag, tagVariant }) {
+function UserHeader({
+  avatar,
+  name,
+  location,
+  rightIcon,
+  tag,
+  tagVariant,
+  leftIcon,
+  badge,
+  badgeColor,
+}) {
   return (
     <div className="UserInformation">
+      {leftIcon && (
+        <Avatar
+          alt="leftIcon"
+          sx={{ width: 35, height: 35, backgroundColor: "black" }}
+        >
+          {leftIcon}
+        </Avatar>
+      )}
       {avatar && (
         <Avatar
           alt="ProfilePicture"
@@ -36,6 +54,13 @@ function UserHeader({ avatar, name, location, rightIcon, tag, tagVariant }) {
           )}
         </div>
       </div>
+      {badge && (
+        <Chip
+          label={badge}
+          color={badgeColor || "success"}
+          sx={{ fontSize: 12, fontWeight: 300, borderRadius: 2, height: 25 }}
+        />
+      )}
       {rightIcon && (
         <IconButton color="dark">
           {rightIcon === "PersonAdd" && <PersonAdd />}
