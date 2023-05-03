@@ -1,23 +1,88 @@
-import React, { useState } from "react";
+import React from "react";
 import MuiAppBar from "../../components/AppBar";
 import "./style.css";
+import { IconButton, InputAdornment, Typography } from "@mui/material";
 import {
-  Badge,
-  Divider,
-  IconButton,
-  InputAdornment,
-  Typography,
-} from "@mui/material";
-import { MoreHoriz, Search } from "@mui/icons-material";
+  AttachFile,
+  Call,
+  MoreHoriz,
+  Send,
+  Videocam,
+  WatchLater,
+} from "@mui/icons-material";
 import MuiTextField from "../../components/TextField";
-import MuiListItem from "../../components/MuiListItem";
-import MuiButton from "../../components/Button";
+
 import RobertPicture from "../../assets/profilepicture/image1.jpg";
-import postImg from "../../assets/logo.png";
+
 import StevePicture from "../../assets/profilepicture/image2.jpg";
+import Chats from "../../components/Chats";
+import ChatMessages from "../../components/ChatMessages";
 
 function Messages() {
-  const [more, setMore] = useState(4);
+  const date = new Date();
+  const timestamp = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+  const chatMessages = [
+    {
+      message: "Hi",
+      type: "mine",
+      timeStamp: timestamp,
+    },
+    {
+      message: "Hi",
+      type: "user",
+      timeStamp: timestamp,
+    },
+    {
+      message: "How are you doing?",
+      type: "mine",
+      timeStamp: timestamp,
+    },
+    {
+      message: "all right, and you?",
+      type: "user",
+      timeStamp: timestamp,
+    },
+    {
+      message: "nothing new. How is work?",
+      type: "mine",
+      timeStamp: timestamp,
+    },
+    {
+      message: "good",
+      type: "user",
+      timeStamp: timestamp,
+    },
+    {
+      message: "Hi",
+      type: "mine",
+      timeStamp: timestamp,
+    },
+    {
+      message: "Hi",
+      type: "user",
+      timeStamp: timestamp,
+    },
+    {
+      message: "How are you doing?",
+      type: "mine",
+      timeStamp: timestamp,
+    },
+    {
+      message: "all right, and you?",
+      type: "user",
+      timeStamp: timestamp,
+    },
+    {
+      message: "nothing new. How is work?",
+      type: "mine",
+      timeStamp: timestamp,
+    },
+    {
+      message: "good",
+      type: "user",
+      timeStamp: timestamp,
+    },
+  ];
   const messagesList = [
     {
       title: "Steve Rogers",
@@ -54,58 +119,8 @@ function Messages() {
     <div className="MessagesContainer">
       <MuiAppBar />
       <div className="MessagesSection">
-        <div className="MessagesScreen">
-          <div className="Messages">
-            <div className="MessagesHeader">
-              <Badge badgeContent={17} color="error">
-                <Typography variant="h5">Messages</Typography>
-              </Badge>
-              <IconButton color="dark">
-                <MoreHoriz />
-              </IconButton>
-            </div>
-            <MuiTextField
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <Search />
-                  </InputAdornment>
-                ),
-              }}
-              label="Search Bar"
-              fullWidth
-              color="dark"
-            />
-            <Divider
-              sx={{
-                borderWidth: 1,
-                margin: "10px 0px",
-                borderColor: "#cccccc",
-                width: "100%",
-              }}
-            />
-            <div className="ChatBox">
-              {messagesList.length > 0 &&
-                messagesList.slice(0, more).map((data) => {
-                  return (
-                    <MuiListItem
-                      title={data.title}
-                      subtitle={data.subtitle}
-                      avatar={data.avatar}
-                      icon={data.icon}
-                    />
-                  );
-                })}
-            </div>
-            {messagesList.length > more && (
-              <MuiButton
-                label="see more"
-                variant="dark"
-                onClick={() => setMore(more + 3)}
-              />
-            )}
-          </div>
-        </div>
+        <Chats messagesList={messagesList} />
+        <ChatMessages chatMessages={chatMessages} />
       </div>
     </div>
   );
