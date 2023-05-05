@@ -6,6 +6,7 @@ const theme = {
   whiteColor: "#FFFFFF",
   grayColor: "#CCCCCC",
   blackColor: "#000000",
+  customeSuccessColor: "#86d28a",
 };
 const THEME = createTheme({
   palette: {
@@ -18,6 +19,9 @@ const THEME = createTheme({
       dark: theme.whiteColor,
     },
     dark: { main: theme.blackColor },
+    success: {
+      main: theme.customeSuccessColor,
+    },
   },
   typography: {
     h3: {

@@ -1,19 +1,7 @@
 import React from "react";
 import MuiAppBar from "../../components/AppBar";
 import "./style.css";
-import { IconButton, InputAdornment, Typography } from "@mui/material";
-import {
-  AttachFile,
-  Call,
-  MoreHoriz,
-  Send,
-  Videocam,
-  WatchLater,
-} from "@mui/icons-material";
-import MuiTextField from "../../components/TextField";
-
 import RobertPicture from "../../assets/profilepicture/image1.jpg";
-
 import StevePicture from "../../assets/profilepicture/image2.jpg";
 import Chats from "../../components/Chats";
 import ChatMessages from "../../components/ChatMessages";

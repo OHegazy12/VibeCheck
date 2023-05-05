@@ -8,22 +8,30 @@ import {
   InputAdornment,
   Typography,
 } from "@mui/material";
-import { MoreHoriz, Search } from "@mui/icons-material";
+import { GroupAdd, MoreHoriz, Search } from "@mui/icons-material";
 import MuiTextField from "../TextField";
 import MuiListItem from "../MuiListItem";
 import MuiButton from "../Button";
 
-function Chats({ messagesList }) {
+function Chats({ messagesList, title, rightTitleIcon = "HorizontalDots" }) {
   const [more, setMore] = useState(4);
+  const [search, setSearch] = useState("");
+  const filterList = messagesList.filter(
+    (data) =>
+      data.title.toLowerCase().includes(search.toLowerCase()) !== false ||
+      data.subtitle.toLowerCase().includes(search.toLowerCase()) !== false
+  );
+
   return (
     <div className="MessagesScreen">
       <div className="Messages">
         <div className="MessagesHeader">
-          <Badge badgeContent={17} color="error">
-            <Typography variant="h5">Messages</Typography>
+          <Badge badgeContent={messagesList.length || 0} color="success">
+            <Typography variant="h5">{title || "Messages"}</Typography>
           </Badge>
           <IconButton color="dark">
-            <MoreHoriz />
+            {rightTitleIcon === "HorizontalDots" && <MoreHoriz />}
+            {rightTitleIcon === "AddCommunity" && <GroupAdd />}
           </IconButton>
         </div>
         <MuiTextField
@@ -37,6 +45,8 @@ function Chats({ messagesList }) {
           label="Search Bar"
           fullWidth
           color="dark"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
         />
         <Divider
           sx={{
@@ -47,8 +57,8 @@ function Chats({ messagesList }) {
           }}
         />
         <div className="ChatBox">
-          {messagesList.length > 0 &&
-            messagesList.slice(0, more).map((data) => {
+          {filterList.length > 0 &&
+            filterList.slice(0, more).map((data) => {
               return (
                 <MuiListItem
                   title={data.title}
@@ -59,7 +69,7 @@ function Chats({ messagesList }) {
               );
             })}
         </div>
-        {messagesList.length > more && (
+        {filterList.length > more && (
           <MuiButton
             label="see more"
             variant="dark"

@@ -55,7 +55,7 @@ function CreatePost() {
         <IconButton color="dark">
           <Photo />
         </IconButton>
-        <IconButton color="dark">
+        {/* <IconButton color="dark">
           <PersonSearch />
         </IconButton>
         <IconButton color="dark">
@@ -63,7 +63,7 @@ function CreatePost() {
         </IconButton>
         <IconButton color="dark">
           <MoreHoriz />
-        </IconButton>
+        </IconButton> */}
       </div>
       <MuiButton label="post" variant="contained" fullWidth />
     </div>

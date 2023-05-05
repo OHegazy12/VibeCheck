@@ -16,6 +16,8 @@ import MuiButton from "../../components/Button";
 
 function Notifications() {
   const [more, setMore] = useState(3);
+  const [search, setSearch] = useState("");
+
   const notificationList = [
     {
       title: "New comment",
@@ -43,6 +45,11 @@ function Notifications() {
       icon: <NotificationsNone />,
     },
   ];
+  const filterList = notificationList.filter(
+    (data) =>
+      data.title.toLowerCase().includes(search.toLowerCase()) !== false ||
+      data.subtitle.toLowerCase().includes(search.toLowerCase()) !== false
+  );
   return (
     <div className="NotificationsContainer">
       <MuiAppBar />
@@ -50,7 +57,7 @@ function Notifications() {
         <div className="NotificationsScreen">
           <div className="Notifications">
             <div className="NotificationHeader">
-              <Badge badgeContent={17} color="error">
+              <Badge badgeContent={17} color="success">
                 <Typography variant="h5">Notifications</Typography>
               </Badge>
               <IconButton color="dark">
@@ -68,6 +75,8 @@ function Notifications() {
               label="Search Bar"
               fullWidth
               color="dark"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
             />
             <Divider
               sx={{
@@ -77,8 +86,8 @@ function Notifications() {
                 width: "100%",
               }}
             />
-            {notificationList.length > 0 &&
-              notificationList.slice(0, more).map((data) => {
+            {filterList.length > 0 &&
+              filterList.slice(0, more).map((data) => {
                 return (
                   <MuiListItem
                     title={data.title}
@@ -88,7 +97,7 @@ function Notifications() {
                   />
                 );
               })}
-            {notificationList.length > more && (
+            {filterList.length > more && (
               <MuiButton
                 label="see more"
                 variant="dark"

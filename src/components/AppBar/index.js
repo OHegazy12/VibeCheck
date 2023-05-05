@@ -1,10 +1,11 @@
 import {
   AccountCircle,
   AccountCircleOutlined,
-  Favorite,
-  FavoriteBorder,
+  Diversity2,
+  Diversity2TwoTone,
   Home,
   HomeOutlined,
+  Logout,
   Mail,
   MailLockOutlined,
   MailOutline,
@@ -29,6 +30,7 @@ import React from "react";
 import "./style.css";
 import { Link, useLocation } from "react-router-dom";
 import MuiTextField from "../TextField";
+import logo from "../../assets/new-logo.png";
 
 function MuiAppBar() {
   const { state, pathname } = useLocation();
@@ -38,17 +40,26 @@ function MuiAppBar() {
     <Box sx={{ flexGrow: 1, width: "100%" }}>
       <AppBar position="fixed" color="light">
         <Toolbar>
-          <IconButton size="large" edge="start" color="dark" sx={{ mr: 2 }}>
+          {/* <IconButton size="large" edge="start" color="dark" sx={{ mr: 2 }}>
             <MenuIcon />
-          </IconButton>
+          </IconButton> */}
           <Typography
             variant="h6"
             noWrap
             component="div"
             color="black"
-            sx={{ display: { xs: "none", sm: "block" }, width: "150px" }}
+            sx={{
+              display: { xs: "none", sm: "block" },
+              width: "400px",
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-evenly",
+              alignItems: "center",
+            }}
           >
-            VibeCheck
+            Vibe
+            <img src={logo} alt="Logo" className="logo" />
+            Check
           </Typography>
 
           {/* <Box sx={{ flexGrow: 1 }} /> */}
@@ -70,7 +81,7 @@ function MuiAppBar() {
                 {pathname === "/Home" ? <Home /> : <HomeOutlined />}
               </IconButton>
             </Link>
-            <Link to="/Dating">
+            <Link to="/Community">
               <IconButton
                 size="large"
                 edge="end"
@@ -78,7 +89,11 @@ function MuiAppBar() {
                 color="dark"
                 className="AppIconButton"
               >
-                {pathname === "/Dating" ? <Favorite /> : <FavoriteBorder />}
+                {pathname === "/Community" ? (
+                  <Diversity2 />
+                ) : (
+                  <Diversity2TwoTone />
+                )}
               </IconButton>
             </Link>
             <Link to="/Messages">
@@ -88,14 +103,14 @@ function MuiAppBar() {
                 color="dark"
                 className="AppIconButton"
               >
-                <Badge badgeContent={4} color="error">
+                <Badge badgeContent={4} color="success">
                   {pathname === "/Messages" ? <Mail /> : <MailOutline />}
                 </Badge>
               </IconButton>
             </Link>
             <Link to="/Notifications">
               <IconButton size="large" color="dark" className="AppIconButton">
-                <Badge badgeContent={17} color="error">
+                <Badge badgeContent={17} color="success">
                   {pathname === "/Notifications" ? (
                     <NotificationsIcon />
                   ) : (
@@ -140,6 +155,9 @@ function MuiAppBar() {
             label="Search Bar"
             sx={{ width: "300px", borderColor: "#000000" }}
           />
+          <IconButton size="large" edge="start" color="error" sx={{ ml: 2 }}>
+            <Logout />
+          </IconButton>
         </Toolbar>
       </AppBar>
       {/* {renderMobileMenu}

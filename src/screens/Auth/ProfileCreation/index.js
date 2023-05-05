@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./style.css";
 import MuiButton from "../../../components/Button";
-import { Avatar, Typography } from "@mui/material";
+import { Avatar, IconButton, Typography } from "@mui/material";
 import MuiTextField from "../../../components/TextField";
 import { AddAPhoto } from "@mui/icons-material";
 
@@ -20,9 +20,11 @@ function ProfileCreation() {
     <div className="ProfileCreationContainer">
       <div className="ProfileCreationBox">
         <Typography variant="h3">Profile Creation</Typography>
-        <Avatar className="AddImageAvatar">
-          <AddAPhoto className="AddImageIcon" />
-        </Avatar>
+        <IconButton>
+          <Avatar className="AddImageAvatar">
+            <AddAPhoto className="AddImageIcon" />
+          </Avatar>
+        </IconButton>
 
         <div className="ProfileCreationInputBox">
           <MuiTextField
