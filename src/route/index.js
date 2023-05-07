@@ -9,6 +9,7 @@ import Community from "../screens/Community";
 import Home from "../screens/Home";
 import Messages from "../screens/Messages";
 import Notifications from "../screens/Notifications";
+import PostScreen from "../screens/PostScreen";
 
 function Router() {
   return (
@@ -23,6 +24,7 @@ function Router() {
         <Route path="/Home" element={<Home />} />
         <Route path="/Notifications" element={<Notifications />} />
         <Route path="/Messages" element={<Messages />} />
+        <Route path="/post" element={<PostScreen />} />
       </Routes>
     </BrowserRouter>
   );

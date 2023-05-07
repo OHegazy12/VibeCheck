@@ -11,7 +11,15 @@ import "./style.css";
 import UserHeader from "../UserHeader";
 import MuiTextField from "../TextField";
 
-function Post({ userName, location, caption, postImage, avatar }) {
+function Post({
+  userName,
+  location,
+  caption,
+  postImage,
+  avatar,
+  onPostBodyClick,
+  headerRightIcon,
+}) {
   const [showComment, setShowComment] = useState(false);
   return (
     <div className="PostBox">
@@ -19,12 +27,12 @@ function Post({ userName, location, caption, postImage, avatar }) {
         avatar={avatar}
         name={userName}
         location={location}
-        rightIcon="PersonAdd"
+        rightIcon={headerRightIcon || "PersonAdd"}
       />
 
-      <div className="PostBody">
+      <div className="PostBody" onClick={onPostBodyClick}>
         {/* Checks if the caption prop is truthy.If it is, then it renders a typography  */}
-        {caption && <Typography variant="caption">{caption}</Typography>}
+        {caption && <Typography variant="body1">{caption}</Typography>}
         {postImage && (
           // check if the postImage is truthy. If it is, then it renders an 'img' element with the 'src' attribute
           <img src={postImage} alt="Post Image" className="PostImage" />
