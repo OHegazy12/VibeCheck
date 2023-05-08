@@ -3,15 +3,20 @@ import "./style.css";
 import MuiButton from "../../../components/Button";
 import { Typography } from "@mui/material";
 import MuiTextField from "../../../components/TextField";
+// used for passing email as a prop
+import { useHistory, useNavigate } from "react-router-dom";
 
 function Signup() {
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  // used for passing email as a prop
+  const navigate = useNavigate();
+
   const handleSignUp = () => {
-    // console.log(" username: " + userName);
-    // console.log(" email: " + email);
-    // console.log(" password: " + password);
+    console.log(" user name: " + userName);
+    console.log(" email: " + email);
+    console.log(" password: " + password);
 
     // Added by Dillon -----------------------------------
     // Connects to API locally
@@ -27,6 +32,9 @@ function Signup() {
       .then(res => res.json())
       .then(json => console.log(json))
       .catch(err => console.error('error:' + err));
+
+    // Redirect to previous page with email prop
+    navigate('/ProfileCreation', { state: { id: 1, email } });
     // end Dillon stuff -----------------------------------
   };
   return (

@@ -1,0 +1,61 @@
+.MessagesScreen {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex: 2;
+  align-items: center;
+  flex-direction: column;
+  /* padding: 40px 0px; */
+}
+.Messages {
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+  background-color: white;
+  padding: 20px;
+  width: 300px;
+  height: 510px;
+  border-radius: 20px;
+  box-shadow: 0px 2px 2px black;
+  align-items: center;
+}
+.MessagesHeader {
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+.ChatBox {
+  /* height: 350px; */
+  height: 100%;
+  background-color: rgba(135, 206, 250, 0.2);
+  width: 100%;
+  padding: 0px 10px;
+  border-radius: 5px;
+  overflow: auto;
+  overflow-x: none;
+}
+.ChatBox::-webkit-scrollbar {
+  width: 6px;
+}
+.ChatBox::-webkit-scrollbar-track {
+  background-color: #ffffff90;
+}
+.ChatBox::-webkit-scrollbar-track:active {
+  background-color: #ffffff90;
+}
+.ChatBox::-webkit-scrollbar-button {
+  height: 0;
+  width: 0;
+}
+.ChatBox::-webkit-scrollbar-thumb {
+  background-color: #cccccc80;
+}
+.ChatBox::-webkit-scrollbar-thumb:hover {
+  background-color: #cccccc90;
+}
+.ChatBox::-webkit-scrollbar-thumb:active {
+  background-color: #cccccc;
+}

@@ -8,8 +8,8 @@ function Signin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const handleSignin = () => {
-    // console.log(" email: " + email);
-    // console.log(" password: " + password);
+    console.log(" email: " + email);
+    console.log(" password: " + password);
 
     // Added by Dillon -----------------------------------
     // Connects to API locally
@@ -17,8 +17,9 @@ function Signin() {
 
     let options = {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: `{"email":"${email}","pass":"${password}"}`
+      headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Headers': true },
+      body: `{"email":"${email}","pass":"${password}"}`,
+      credentials: 'include'
     };
 
     fetch(url, options)
@@ -31,7 +32,7 @@ function Signin() {
   return (
     <div className="signinContainer">
       <div className="siginBox">
-        <Typography variant="h3">Sign In</Typography>
+        <Typography variant="h3">Sign in</Typography>
 
         <div className="inputBox">
           <MuiTextField

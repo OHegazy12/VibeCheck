@@ -1,10 +1,18 @@
-import React from "react";
-import { Badge, IconButton, Typography } from "@mui/material";
-import { BookmarkBorder, Comment, ThumbUp } from "@mui/icons-material";
+import React, { useState } from "react";
+import {
+  Avatar,
+  Badge,
+  IconButton,
+  InputAdornment,
+  Typography,
+} from "@mui/material";
+import { BookmarkBorder, Comment, Send, ThumbUp } from "@mui/icons-material";
 import "./style.css";
 import UserHeader from "../UserHeader";
+import MuiTextField from "../TextField";
 
 function Post({ userName, location, caption, postImage, avatar }) {
+  const [showComment, setShowComment] = useState(false);
   return (
     <div className="PostBox">
       <UserHeader
@@ -28,7 +36,7 @@ function Post({ userName, location, caption, postImage, avatar }) {
             <ThumbUp />
           </Badge>
         </IconButton>
-        <IconButton color="dark">
+        <IconButton color="dark" onClick={() => setShowComment(!showComment)}>
           <Badge badgeContent={50}>
             <Comment />
           </Badge>
@@ -37,6 +45,35 @@ function Post({ userName, location, caption, postImage, avatar }) {
           <BookmarkBorder />
         </IconButton>
       </div>
+      {showComment && (
+        <div className="postComments">
+          <MuiTextField
+            placeholder="comments"
+            color="dark"
+            fullWidth
+            multiline
+            style={{ borderRadius: 100 }}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  {avatar && (
+                    <Avatar
+                      alt="ProfilePicture"
+                      src={avatar}
+                      sx={{ width: 35, height: 35 }}
+                    />
+                  )}
+                </InputAdornment>
+              ),
+              endAdornment: (
+                <InputAdornment position="end">
+                  <Send />
+                </InputAdornment>
+              ),
+            }}
+          />
+        </div>
+      )}
     </div>
   );
 }

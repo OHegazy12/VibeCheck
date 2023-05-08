@@ -1,29 +1,46 @@
 import React, { useState } from "react";
 import "./style.css";
 import MuiButton from "../../../components/Button";
-import { Avatar, Typography } from "@mui/material";
+import { Avatar, IconButton, Typography } from "@mui/material";
 import MuiTextField from "../../../components/TextField";
 import { AddAPhoto } from "@mui/icons-material";
+import { useLocation } from 'react-router-dom';
 
 function ProfileCreation() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   // const [phone, setPhone] = useState("");
   const [DOB, setDob] = useState("");
+  // added by Dillon
+  const [image, setImage] = useState(null);
+  const location = useLocation();
+
+  const handleImageUpload = (event) => {
+    const file = event.target.files[0];
+    setImage(file);
+  };
+  // end added by Dillon
+
   const handleProfileCreation = () => {
-    // console.log(" first name: " + firstName);
-    // console.log(" last name: " + lastName);
-    // // console.log(" phone: " + phone);
-    // console.log(" date of birth: " + DOB);
+    console.log(" first name: " + firstName);
+    console.log(" last name: " + lastName);
+    // console.log(" phone: " + phone);
+    console.log(" date of birth: " + DOB);
+    console.log(" image: ", image);
 
     // Added by Dillon -----------------------------------
     // Connects to API locally
     let url = 'http://localhost:3001/api/ProfileCreation/';
-
+    let formdata = new FormData()
+    formdata.append("image", image)
+    formdata.append("firstname", firstName)
+    formdata.append("lastname", lastName)
+    formdata.append("dob", DOB)
+    formdata.append("email", location.state.email)
     let options = {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: `{"firstname":"${firstName}","lastname":"${lastName}","dob":"${DOB}"}`
+      // headers: { 'Content-Type': 'multipart/form-data' },
+      body: formdata
     };
 
     fetch(url, options)
@@ -33,13 +50,46 @@ function ProfileCreation() {
     // end Dillon stuff -----------------------------------
 
   };
+
+
+
+  // image stuff
+  // var myHeaders = new Headers();
+  // myHeaders.append("Authorization", "f4d0de867125a97");
+
+  // var formdata = new FormData();
+  // formdata.append("sampleFile", fileInput.files[0], "/C:/Users/dillo/OneDrive/Pictures/Images to be Deleted/Screenshot_20220221-042226.jpg");
+
+  // var requestOptions = {
+  //   method: 'POST',
+  //   headers: myHeaders,
+  //   body: formdata,
+  //   redirect: 'follow'
+  // };
+
+  // fetch("localhost:3001/api/uploadImg", requestOptions)
+  //   .then(response => response.text())
+  //   .then(result => console.log(result))
+  //   .catch(error => console.log('error', error));
+  // end image stuff
+
   return (
     <div className="ProfileCreationContainer">
+      {/* <div>{location.state ? location.state.name:""}</div> */}
       <div className="ProfileCreationBox">
         <Typography variant="h3">Profile Creation</Typography>
-        <Avatar className="AddImageAvatar">
-          <AddAPhoto className="AddImageIcon" />
-        </Avatar>
+        <label htmlFor="image-upload">
+          <Avatar className="AddImageAvatar" src={image ? URL.createObjectURL(new Blob([image])) : undefined}>
+            <AddAPhoto className="AddImageIcon" />
+          </Avatar>
+        </label>
+        <input
+          type="file"
+          id="image-upload"
+          accept=".jpg, .jpeg, .png"
+          onChange={handleImageUpload}
+          style={{ display: "none" }}
+        />
 
         <div className="ProfileCreationInputBox">
           <MuiTextField
@@ -60,15 +110,6 @@ function ProfileCreation() {
             value={lastName}
             fullWidth
           />
-          {/* <MuiTextField
-            label="phone"
-            variant="outlined"
-            color="light"
-            type="tel"
-            onChange={(event) => setPhone(event.target.value)}
-            value={phone}
-            fullWidth
-          /> */}
           <MuiTextField
             label="date of birth"
             variant="outlined"
@@ -79,16 +120,13 @@ function ProfileCreation() {
             fullWidth
           />
         </div>
-        {/* <div className="signUpbuttonBox">
-            
-          </div> */}
         <MuiButton
           label="Continue"
           onClick={handleProfileCreation}
           variant="contained"
           color="light"
           fullWidth
-          href="/Profile"
+          href="/Signin"
         />
       </div>
     </div>
@@ -96,3 +134,4 @@ function ProfileCreation() {
 }
 
 export default ProfileCreation;
+

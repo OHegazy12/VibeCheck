@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import MuiAppBar from "../../components/AppBar";
 import "./style.css";
 import RobertPicture from "../../assets/profilepicture/image1.jpg";
@@ -55,46 +55,21 @@ function Profile() {
       location: "Paris, France",
     },
   ];
-  const UserPost = [
-    {
-      name: "Steve Rogers",
-      avatar: StevePicture,
-      location: "London, UK",
-      caption: "My new house",
-      image: postImg,
-    },
-    {
-      name: "Archie",
-      avatar: RobertPicture,
-      location: "Toronto,Canada",
-      caption: "Amaizing view",
-    },
-    {
-      name: "Melinda",
-      avatar: RobertPicture,
-      location: "Paris, France",
-      caption: "My new house",
-      image: postImg,
-    },
-    {
-      name: "Marcus",
-      avatar: RobertPicture,
-      location: "London, UK",
-      image: postImg,
-    },
-    {
-      name: "Gary",
-      avatar: RobertPicture,
-      location: "Toronto,Canada",
-      caption: "My new house",
-      image: postImg,
-    },
-    {
-      name: "Kevin",
-      avatar: RobertPicture,
-      location: "Paris, France",
-    },
-  ];
+  const [userPosts, setUserPosts] = useState()
+  const fetchUserPosts = useCallback(async () => {
+
+    console.log('hello')
+    try {
+      const response = await fetch('http://localhost:3001/api/profile/', { credentials: "include" });
+      const data = await response.json()
+      setUserPosts(data)
+    } catch (e) {
+      console.log(e)
+    }
+
+  })
+
+  useEffect(() => { fetchUserPosts() }, [])
   return (
     <div className="profileContainer">
       <MuiAppBar />
@@ -102,7 +77,7 @@ function Profile() {
         <div className="ProfileExtra" />
         <div className="ProfileScreen">
           <ProfileDetails
-            userName="Robert Jr"
+            userName="Username"
             location="New York, New York"
             avatar={RobertPicture}
             numberOfPost={4}
@@ -110,14 +85,14 @@ function Profile() {
             numberOfFollowers={200}
           />
           {/* Map over the user post array and render the post component for each post */}
-          {UserPost.map((data) => {
+          {userPosts?.map((data) => {
             return (
               <Post
-                userName={data.name}
-                location={data.location}
-                avatar={data.avatar}
-                caption={data.caption}
-                postImage={data.image}
+                userName={data.posted_by}
+                location={data.created_at}
+                avatar={data.type}
+                caption={data.body_text}
+                postImage={data.img_link}
               />
             );
           })}
