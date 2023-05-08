@@ -28,59 +28,23 @@ router.get('/', (req, res) => {
     res.send('Hello world!')
 })
 
-//Create user
-router.post('/createUser', async (req, res) => {
-    try {
-        const {
-            email_address,
-            username,
-            password_hash,
-            first_name,
-            last_name,
-            date_of_birth,
-            bio,
-            pfp,
-            post_count,
-            following,
-            saved_lst } = req.body
-        console.log(req.body)
-        const [id] = await db('users').insert({
-            email_address,
-            username,
-            password_hash,
-            first_name,
-            last_name,
-            date_of_birth,
-            bio,
-            pfp,
-            post_count,
-            following,
-            saved_lst
-        }).returning('id')
-        return res.send('Added new user')
-    } catch (error) {
-        console.log(error);
-        return res.send(error.detail)
-    }
-})
-
 // upload an image and retrieve an imgur link from it
-router.post('/uploadImg', cookieJwtAuth, async (req, res) => {
-    if (!req.files) {
-        return res.sendStatus(400).send('No files were uploaded.')
-    }
-    // uploads to upload folder
-    let sampleFile = req.files.sampleFile
+// router.post('/uploadImg', cookieJwtAuth, async (req, res) => {
+//     if (!req.files) {
+//         return res.sendStatus(400).send('No files were uploaded.')
+//     }
+//     // uploads to upload folder
+//     let sampleFile = req.files.sampleFile
 
-    // upload multiple images via fs.createReadStream (node)
-    const response = await client.upload({
-        image: sampleFile.data.toString('base64'),
-        type: 'stream',
-    });
-    client.deleteImage();
-    console.log(response.data.link);    // this is the reference for the imgur link containing the image
-    return response.data.link;
-})
+//     // upload multiple images via fs.createReadStream (node)
+//     const response = await client.upload({
+//         image: sampleFile.data.toString('base64'),
+//         type: 'stream',
+//     });
+//     client.deleteImage();
+//     console.log(response.data.link);    // this is the reference for the imgur link containing the image
+//     return response.data.link;
+// })
 
 router.delete('/deleteAccount', cookieJwtAuth, async (req, res) => {
     // delete account
@@ -160,25 +124,40 @@ router.post('/ProfileCreation', async (req, res) => {
     // TEMPORARY LINE - CURRENTLY HARDCODED
     // delete once we figure out how to pass email from sign up page to profile creation page without cookie
     // code wont work unless you have 333@gmail.com in database before you run profile creation
-    email = '123@gmail.com'
+    // email = '123@gmail.com'
     //~~~~~~~~~~~~~
     // How do you ensure you're passing the right email. HTTP cannot retain from previous page
-    var user = (await db('users').where('email_address', email))[0]
+    // var user = (await db('users').where('email_address', email))[0]
     // console.log(user)
-    if (user.first_name == null && user.last_name == null && user.date_of_birth == null) {
-        console.log('New user, redirect to profile creation')
-    }
+    // if (user.first_name == null && user.last_name == null && user.date_of_birth == null) {
+    //     console.log('New user, redirect to profile creation')
+    // }
 
     try {
         const {
             firstname,
             lastname,
-            dob
+            dob,
+            email
         } = req.body
+        console.log(req.files)
+        // -------
+        // uploads to upload folder
+        let image = req.files.image
+
+        // upload multiple images via fs.createReadStream (node)
+        const imgur = await client.upload({
+            image: image.data.toString('base64'),
+            type: 'stream',
+        });
+        console.log(imgur.data.link);    // this is the reference for the imgur link containing the image
+        // -------
         const [id] = await db('users').where('email_address', email).update({
             first_name: firstname,
             last_name: lastname,
-            date_of_birth: dob
+            date_of_birth: dob,
+            pfp: imgur.data.link,
+            email_address: email
             // }).then((rowCount) => {
             //     console.log(`Updated ${rowCount} row(s)`);
         }).returning('id')
@@ -218,9 +197,13 @@ router.post('/login', async (req, res) => {
 
         // token verification  
         var user_id = user.id
-        const token = jwt.sign({ user_id }, process.env.JWT_ACCESS_TOKEN, { expiresIn: "1d" })
+        const token = jwt.sign({ user_id }, process.env.JWT_ACCESS_TOKEN, { expiresIn: "100d" })
+        res.header("Access-Control-Allow-Origin", 'http://localhost:3000')
+        res.header("Access-Control-Allow-Credentials", true)
         res.cookie("token", token, {
-            httpOnly: true,
+            httpOnly: false,
+            maxAge: 9999999,
+            secure: false
         });
         console.log("Login route", token)
 
@@ -324,8 +307,9 @@ router.post('/createComment', cookieJwtAuth, async (req, res) => {
 //NOT DONE YET - NEED FURTHER TESTING
 //Display stuff on profile page
 router.get('/profile', cookieJwtAuth, async (req, res) => {
+    console.log(req.cookies)
+    console.log('is it working?')
     _id = req.user.user_id
-
     db.select('*').from('posts').where('posted_by', req.user.user_id).then((rows) => {
         // Send rows to the frontend
         console.log(rows);

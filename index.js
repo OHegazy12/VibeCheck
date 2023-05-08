@@ -7,7 +7,7 @@ const cors = require('cors');
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+app.use(cors({ credentials: true, origin: true }));
 
 const PORT = 3001;
 
