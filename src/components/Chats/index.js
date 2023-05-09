@@ -13,7 +13,12 @@ import MuiTextField from "../TextField";
 import MuiListItem from "../MuiListItem";
 import MuiButton from "../Button";
 
-function Chats({ messagesList, title, rightTitleIcon = "HorizontalDots" }) {
+function Chats({
+  messagesList,
+  handleClick,
+  title,
+  rightTitleIcon = "HorizontalDots",
+}) {
   const [more, setMore] = useState(4);
   const [search, setSearch] = useState("");
   const filterList = messagesList.filter(
@@ -65,6 +70,7 @@ function Chats({ messagesList, title, rightTitleIcon = "HorizontalDots" }) {
                   subtitle={data.subtitle}
                   avatar={data.avatar}
                   icon={data.icon}
+                  onClick={() => handleClick(data)}
                 />
               );
             })}

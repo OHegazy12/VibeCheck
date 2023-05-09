@@ -155,9 +155,11 @@ function MuiAppBar() {
             label="Search Bar"
             sx={{ width: "300px", borderColor: "#000000" }}
           />
-          <IconButton size="large" edge="start" color="error" sx={{ ml: 2 }}>
-            <Logout />
-          </IconButton>
+          <Link to="/Signin">
+            <IconButton size="large" edge="start" color="error" sx={{ ml: 2 }}>
+              <Logout />
+            </IconButton>
+          </Link>
         </Toolbar>
       </AppBar>
       {/* {renderMobileMenu}

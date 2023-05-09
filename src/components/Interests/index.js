@@ -16,7 +16,7 @@ function Interests({ InterestData }) {
         return (
           <UserHeader
             leftIcon={data.icon}
-            name={data.name}
+            name={data.name || data.title}
             badge={data.badge}
           />
         );
