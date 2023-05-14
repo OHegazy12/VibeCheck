@@ -8,13 +8,13 @@ router.use(express.json())
 
 const db = require('../db/db');
 
-const fs = require('fs');
 const { ImgurClient } = require('imgur');
 const bcrypt = require('bcryptjs');
 const jwt = require("jsonwebtoken")
 const cookieParser = require('cookie-parser');
 router.use(cookieParser());
 const { cookieJwtAuth } = require('../middleware/authorization');
+const dayjs = require('dayjs')
 
 // all credentials with a refresh token, in order to get access tokens automatically
 const client = new ImgurClient({
@@ -27,24 +27,6 @@ const client = new ImgurClient({
 router.get('/', (req, res) => {
     res.send('Hello world!')
 })
-
-// upload an image and retrieve an imgur link from it
-// router.post('/uploadImg', cookieJwtAuth, async (req, res) => {
-//     if (!req.files) {
-//         return res.sendStatus(400).send('No files were uploaded.')
-//     }
-//     // uploads to upload folder
-//     let sampleFile = req.files.sampleFile
-
-//     // upload multiple images via fs.createReadStream (node)
-//     const response = await client.upload({
-//         image: sampleFile.data.toString('base64'),
-//         type: 'stream',
-//     });
-//     client.deleteImage();
-//     console.log(response.data.link);    // this is the reference for the imgur link containing the image
-//     return response.data.link;
-// })
 
 router.delete('/deleteAccount', cookieJwtAuth, async (req, res) => {
     // delete account
@@ -120,15 +102,7 @@ router.post('/signUp', async (req, res) => {
 
 //Additional profile creation page -- NOT DONE
 router.post('/ProfileCreation', async (req, res) => {
-    //~~~~~~~~~~~~~
-    // TEMPORARY LINE - CURRENTLY HARDCODED
-    // delete once we figure out how to pass email from sign up page to profile creation page without cookie
-    // code wont work unless you have 333@gmail.com in database before you run profile creation
-    // email = '123@gmail.com'
-    //~~~~~~~~~~~~~
-    // How do you ensure you're passing the right email. HTTP cannot retain from previous page
-    // var user = (await db('users').where('email_address', email))[0]
-    // console.log(user)
+
     // if (user.first_name == null && user.last_name == null && user.date_of_birth == null) {
     //     console.log('New user, redirect to profile creation')
     // }
@@ -140,7 +114,6 @@ router.post('/ProfileCreation', async (req, res) => {
             dob,
             email
         } = req.body
-        console.log(req.files)
         // -------
         // uploads to upload folder
         let image = req.files.image
@@ -150,7 +123,6 @@ router.post('/ProfileCreation', async (req, res) => {
             image: image.data.toString('base64'),
             type: 'stream',
         });
-        console.log(imgur.data.link);    // this is the reference for the imgur link containing the image
         // -------
         const [id] = await db('users').where('email_address', email).update({
             first_name: firstname,
@@ -158,10 +130,7 @@ router.post('/ProfileCreation', async (req, res) => {
             date_of_birth: dob,
             pfp: imgur.data.link,
             email_address: email
-            // }).then((rowCount) => {
-            //     console.log(`Updated ${rowCount} row(s)`);
         }).returning('id')
-        console.log(id)
         return res.json({ 'response': 'Added first name, last name, and DoB' })
     } catch (error) {
         console.log(error);
@@ -178,22 +147,18 @@ router.post('/login', async (req, res) => {
             email,
             pass,
         } = req.body
-        // console.log(req.body.email)
         // Check email address
-        var user = (await db('users').where('email_address', email))[0]
-        // console.log(user)
+        var user = (await db('users').where('email_address', email.toLowerCase()))[0]
         if (user === undefined) {
             return res.status(401).json({ 'response': 'Your username or password is incorrect' })
         }
         var salt = user.password_hash.split('#')[1]
-        // console.log(user.password_hash, user.password_hash.split('#'))
 
         // Check password
         var isSamePassword = checkPassword(pass, user.password_hash, salt)
         if (!isSamePassword) {
             return res.status(401).json({ 'response': 'Your username or password is incorrect' })
         }
-        // console.log(user)
 
         // token verification  
         var user_id = user.id
@@ -216,14 +181,6 @@ router.post('/login', async (req, res) => {
     }
 })
 
-router.get("/loggedInTest", cookieJwtAuth, async (req, res) => {
-
-    console.log(req.user.user_id)
-    res.send("Logged in")
-
-})
-
-
 function hashAndSalt(pw_plaintext) {
     var salt = bcrypt.genSaltSync(10);
     var hash = bcrypt.hashSync(pw_plaintext, salt);
@@ -243,11 +200,9 @@ function checkPassword(pw_plaintext, stored_hash, salt) {
 
 //Make Post
 router.post('/createPost', cookieJwtAuth, async (req, res) => {
-    console.log(req.body)
     try {
         const {
             type,
-            // posted_by,
             img_link,
             topic,
             title,
@@ -256,9 +211,8 @@ router.post('/createPost', cookieJwtAuth, async (req, res) => {
             dislikes_lst,
             comments_lst,
             posted_at } = req.body
-        console.log(req.body)
         posted_by = req.user.user_id
-        const [id] = await db('posts').insert({
+        await db('posts').insert({
             type,
             posted_by,
             img_link,
@@ -287,7 +241,6 @@ router.post('/createComment', cookieJwtAuth, async (req, res) => {
             dislikes_lst,
             comments_lst,
             posted_at } = req.body
-        console.log(req.body)
         posted_by = req.user.user_id
         const [id] = await db('comments').insert({
             posted_by,
@@ -304,11 +257,8 @@ router.post('/createComment', cookieJwtAuth, async (req, res) => {
     }
 })
 
-//NOT DONE YET - NEED FURTHER TESTING
-//Display stuff on profile page
+// Display stuff on profile page
 router.get('/profile', cookieJwtAuth, async (req, res) => {
-    console.log(req.cookies)
-    console.log('is it working?')
     _id = req.user.user_id
     db.select('*').from('posts').where('posted_by', req.user.user_id).then((rows) => {
         // Send rows to the frontend
@@ -321,6 +271,81 @@ router.get('/profile', cookieJwtAuth, async (req, res) => {
             res.status(500).send('Internal server error');
         });
 
+})
+
+// Display stuff on friends feed
+router.get('/friendsFeed', cookieJwtAuth, async (req, res) => {
+    _id = req.user.user_id
+
+    following_lst = (await db('users').where('id', _id).select('following'))[0].following
+    mutual_follows = []
+    // insert all from your following list who also follow you back
+    for (let i = 0; i < following_lst.length; i++) {
+        if (await areUsersFollowingEachOther(_id, following_lst[i])) {
+            mutual_follows.push(following_lst[i])
+        }
+    }
+    now = dayjs()
+    day_before = now.subtract(24, 'h')
+    display_posts = []
+    for (let i = 0; i < mutual_follows.length; i++) {
+        if (mutual_follows[i] === _id) continue
+        post_ = (await (db('posts').where('posted_by', mutual_follows[i])))
+        for (const post of post_) {
+            created_time = post.created_at
+            if (dayjs(created_time).isBefore(day_before)) continue
+            // jumble by resorting by time?
+            display_posts.push(post)
+        }
+    }
+
+    // display_posts now holds the needed uuids (unsorted)
+    // TO DO: For each value in display_posts array, need to resort by time
+
+
+    res.json(display_posts)
+
+})
+
+// Are users following each other?
+async function areUsersFollowingEachOther(userId1, userId2) {
+    // Query the database to check if the relationship exists in the "following" column
+    const result = await db('users')
+        .select()
+        .whereRaw('id = :userId1 AND :userId2 = ANY(following)', { userId1, userId2 })
+        .orWhereRaw('id = :userId2 AND :userId1 = ANY(following)', { userId1, userId2 });
+    // Return true if both users are following each other
+    return result.length === 2;
+}
+
+// Follow/unfollow
+router.post('/follow', cookieJwtAuth, async (req, res) => {
+    try {
+        user = db('users').where('id', req.user.user_id)
+        // if currently NOT following --> then follow
+        if (!(await user.select('following')).includes(req.body.id)) {
+            await user.update(
+                {
+                    following: db.raw('array_append(following, ?)', [req.body.id])
+                })
+        }
+        // if currently  following --> then unfollow
+        else {
+            user.select('following').del(req.body.id)
+        }
+        res.status(200)
+    } catch (error) {
+        console.log(error)
+        res.status(400)
+    }
+})
+
+router.delete('/deleteAll', async (req, res) => {
+    // delete ALL accounts
+    await db.select('*').from('comments').delete()
+    await db.select('*').from('posts').delete()
+    await db.select('*').from('users').delete()
+    return res.status(200)
 })
 
 

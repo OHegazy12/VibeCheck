@@ -25,7 +25,7 @@ exports.up = async function (knex) {
         table.string('bio');
         table.string('pfp');
         table.integer('post_count').defaultTo(0);
-        table.specificType('following', 'text[]');  // might need to swap the type from text[] to uuid
+        table.specificType('following', 'text[]').defaultTo("{}");  // might need to swap the type from text[] to uuid
         table.specificType('saved_lst', 'text[]');
         table.timestamps(true, true);
     });
