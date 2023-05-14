@@ -1,25 +1,25 @@
 .ProfileCreationContainer {
-font-size:24px ;
-font-weight: 900;
-width: 100%;
-background-image:url(../../../assets/background/img3.png) ;
-background-position: center;
-background-repeat: no-repeat;
-background-size: cover;
-display: flex;
-flex: 1;
-justify-content: center;
-align-items: center;
+  font-size: 24px;
+  font-weight: 900;
+  width: 100%;
+  background-image: url(../../../assets/background/img3.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
 }
 
-.ProfileCreationBox{
-border: 1px solid white;
-padding: 50px;
-border-radius: 20px;
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
+.ProfileCreationBox {
+  border: 1px solid white;
+  padding: 50px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 /* .signUpbuttonBox{
@@ -28,17 +28,16 @@ justify-content: center;
     justify-content: space-between;    
 } */
 
-.ProfileCreationInputBox{
-    display: flex;
-    flex-direction: column;
-align-items: center;
-justify-content: center;
-height: 300px;
-justify-content: space-evenly;
-width: 100%
-/* justify-content: space-around; */
-/* justify-content: space-between; */
-
+.ProfileCreationInputBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+  justify-content: space-evenly;
+  width: 100%;
+  /* justify-content: space-around; */
+  /* justify-content: space-between; */
 }
 
 /* .MuiOutlinedInput-notchedOutline{
@@ -48,17 +47,3 @@ width: 100%
 /* .MuiFormLabel-root{
     color: white !important;
 } */
-
-.AddImageAvatar {
-    height: 85px !important;
-    width: 85px !important;
-}
-.AddImageIcon {
-    font-size: 50px !important;
-}
-
-
-
-
-
-

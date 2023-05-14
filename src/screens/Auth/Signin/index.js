@@ -1,16 +1,35 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./style.css";
 import MuiButton from "../../../components/Button";
 import { Typography } from "@mui/material";
 import MuiTextField from "../../../components/TextField";
+import { AuthAction, AuthContext } from "../../../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 function Signin() {
+  const { onSignin } = useContext(AuthAction);
+  const { user } = useContext(AuthContext);
+
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
   const handleSignin = () => {
-    console.log(" email: " + email);
-    console.log(" password: " + password);
+    if (email !== "" && password !== "") {
+      onSignin(email, password);
+    } else {
+      alert("Email or Password field is empty");
+    }
+    // console.log(" email: " + email);
+    // console.log(" password: " + password);
   };
+
+  useEffect(() => {
+    if (user === "Logging in") {
+      navigate("/Home");
+    }
+  }, [user]);
 
   return (
     <div className="signinContainer">
@@ -41,7 +60,7 @@ function Signin() {
             onClick={handleSignin}
             variant="contained"
             color="primary"
-            href="/Profile"
+            // href="/Profile"
           />
           <MuiButton
             label="Sign up"

@@ -1,113 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 import MuiAppBar from "../../components/AppBar";
 import "./style.css";
-import RobertPicture from "../../assets/profilepicture/image1.jpg";
-import StevePicture from "../../assets/profilepicture/image2.jpg";
 import Chats from "../../components/Chats";
 import ChatMessages from "../../components/ChatMessages";
+import { MessagesContext } from "../../context/MessagesContext";
 
 function Messages() {
-  const date = new Date();
-  const timestamp = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
-  const chatMessages = [
-    {
-      message: "Hi",
-      type: "mine",
-      timeStamp: timestamp,
-    },
-    {
-      message: "Hi",
-      type: "user",
-      timeStamp: timestamp,
-    },
-    {
-      message: "How are you doing?",
-      type: "mine",
-      timeStamp: timestamp,
-    },
-    {
-      message: "all right, and you?",
-      type: "user",
-      timeStamp: timestamp,
-    },
-    {
-      message: "nothing new. How is work?",
-      type: "mine",
-      timeStamp: timestamp,
-    },
-    {
-      message: "good",
-      type: "user",
-      timeStamp: timestamp,
-    },
-    {
-      message: "Hi",
-      type: "mine",
-      timeStamp: timestamp,
-    },
-    {
-      message: "Hi",
-      type: "user",
-      timeStamp: timestamp,
-    },
-    {
-      message: "How are you doing?",
-      type: "mine",
-      timeStamp: timestamp,
-    },
-    {
-      message: "all right, and you?",
-      type: "user",
-      timeStamp: timestamp,
-    },
-    {
-      message: "nothing new. How is work?",
-      type: "mine",
-      timeStamp: timestamp,
-    },
-    {
-      message: "good",
-      type: "user",
-      timeStamp: timestamp,
-    },
-  ];
-  const messagesList = [
-    {
-      title: "Steve Rogers",
-      avatar: StevePicture,
-      subtitle: "London, UK",
-    },
-    {
-      title: "Archie",
-      avatar: RobertPicture,
-      subtitle: "Toronto,Canada",
-    },
-    {
-      title: "Melinda",
-      avatar: RobertPicture,
-      subtitle: "Paris, France",
-    },
-    {
-      title: "Marcus",
-      avatar: RobertPicture,
-      subtitle: "London, UK",
-    },
-    {
-      title: "Gary",
-      avatar: RobertPicture,
-      subtitle: "Toronto,Canada",
-    },
-    {
-      title: "Kevin",
-      avatar: RobertPicture,
-      subtitle: "Paris, France",
-    },
-  ];
+  const { chatMessages, chatList } = useContext(MessagesContext);
+
   return (
     <div className="MessagesContainer">
       <MuiAppBar />
       <div className="MessagesSection">
-        <Chats messagesList={messagesList} />
+        <Chats messagesList={chatList} />
         <ChatMessages chatMessages={chatMessages} />
       </div>
     </div>

@@ -1,17 +1,24 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./style.css";
 import MuiButton from "../../../components/Button";
 import { Typography } from "@mui/material";
 import MuiTextField from "../../../components/TextField";
+import { AuthAction } from "../../../context/AuthContext";
 
 function Signup() {
+  const { onSignup } = useContext(AuthAction);
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const handleSignUp = () => {
-    console.log(" user name: " + userName);
-    console.log(" email: " + email);
-    console.log(" password: " + password);
+    if (email !== "" && password !== "" && userName !== "") {
+      onSignup(email, password, userName);
+    } else {
+      alert("No field should be empty!");
+    }
+    // console.log(" user name: " + userName);
+    // console.log(" email: " + email);
+    // console.log(" password: " + password);
   };
   return (
     <div className="signupContainer">
@@ -53,7 +60,7 @@ function Signup() {
           variant="contained"
           color="light"
           fullWidth
-          href="/ProfileCreation"
+          // href="/ProfileCreation"
         />
       </div>
     </div>

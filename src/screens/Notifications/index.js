@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import MuiAppBar from "../../components/AppBar";
 import "./style.css";
 import MuiListItem from "../../components/MuiListItem";
 import { MoreHoriz, NotificationsNone, Search } from "@mui/icons-material";
-import StevePicture from "../../assets/profilepicture/image2.jpg";
+
 import MuiTextField from "../../components/TextField";
 import {
   Badge,
@@ -13,38 +13,13 @@ import {
   Typography,
 } from "@mui/material";
 import MuiButton from "../../components/Button";
+import { NotificationContext } from "../../context/NotificationContext";
 
 function Notifications() {
   const [more, setMore] = useState(3);
   const [search, setSearch] = useState("");
+  const { notificationList } = useContext(NotificationContext);
 
-  const notificationList = [
-    {
-      title: "New comment",
-      subtitle: "Someone has commented on your post",
-      icon: <NotificationsNone />,
-    },
-    {
-      title: "New like",
-      subtitle: "Someone has liked  your photo",
-      icon: <NotificationsNone />,
-    },
-    {
-      title: "Steve tag",
-      subtitle: "Steve tagged you on his post",
-      avatar: StevePicture,
-    },
-    {
-      title: "New comment",
-      subtitle: "Someone has commented on your post",
-      icon: <NotificationsNone />,
-    },
-    {
-      title: "New like",
-      subtitle: "Someone has liked  your photo",
-      icon: <NotificationsNone />,
-    },
-  ];
   const filterList = notificationList.filter(
     (data) =>
       data.title.toLowerCase().includes(search.toLowerCase()) !== false ||

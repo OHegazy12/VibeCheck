@@ -1,30 +1,34 @@
 import React, { useState } from "react";
 import "./style.css";
 import MuiButton from "../../../components/Button";
-import { Avatar, IconButton, Typography } from "@mui/material";
+import { Avatar, IconButton, Input, Typography } from "@mui/material";
 import MuiTextField from "../../../components/TextField";
 import { AddAPhoto } from "@mui/icons-material";
+import UploadAvatarImage from "../../../components/UploadAvatarImage";
 
 function ProfileCreation() {
+  const [profilePicture, setProfilePicture] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  // const [phone, setPhone] = useState("");
   const [DOB, setDob] = useState("");
+  // const [phone, setPhone] = useState("");
+
   const handleProfileCreation = () => {
     console.log(" first name: " + firstName);
     console.log(" last name: " + lastName);
-    // console.log(" phone: " + phone);
     console.log(" date of birth: " + DOB);
+    // console.log(" phone: " + phone);
   };
+
   return (
     <div className="ProfileCreationContainer">
       <div className="ProfileCreationBox">
         <Typography variant="h3">Profile Creation</Typography>
-        <IconButton>
-          <Avatar className="AddImageAvatar">
-            <AddAPhoto className="AddImageIcon" />
-          </Avatar>
-        </IconButton>
+        <UploadAvatarImage
+          image={profilePicture}
+          setImage={setProfilePicture}
+        />
+        {/* <Input type="file" accept="image/*" /> */}
 
         <div className="ProfileCreationInputBox">
           <MuiTextField
