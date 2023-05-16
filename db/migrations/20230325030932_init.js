@@ -26,13 +26,14 @@ exports.up = async function (knex) {
         table.string('pfp');
         table.integer('post_count').defaultTo(0);
         table.specificType('following', 'text[]').defaultTo("{}");  // might need to swap the type from text[] to uuid
-        table.specificType('saved_lst', 'text[]');
+        table.specificType('saved_lst', 'text[]').defaultTo("{}");
+        table.specificType('interests_lst', 'text[]').defaultTo("{}");
         table.timestamps(true, true);
     });
 
     await knex.schema.createTable('posts', (table) => {
         table.enum('type', ['friends', 'community']).notNullable();
-        table.uuid('post_id').defaultTo(knex.raw("gen_random_uuid()")).notNullable();
+        table.uuid('post_id').defaultTo(knex.raw("gen_random_uuid()")).unique().primary();
 
         table.uuid('posted_by');
         table.foreign('posted_by').references('users.id');
@@ -41,25 +42,61 @@ exports.up = async function (knex) {
         table.string('topic');
         table.string('title').notNullable();
         table.string('body_text');
-        table.specificType('likes_lst', 'text[]');
-        table.specificType('dislikes_lst', 'text[]');
-        table.specificType('comments_lst', 'text[]');  // stores the unique uuid of a comment
-        table.datetime('posted_at').notNullable();  // when the post was made
+        table.specificType('likes_lst', 'text[]').defaultTo("{}");
+        table.specificType('dislikes_lst', 'text[]').defaultTo("{}");
+        table.specificType('comments_lst', 'text[]').defaultTo("{}");  // stores the unique uuid of a comment
         table.timestamps(true, true);
     });
 
     await knex.schema.createTable('comments', (table) => {
-        table.uuid('comment_id').defaultTo(knex.raw("gen_random_uuid()")).notNullable();
+        table.uuid('comment_id').defaultTo(knex.raw("gen_random_uuid()")).unique().primary();
 
         table.uuid('posted_by');
         table.foreign('posted_by').references('users.id');
 
         table.string('body_text').notNullable();
-        table.specificType('likes_lst', 'text[]');
-        table.specificType('dislikes_lst', 'text[]');
-        table.specificType('comments_lst', 'text[]');  // stores the unique uuid of a reply comment
-        table.dateTime('posted_at').notNullable();  // when the comment was made
+        table.specificType('likes_lst', 'text[]').defaultTo("{}");
+        table.specificType('dislikes_lst', 'text[]').defaultTo("{}");
+        table.specificType('comments_lst', 'text[]').defaultTo("{}");  // stores the unique uuid of a reply comment
+        table.enum('replying_to_type', ['posts', 'comments']);
         table.timestamps(true, true);
+    });
+
+    await knex.schema.createTable('messages', (table) => {
+        table.uuid('message_id').defaultTo(knex.raw("gen_random_uuid()")).unique().primary();
+
+        table.uuid('sender_id');
+        table.foreign('sender_id').references('users.id');
+
+        table.specificType('receiver_lst', 'text[]').defaultTo("{}");
+        table.string('body_text').notNullable();
+        table.string('img_link').defaultTo(null);
+        table.timestamps(true, true);
+    });
+
+    await knex.schema.createTable('chats', (table) => {
+        table.enum('type', ['private', 'group']).notNullable();
+
+        table.uuid('group_id').defaultTo(knex.raw("gen_random_uuid()")).unique().primary();
+        table.specificType('message_lst', 'text[]').defaultTo("{}");
+
+        table.string('group_name').notNullable();   // only available for group type
+        table.uuid('group_admin').notNullable();    // whoever created the group can remove members
+        table.specificType('members_lst', 'text[]').defaultTo("{}");    // who has access to the group
+        table.timestamps(true, true);
+
+    });
+
+    await knex.schema.createTable('interests', (table) => {
+        table.string('interest_name').unique().notNullable();
+        table.specificType('posts_lst', 'text[]').defaultTo("{}");
+    });
+
+    await knex.schema.createTable('events', (table) => {
+        table.uuid('interest_name').unique().notNullable();    // what topic does is this event for
+        table.string('event_post');                            // uuid of a post advertising the event
+        table.string('event_name');                            // specific name of event
+        table.string('event_winner');                          // who wins the prize
     });
 };
 
@@ -68,6 +105,9 @@ exports.up = async function (knex) {
  * @returns { Promise<void> }
  */
 exports.down = async function (knex) {
+    await knex.schema.dropTable('interests');
+    await knex.schema.dropTable('chats');
+    await knex.schema.dropTable('messages');
     await knex.schema.dropTable('comments');
     await knex.schema.dropTable('posts');
     await knex.schema.dropTable('users');
