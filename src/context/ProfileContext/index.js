@@ -1,13 +1,15 @@
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import RobertPicture from "../../assets/profilepicture/image1.jpg";
 import StevePicture from "../../assets/profilepicture/image2.jpg";
 import postImg from "../../assets/logo.png";
 import Hulk from "../../assets/profilepicture/image.jpg";
+import { AuthContext } from "../AuthContext";
 
 export const ProfileContext = createContext();
 export const ProfileAction = createContext();
 
 function ProfileContextProvider({ children }) {
+  const { user } = useContext(AuthContext);
   const [userDetails, setUserDetails] = useState({
     userName: "Kevin",
     firstName: "Kevin",
@@ -21,6 +23,35 @@ function ProfileContextProvider({ children }) {
   });
   const [profilePost, setProfilePost] = useState([]);
   const [suggestedPeople, setSuggestedPeople] = useState([]);
+
+  useEffect(() => {
+    // user: {
+    //   id: user.id,
+    //   email_address: user.email_address,
+    //   username: user.username,
+    //   first_name: user.first_name,
+    //   last_name: user.last_name,
+    //   date_of_birth: user.date_of_birth,
+    //   bio: user.bio,
+    //   profile_picture: user.pfp,
+    //   post_count: user.post_count,
+    //   following: user.following,
+    //   saved_lst: user.saved_lst,
+    //   created_at: user.created_at,
+    //   updated_at: user.updated_at,
+    // },
+    setUserDetails({
+      userName: user.username,
+      firstName: user.first_name,
+      lastName: user.last_name,
+      email: user.email_address,
+      profilePicture: user.profile_picture || Hulk,
+
+      numberOfPost: user.post_count || 0,
+      numberOfFollowings: user.following || 0,
+      numberOfFollowers: user.saved_lst || 0,
+    });
+  }, [user]);
 
   const ProfilePost = [
     {

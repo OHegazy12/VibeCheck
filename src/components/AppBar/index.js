@@ -26,13 +26,15 @@ import {
   TextField,
   InputAdornment,
 } from "@mui/material";
-import React from "react";
+import React, { useContext } from "react";
 import "./style.css";
 import { Link, useLocation } from "react-router-dom";
 import MuiTextField from "../TextField";
 import logo from "../../assets/new-logo.png";
+import { AuthAction } from "../../context/AuthContext";
 
 function MuiAppBar() {
+  const { onLogOut } = useContext(AuthAction);
   const { state, pathname } = useLocation();
   console.log("hello ", state, pathname);
 
@@ -155,11 +157,16 @@ function MuiAppBar() {
             label="Search Bar"
             sx={{ width: "300px", borderColor: "#000000" }}
           />
-          <Link to="/Signin">
-            <IconButton size="large" edge="start" color="error" sx={{ ml: 2 }}>
-              <Logout />
-            </IconButton>
-          </Link>
+
+          <IconButton
+            onClick={onLogOut}
+            size="large"
+            edge="start"
+            color="error"
+            sx={{ ml: 2 }}
+          >
+            <Logout />
+          </IconButton>
         </Toolbar>
       </AppBar>
       {/* {renderMobileMenu}

@@ -3,11 +3,12 @@ import { Avatar, IconButton } from "@mui/material";
 import React, { useRef } from "react";
 import "./style.css";
 
-function UploadAvatarImage({ image, setImage }) {
+function UploadAvatarImage({ image, setImage, setImageUri }) {
   const fileInput = useRef();
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
+    setImageUri(file);
     const imagePath = URL.createObjectURL(file);
     setImage(imagePath);
   };

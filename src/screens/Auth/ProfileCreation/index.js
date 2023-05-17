@@ -1,23 +1,35 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./style.css";
 import MuiButton from "../../../components/Button";
 import { Avatar, IconButton, Input, Typography } from "@mui/material";
 import MuiTextField from "../../../components/TextField";
 import { AddAPhoto } from "@mui/icons-material";
 import UploadAvatarImage from "../../../components/UploadAvatarImage";
+import { AuthAction } from "../../../context/AuthContext";
 
 function ProfileCreation() {
+  const { onProfileCreation } = useContext(AuthAction);
   const [profilePicture, setProfilePicture] = useState("");
+  const [profilePictureUri, setProfilePictureUri] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [DOB, setDob] = useState("");
+
   // const [phone, setPhone] = useState("");
 
-  const handleProfileCreation = () => {
+  const handleProfileCreation = (e) => {
+    e.preventDefault();
     console.log(" first name: " + firstName);
     console.log(" last name: " + lastName);
     console.log(" date of birth: " + DOB);
     // console.log(" phone: " + phone);
+    if (firstName !== "" && DOB !== "" && profilePicture !== "") {
+      onProfileCreation(firstName, lastName, DOB, profilePictureUri);
+    } else {
+      alert(
+        "First name, Date of birth and profile picture should not be empty!"
+      );
+    }
   };
 
   return (
@@ -27,6 +39,7 @@ function ProfileCreation() {
         <UploadAvatarImage
           image={profilePicture}
           setImage={setProfilePicture}
+          setImageUri={setProfilePictureUri}
         />
         {/* <Input type="file" accept="image/*" /> */}
 

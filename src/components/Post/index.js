@@ -19,6 +19,7 @@ function Post({
   avatar,
   onPostBodyClick,
   headerRightIcon,
+  handleHeaderRightIcon,
 }) {
   const [showComment, setShowComment] = useState(false);
   return (
@@ -28,6 +29,7 @@ function Post({
         name={userName}
         location={location}
         rightIcon={headerRightIcon || "PersonAdd"}
+        handleRightIcon={handleHeaderRightIcon}
       />
 
       <div className="PostBody" onClick={onPostBodyClick}>

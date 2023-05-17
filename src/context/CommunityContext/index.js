@@ -44,13 +44,18 @@ function CommunityContextProvider({ children }) {
     updateSelectedCommunity(CommunityData[0]);
     // Replace this profile post with the data you receive
   };
+  const createCommunity = (arg) => {
+    setCommunityData([...communityData, arg]);
+  };
 
   useEffect(() => {
     getCommunityData();
   }, []);
   return (
     <CommunityContext.Provider value={{ communityData, selectedCommunity }}>
-      <CommunityAction.Provider value={{ updateSelectedCommunity }}>
+      <CommunityAction.Provider
+        value={{ updateSelectedCommunity, createCommunity }}
+      >
         {children}
       </CommunityAction.Provider>
     </CommunityContext.Provider>

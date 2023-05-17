@@ -1,21 +1,38 @@
-import React, { useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import MuiTextField from "../TextField";
 import "./style.css";
 import MuiButton from "../Button";
 import { Divider, IconButton, InputAdornment, Typography } from "@mui/material";
-import avatar from "../../assets/profilepicture/image1.jpg";
 import UserHeader from "../UserHeader";
-import {
-  EmojiEmotions,
-  LocationOn,
-  MoreHoriz,
-  PersonSearch,
-  Photo,
-  Replay,
-} from "@mui/icons-material";
+import { LocationOn, Photo, Replay } from "@mui/icons-material";
+import { ProfileContext } from "../../context/ProfileContext";
+import { HomeAction } from "../../context/HomeContext";
 
 function CreatePost() {
+  const { userDetails } = useContext(ProfileContext);
+  const { createPost } = useContext(HomeAction);
+  const fileInput = useRef();
+
+  const [topic, setTopic] = useState("");
+  const [title, setTitle] = useState("");
   const [postText, setPostText] = useState("");
+  const [postImage, setPostImage] = useState("");
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    setPostImage(file);
+    // const imagePath = URL.createObjectURL(file);
+    // setImage(imagePath);
+  };
+
+  const handlePost = () => {
+    if (topic !== "" && title !== "" && postText !== "") {
+      createPost(topic, title, postText, postImage);
+    } else {
+      alert("Topic, title and post text should not be empty!");
+    }
+  };
+
   return (
     <div className="createPostContainer">
       <Typography variant="h6">Create Post</Typography>
@@ -27,8 +44,30 @@ function CreatePost() {
           width: "100%",
         }}
       />
-      <UserHeader avatar={avatar} name="Lorenzo" tag="Friends" />
-
+      <UserHeader
+        avatar={userDetails.profilePicture}
+        name={userDetails.userName}
+        tag="Friends"
+      />
+      <MuiTextField
+        label="Topic"
+        placeholder="what is your topic?"
+        variant="filled"
+        color="dark"
+        onChange={(event) => setTopic(event.target.value)}
+        value={topic}
+        fullWidth
+      />
+      <MuiTextField
+        label="Title"
+        placeholder="Give a title to your post!"
+        variant="filled"
+        color="dark"
+        onChange={(event) => setTitle(event.target.value)}
+        value={title}
+        fullWidth
+        sx={{ margin: "10px 0px" }}
+      />
       <MuiTextField
         // label="post"
         placeholder="What's on your mind?"
@@ -50,10 +89,18 @@ function CreatePost() {
       />
       <div className="Attachements">
         <Typography variant="body2" sx={{ display: "flex", flex: 1 }}>
-          Add To Your Post
+          Add To Your Post {postImage?.name}
         </Typography>
-        <IconButton color="dark">
+        <IconButton color="dark" onClick={() => fileInput.current.click()}>
           <Photo />
+          <input
+            ref={fileInput}
+            type="file"
+            accept="image/*"
+            name="file"
+            hidden
+            onChange={handleFileChange}
+          />
         </IconButton>
         {/* <IconButton color="dark">
           <PersonSearch />
@@ -65,7 +112,12 @@ function CreatePost() {
           <MoreHoriz />
         </IconButton> */}
       </div>
-      <MuiButton label="post" variant="contained" fullWidth />
+      <MuiButton
+        label="post"
+        variant="contained"
+        fullWidth
+        onClick={handlePost}
+      />
     </div>
   );
 }

@@ -42,6 +42,8 @@ function Profile() {
                   avatar={data.avatar}
                   caption={data.caption}
                   postImage={data.image}
+                  headerRightIcon="Remove"
+                  handleHeaderRightIcon={() => alert("Post removed!")}
                 />
               );
             })}

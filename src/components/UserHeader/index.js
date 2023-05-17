@@ -1,13 +1,14 @@
 import React from "react";
 import "./style.css";
 import { Avatar, Chip, IconButton, Typography } from "@mui/material";
-import { People, PersonAdd, Share } from "@mui/icons-material";
+import { Delete, People, PersonAdd, Remove, Share } from "@mui/icons-material";
 
 function UserHeader({
   avatar,
   name,
   location,
   rightIcon,
+  handleRightIcon,
   tag,
   tagVariant,
   leftIcon,
@@ -62,9 +63,10 @@ function UserHeader({
         />
       )}
       {rightIcon && (
-        <IconButton color="dark">
+        <IconButton color="dark" onClick={handleRightIcon}>
           {rightIcon === "PersonAdd" && <PersonAdd />}
           {rightIcon === "Share" && <Share />}
+          {rightIcon === "Remove" && <Delete />}
         </IconButton>
       )}
     </div>

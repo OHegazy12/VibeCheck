@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 
 import "./style.css";
 import {
@@ -8,10 +8,11 @@ import {
   InputAdornment,
   Typography,
 } from "@mui/material";
-import { GroupAdd, MoreHoriz, Search } from "@mui/icons-material";
+import { GroupAdd, MoreHoriz, Search, Send } from "@mui/icons-material";
 import MuiTextField from "../TextField";
 import MuiListItem from "../MuiListItem";
 import MuiButton from "../Button";
+import { CommunityAction } from "../../context/CommunityContext";
 
 function Chats({
   messagesList,
@@ -19,8 +20,18 @@ function Chats({
   title,
   rightTitleIcon = "HorizontalDots",
 }) {
+  const { createCommunity } = useContext(CommunityAction);
   const [more, setMore] = useState(4);
   const [search, setSearch] = useState("");
+  const [addCommunity, setAddCommunity] = useState(false);
+  const [communityName, setCommunityName] = useState("");
+
+  const handleAddCommunity = () => {
+    createCommunity({ icon: "", title: communityName });
+    setCommunityName("");
+    setAddCommunity(!addCommunity);
+  };
+
   const filterList = messagesList.filter(
     (data) =>
       data.title.toLowerCase().includes(search.toLowerCase()) !== false ||
@@ -34,11 +45,39 @@ function Chats({
           <Badge badgeContent={messagesList.length || 0} color="success">
             <Typography variant="h5">{title || "Messages"}</Typography>
           </Badge>
-          <IconButton color="dark">
-            {rightTitleIcon === "HorizontalDots" && <MoreHoriz />}
-            {rightTitleIcon === "AddCommunity" && <GroupAdd />}
-          </IconButton>
+          {rightTitleIcon === "HorizontalDots" && (
+            <IconButton color="dark">
+              <MoreHoriz />
+            </IconButton>
+          )}
+          {rightTitleIcon === "AddCommunity" && (
+            <IconButton
+              color="dark"
+              onClick={() => setAddCommunity(!addCommunity)}
+            >
+              <GroupAdd />
+            </IconButton>
+          )}
         </div>
+        {addCommunity && (
+          <MuiTextField
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton color="dark" onClick={handleAddCommunity}>
+                    <Send />
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+            label="New Community Name"
+            fullWidth
+            color="dark"
+            value={communityName}
+            onChange={(e) => setCommunityName(e.target.value)}
+            sx={{ mb: 2 }}
+          />
+        )}
         <MuiTextField
           InputProps={{
             startAdornment: (
