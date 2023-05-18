@@ -8,7 +8,7 @@
 import UIKit
 import Parse
 
-class CommunityPostCommentsViewController: UIViewController {
+class CommunityPostCommentsViewController: UIViewController, CommunityCommentCellDelegate {
 
     var post: [String: Any]?
 
@@ -83,15 +83,10 @@ class CommunityPostCommentsViewController: UIViewController {
 
                     // Reload the table view to reflect the updated comments
                     self?.commentsTableView.reloadData()
-
-                    // Scroll to the newly created comment
-                    let indexPath = IndexPath(row: self?.comments.count ?? 0 - 1, section: 0)
-                    self?.commentsTableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
                 }
             }
         }
     }
-
 
     func setupAddCommentButton() {
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(displayAddCommentAlert))
@@ -127,6 +122,7 @@ extension CommunityPostCommentsViewController: UITableViewDelegate, UITableViewD
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CommunityCommentCell.identifier, for: indexPath) as! CommunityCommentCell
+        cell.delegate = self
         let comment = comments[indexPath.row]
         if let name = comment["name"] as? String, let commentText = comment["commentText"] as? String {
             cell.configure(withName: name, commentText: commentText)
@@ -134,4 +130,8 @@ extension CommunityPostCommentsViewController: UITableViewDelegate, UITableViewD
         return cell
     }
 
+    // Delegate method implementation
+    func didTapPostButton(comment: String) {
+        createComment(comment)
+    }
 }

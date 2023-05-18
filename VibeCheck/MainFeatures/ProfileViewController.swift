@@ -166,40 +166,51 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         // Mark: - Selectors
         
         // fetch user info from Parse
-        func fetchUserInfo() {
-            guard let currentUser = PFUser.current() else {
+    func fetchUserInfo() {
+        guard let currentUser = PFUser.current() else {
+            return
+        }
+        
+        // Fetch user data
+        currentUser.fetchInBackground { [weak self] (user, error) in
+            guard let self = self else { return }
+            
+            if let error = error {
+                print("Error fetching user data: \(error.localizedDescription)")
                 return
             }
             
-            // fetch user data
-            currentUser.fetchInBackground { (user, error) in
-                if let error = error {
-                    print("Error fetching user data: \(error.localizedDescription)")
-                    return
-                }
-                
-                // update UI with user data
-                if let username = user?.object(forKey: "username") as? String {
-                    self.nameLabel.text = username
-                } else {
-                    self.nameLabel.text = ""
-                }
+            // Update UI with user data
+            if let username = user?.object(forKey: "username") as? String {
+                self.nameLabel.text = username
+            } else {
+                self.nameLabel.text = ""
+            }
+            
+            // Fetch user's profile image from Parse
+            if let imageFile = user?["profileImage"] as? PFFileObject {
+                imageFile.getDataInBackground { (data, error) in
+                    if let error = error {
+                        print("Error fetching profile image: \(error.localizedDescription)")
+                        return
+                    }
                     
-                    // fetch user's profile image from Parse
-                if let imageFile = user!["profileImage"] as? PFFileObject {
-                        imageFile.getDataInBackground { (data, error) in
-                            if let error = error {
-                                print("Error fetching profile image: \(error.localizedDescription)")
-                                return
-                            }
-                            
-                            if let data = data {
-                                self.profileImageView.image = UIImage(data: data)
-                            }
+                    if let data = data, let image = UIImage(data: data) {
+                        DispatchQueue.main.async {
+                            self.profileImageView.image = image
                         }
                     }
                 }
+            } else if let profilePictureData = user?["profilePicture"] as? String,
+                      let imageData = Data(base64Encoded: profilePictureData),
+                      let image = UIImage(data: imageData) {
+                DispatchQueue.main.async {
+                    self.profileImageView.image = image
+                }
             }
+        }
+    }
+
     
     func fetchPosts() {
             guard let currentUser = PFUser.current() else {
