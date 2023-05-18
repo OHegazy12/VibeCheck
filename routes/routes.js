@@ -588,7 +588,7 @@ router.post('/createMessage', cookieJwtAuth, async (req, res) => {
         console.error('Error creating message:', error);
         res.status(500).json({ error: 'Failed to create message' });
     }
-})
+});
 
 
 // Unsure if needed
@@ -953,7 +953,9 @@ async function checkCriteria(comment, post) {
         return
     }
     let usr = comment.posted_by
+    let prz = post.event_prize
     await db('posts').where('post_id', post.post_id).update({ event_winner: usr })
+    await db('users').where('id', usr).update({ award: prz })
 }
 
 router.get('/displayComments', cookieJwtAuth, async (req, res) => {
