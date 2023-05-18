@@ -1,0 +1,45 @@
+*{
+    box-sizing: border-box;
+}
+body{
+    /* Background color */
+    background-color: #fff;
+    /* Text color */
+    color: #141d16;
+    /* Text font */
+    font-family: sans-serif;
+}
+form {
+    position:fixed;
+    bottom:0;
+    left:0;
+    right:0;
+    padding:20px;
+}
+/* Typing field */
+input{
+    border:1px solid #555;
+    background-color: #f6f6f6;
+    width: 100%;
+    border-radius:20px;
+    padding: 15px 25px;
+    /* Color of your text in typing field */
+    color:#141d16;
+}
+.bubble{
+    border-radius: 20px;
+    /* Bubble color of messages */
+    background-color:#e1e9e3;
+    margin:4px;
+    padding: 15px 25px;
+    display: inline-block;
+    filter: drop-shadow(1px 1px 1px #c2c2c2);
+}
+.message-row.mine{
+    text-align:right;
+}
+.message-row.mine .bubble{
+    /* Color of YOUR chat bubble */
+    background-color: #a0eab1;
+    filter: drop-shadow(1px 1px 1px #c2c2c2);
+}
