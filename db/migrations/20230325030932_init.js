@@ -28,6 +28,8 @@ exports.up = async function (knex) {
         table.specificType('following', 'text[]').defaultTo("{}");  // might need to swap the type from text[] to uuid
         table.specificType('saved_lst', 'text[]').defaultTo("{}");
         table.specificType('interests_lst', 'text[]').defaultTo("{}");
+        table.boolean('is_admin').defaultTo(false);
+        table.string('award');
         table.timestamps(true, true);
     });
 
@@ -45,6 +47,11 @@ exports.up = async function (knex) {
         table.specificType('likes_lst', 'text[]').defaultTo("{}");
         table.specificType('dislikes_lst', 'text[]').defaultTo("{}");
         table.specificType('comments_lst', 'text[]').defaultTo("{}");  // stores the unique uuid of a comment
+
+        table.boolean('is_event').defaultTo(false);
+        table.string('event_winner');                          // who wins the prize
+        table.string('event_prize');                          // img link to ribbon
+        table.integer('likes_criteria').defaultTo(100);       // once criteria is filled dish out event prize
         table.timestamps(true, true);
     });
 
@@ -92,11 +99,21 @@ exports.up = async function (knex) {
         table.specificType('posts_lst', 'text[]').defaultTo("{}");
     });
 
-    await knex.schema.createTable('events', (table) => {
-        table.uuid('interest_name').unique().notNullable();    // what topic does is this event for
-        table.string('event_post');                            // uuid of a post advertising the event
-        table.string('event_name');                            // specific name of event
-        table.string('event_winner');                          // who wins the prize
+    // await knex.schema.createTable('events', (table) => {
+    //     table.uuid('interest_name').unique().notNullable();    // what topic does is this event for
+    //     table.string('event_post');                            // uuid of a post advertising the event
+    //     table.string('event_name');                            // specific name of event
+    //     table.string('event_winner');                          // who wins the prize
+    //     table.string('event_prize');                          // img link to ribbon
+    //     table.dateTime('duration');                             // how long the event lasts
+    //     table.timestamps(true, true);
+    // });
+
+    await knex.schema.createTable('notifications', (table) => {
+        table.uuid('user_id').references('users.id');    // references your own user
+        table.uuid('sender_id');                         // WHO is liking your post
+        table.string('body_text');                       // User IS DOING WHAT?
+        table.timestamps(true, true);                    // who wins the prize
     });
 };
 
@@ -105,6 +122,7 @@ exports.up = async function (knex) {
  * @returns { Promise<void> }
  */
 exports.down = async function (knex) {
+    await knex.schema.dropTable('notifications');
     await knex.schema.dropTable('interests');
     await knex.schema.dropTable('chats');
     await knex.schema.dropTable('messages');

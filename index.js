@@ -26,8 +26,6 @@ const io = new Server(httpServer,
         }
     })
 
-// Serve static files from the "public" directory
-app.use(express.static('public'));
 
 // Handle incoming WebSocket connections
 io.on('connection', (socket) => {
@@ -46,6 +44,9 @@ io.on('connection', (socket) => {
     });
 });
 // ------------- End WebSocket Stuff -------------
+
+// Serve static files from the "public" directory
+app.use(express.static('public'));
 
 // Start the server and listen for incoming connections
 httpServer.listen(PORT, () => {

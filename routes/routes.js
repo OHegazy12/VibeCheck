@@ -16,6 +16,7 @@ router.use(cookieParser());
 const { cookieJwtAuth } = require('../middleware/authorization');
 const dayjs = require('dayjs')
 
+
 // all credentials with a refresh token, in order to get access tokens automatically
 const client = new ImgurClient({
     clientId: process.env.CLIENT_ID,
@@ -111,14 +112,7 @@ router.post('/signUp', async (req, res) => {
             email,
             name,
             pass,
-            first_name,
-            last_name,
-            date_of_birth,
-            bio,
-            pfp,
-            post_count,
-            following,
-            saved_lst } = req.body
+        } = req.body
         if (email.length == 0 || name.length == 0 || pass.length == 0) {
             return res.json({ error: 'Can\'t have empty credentials' })
         }
@@ -126,14 +120,6 @@ router.post('/signUp', async (req, res) => {
             email_address: email.toLowerCase(),   // insert email var into email_address col of database
             username: name,
             password_hash: hashAndSalt(pass),
-            // first_name,  // not used for demo, uncomment later
-            // last_name,
-            // date_of_birth,
-            // bio,
-            // pfp,
-            // post_count,
-            // following,
-            // saved_lst
         }).returning('id')
         console.log(id)
         return res.json({ 'response': 'Added new user' })
@@ -245,14 +231,20 @@ function checkPassword(pw_plaintext, stored_hash, salt) {
 // =============================== BEGIN CREATE POST, COMMENT ===============================
 // Create a new post
 router.post('/createPost', cookieJwtAuth, async (req, res) => {
+    posted_by = req.user.user_id
+    const user = (await db('users').where('id', posted_by))[0]
+    // if user is an admin, grant ability to make event posts
+
     try {
         const {
             type,
             topic,
             title,
-            body_text
+            body_text,
+            is_event,
+            event_prize,
+            likes_criteria
         } = req.body;
-        posted_by = req.user.user_id
         let imgLink = ""
         if (req.files) {
             // uploads to upload folder
@@ -265,14 +257,14 @@ router.post('/createPost', cookieJwtAuth, async (req, res) => {
             });
             imgLink = imgur.data.link
         }
-        await db('posts').insert({
-            type,
-            posted_by,
-            img_link: imgLink,
-            topic,
-            title,
-            body_text
-        }).returning('post_id');
+        let post_info = { type, posted_by, img_link: imgLink, topic, title, body_text }
+        console.log(user)
+        // if user is an admin, grant ability to make event posts
+        if (user.is_admin) {
+            post_info = { ...post_info, is_event, likes_criteria, event_prize }
+            console.log(is_event)
+        }
+        await db('posts').insert(post_info).returning('post_id');
         return res.send('Added new post')
     } catch (error) {
         console.log(error);
@@ -290,12 +282,15 @@ router.post('/createComment', cookieJwtAuth, async (req, res) => {
             body_text,
             replying_to_type
         } = req.body
-        posted_by = req.user.user_id
+        userId = req.user.user_id
+
+        const user = (await db('users').where('id', userId))[0]  // for notifications
         const [comment_id] = await db('comments').insert({
-            posted_by,
+            posted_by: userId,
             body_text,
             replying_to_type
         }).returning('comment_id')
+
         // if replying to a post
         if (req.body.replying_to_type == 'posts') {
             post = (await db('posts').where('post_id', post_id))[0]
@@ -303,6 +298,8 @@ router.post('/createComment', cookieJwtAuth, async (req, res) => {
             console.log(post)
             commentsList.push(comment_id.comment_id);
             await db('posts').where('post_id', post_id).update({ comments_lst: commentsList });
+
+            await createNotification(post.posted_by, userId, `${user.username} replied to your post`)    // for notifications
 
             return res.send('Added new comment')
         }
@@ -313,6 +310,8 @@ router.post('/createComment', cookieJwtAuth, async (req, res) => {
             console.log(comment)
             commentsList.push(comment_id.comment_id);
             await db('comments').where('comment_id', post_id).update({ comments_lst: commentsList });
+
+            await createNotification(comment.posted_by, userId, `${user.username} replied to your comment`)    // for notifications
 
             return res.send('Added new comment')
         }
@@ -358,7 +357,8 @@ router.get('/communityFeed', cookieJwtAuth, async (req, res) => {
             .whereNot('posted_by', _id)
             .whereIn('topic', userInterests.interests_lst || [])
             .orderBy('created_at', 'desc');
-
+        console.log(userInterests)
+        console.log(communityPosts)
         res.status(200).json(communityPosts);
     } catch (error) {
         console.log(error);
@@ -523,6 +523,14 @@ router.post('/addInterest', cookieJwtAuth, async (req, res) => {
         const {
             interest
         } = req.body;
+
+        // Check if the interest already exists in the user's interests list
+        const user = await db('users')
+            .where('id', _id)
+            .first();
+        if (user.interests_lst.includes(interest)) {
+            return res.status(400).json({ error: 'Interest already exists.' });
+        }
 
         await db('users')
             .where('id', _id)
@@ -697,6 +705,8 @@ router.post('/likePost', cookieJwtAuth, async (req, res) => {
     try {
         const { post_id } = req.body;
         const userId = req.user.user_id;
+        // for notifications
+        const user = (await db('users').where('id', userId))[0]
         //-------------
         // Retrieve the post from the database
         const post = (await db('posts')
@@ -728,7 +738,8 @@ router.post('/likePost', cookieJwtAuth, async (req, res) => {
                 dislikes_lst: updatedDislikes,
                 likes_lst: [...post.likes_lst, userId]
             });
-
+            // for notifications
+            await createNotification(post.posted_by, userId, `${user.username} liked your post`)
             return res.status(200).json({ message: 'Post liked successfully' });
         }
     } catch (error) {
@@ -787,6 +798,8 @@ router.post('/likeComment', cookieJwtAuth, async (req, res) => {
     try {
         const { comment_id } = req.body;
         const userId = req.user.user_id;
+        // for notifications
+        const user = (await db('users').where('id', userId))[0]
 
         // Retrieve the comment from the database
         const comment = (await db('comments')
@@ -823,7 +836,8 @@ router.post('/likeComment', cookieJwtAuth, async (req, res) => {
                     dislikes_lst: updatedDislikes,
                     likes_lst: [...comment.likes_lst, userId]
                 });
-
+            // for notifications
+            await createNotification(comment.posted_by, userId, `${user.username} liked your comment`)
             return res.status(200).json({ message: 'Comment liked successfully' });
         }
     } catch (error) {
@@ -913,7 +927,7 @@ router.get('/interests', cookieJwtAuth, async (req, res) => {
 });
 // ================================ END SEARCHING ================================
 
-async function getAllComments(parentComment, allComments) {
+async function getAllComments(parentComment, allComments, post) {
     if (!parentComment) {
         return allComments
     }
@@ -924,10 +938,22 @@ async function getAllComments(parentComment, allComments) {
     for (let i = 0; i < comment_uuids.length; i++) {
         // go through comments schema for posts with those uuids
         let temp = await db('comments').where('comment_id', comment_uuids[i]).select('*')
+        if (post && post.is_event) {
+            await checkCriteria(temp[0], post)
+        }
         allComments[comment_uuids[i]] = { id: comment_uuids[i], ...temp[0], replies: [] }
-        getAllComments(comment_uuids[i], allComments)
+        await getAllComments(comment_uuids[i], allComments, post)
     }
     return allComments
+}
+
+async function checkCriteria(comment, post) {
+    let likes_count = comment.likes_lst.length
+    if (likes_count < post.likes_criteria || post.event_winner !== null) {
+        return
+    }
+    let usr = comment.posted_by
+    await db('posts').where('post_id', post.post_id).update({ event_winner: usr })
 }
 
 router.get('/displayComments', cookieJwtAuth, async (req, res) => {
@@ -935,15 +961,20 @@ router.get('/displayComments', cookieJwtAuth, async (req, res) => {
         // for displaying comments in reply to posts
         if (req.body.replying_to_type == 'posts') {
             // get comments_lst in posts schema
-            comment_uuids = (await db('posts').where('post_id', req.body.post_id).select('comments_lst'))[0].comments_lst
+            post = (await db('posts').where('post_id', req.body.post_id))[0]
+            comment_uuids = post.comments_lst
+            isEvent = post.is_event
             let display_posts = {}
 
             // loop through comments_lst for uuids
             for (let i = 0; i < comment_uuids.length; i++) {
                 // go through comments schema for posts with those uuids
                 let temp = (await db('comments').where('comment_id', comment_uuids[i]).select('*'))
+                if (isEvent) {
+                    await checkCriteria(temp[0], post)
+                }
                 display_posts[comment_uuids[i]] = { id: comment_uuids[i], ...temp[0], replies: [] }
-                await getAllComments(comment_uuids[i], display_posts)
+                await getAllComments(comment_uuids[i], display_posts, isEvent ? post : undefined)
             }
             // display all posts with those uuids
             res.send(display_posts)
@@ -953,6 +984,32 @@ router.get('/displayComments', cookieJwtAuth, async (req, res) => {
         res.status(500).json({ error: 'Failed to handle displaying comments' });
     }
 })
+// ================================ BEGIN NOTIFICATIONS ================================
+// When someone likes your post or comment
+// When someone replies to you
+// When someone messages you
+async function createNotification(to, from, text) {
+    await db('notifications').insert({ user_id: to, sender_id: from, body_text: text })
+}
+
+// display all of a user's notifications
+router.get('/displayNotifications', cookieJwtAuth, async (req, res) => {
+    const _id = req.user.user_id;
+    try {
+        display_posts = (await db('notifications').where('user_id', _id))
+
+        // For each value in display_posts array, need to resort by time
+        display_posts.sort((a, b) => dayjs(b.created_at).diff(dayjs(a.created_at)));
+
+        // display all posts with those uuids
+        res.send(display_posts)
+
+    } catch (error) {
+        console.error('Error handling displaying notifications:', error);
+        res.status(500).json({ error: 'Failed to handle displaying notifications' });
+    }
+})
+// ================================ END NOTIFICATIONS ================================
 
 // VERY POWERFUL REQUEST -- ONLY FOR TESTING -- DELETE LATER
 router.delete('/deleteAll', async (req, res) => {
@@ -975,6 +1032,18 @@ router.post('/createInterest', async (req, res) => {
     } catch (error) {
         console.log(error);
         return res.send(error.detail)
+    }
+})
+
+// make a user an admin
+router.post('/makeAdmin', cookieJwtAuth, async (req, res) => {
+    try {
+        _id = req.user.user_id;
+        await db('users').where('id', _id).update({ is_admin: true });
+        res.status(200).json({ message: 'User is now an admin.' });
+    } catch (error) {
+        console.error('Error making user admin:', error);
+        res.status(500).json({ error: 'Failed to make user an admin.' });
     }
 })
 
