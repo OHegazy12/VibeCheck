@@ -46,7 +46,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, UIGestureReco
         user.username = username
         user.email = email
         user.password = password
-        
+
         // Creates a new user asynchronously
         user.signUpInBackground
         { (success, error) in
@@ -61,6 +61,18 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, UIGestureReco
                 print("Error: \(String(describing: error?.localizedDescription))")
             }
         }
+        
+//        // Call your API to sign up the user.
+//        APICaller.shared.signUp(email: email, username: username, password: password) { result in
+//            switch result {
+//            case .success:
+//                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//                let createProfileViewController = storyboard.instantiateViewController(withIdentifier: "CreateProfileViewController")
+//                self.present(createProfileViewController, animated: true) // Pushes navigation controller to top of stack, takes user to next page.
+//            case .failure(let error):
+//                print("Error: \(error.localizedDescription)")
+//            }
+//        }
     }
     
     func initializeHideKeyboard()

@@ -14,6 +14,10 @@ class CreateProfileViewController: UIViewController, UITextFieldDelegate, UIImag
     @IBOutlet weak var profilePictureImageView: UIImageView!
     @IBOutlet weak var dateTextField: UITextField!
     
+   
+    @IBOutlet weak var firstNameTextField: UITextField!
+    
+    @IBOutlet weak var lastNameTextField: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
         initializeHideKeyboard()
@@ -113,31 +117,61 @@ class CreateProfileViewController: UIViewController, UITextFieldDelegate, UIImag
         dismiss(animated: true, completion: nil)
     }
     
-    func saveProfile()
-    {
-        // Create a Parse object for the user's profile
-        let profile = PFObject(className: "Profile")
-        
-        // Set the profile picture image as a Parse file
-        if let imageData = profilePictureImageView.image?.pngData() {
-            let file = PFFileObject(name: "profile_picture.png", data: imageData)
-            profile["profilePicture"] = file
+    func saveProfile() {
+        // Create a dictionary for the user's profile data
+        var profileData = [String: Any]()
+
+        // Set the profile picture image as a base64-encoded string
+        if let imageData = profilePictureImageView.image?.pngData()?.base64EncodedString() {
+            profileData["profilePicture"] = imageData
         }
-        
-        // Set the date of birth as a Date object
-        if let dateString = dateTextField.text, let date = DateFormatter().date(from: dateString) {
-            profile["dateOfBirth"] = date
+
+        // Set the date of birth as a string
+        if let dateString = dateTextField.text {
+            profileData["dateOfBirth"] = dateString
         }
-        
-        // Save the profile object
-        profile.saveInBackground { (success, error) in
-            if success {
+
+        // Set the first and last name
+        profileData["firstName"] = firstNameTextField.text ?? ""
+        profileData["lastName"] = lastNameTextField.text ?? ""
+
+        // Save the profile data
+        APICaller.shared.createProfile(firstname: profileData["firstName"] as! String,
+                                        lastname: profileData["lastName"] as! String,
+                                        dateofbirth: profileData["dateOfBirth"] as! String) { result in
+            switch result {
+            case .success:
                 print("Profile saved successfully")
                 self.navigateToFeedViewController()
-            } else {
-                print("Error saving profile: \(error?.localizedDescription ?? "Unknown error")")
+            case .failure(let error):
+                print("Error saving profile: \(error.localizedDescription)")
             }
         }
+        
+//        // Create a Parse object for the user's profile
+//                let profile = PFObject(className: "Profile")
+//
+//                // Set the profile picture image as a Parse file
+//                if let imageData = profilePictureImageView.image?.pngData() {
+//                    let file = PFFileObject(name: "profile_picture.png", data: imageData)
+//                    profile["profilePicture"] = file
+//                }
+//
+//                // Set the date of birth as a Date object
+//                if let dateString = dateTextField.text, let date = DateFormatter().date(from: dateString) {
+//                    profile["dateOfBirth"] = date
+//                }
+//
+//                // Save the profile object
+//                profile.saveInBackground { (success, error) in
+//                    if success {
+//                        print("Profile saved successfully")
+//                        self.navigateToFeedViewController()
+//                    } else {
+//                        print("Error saving profile: \(error?.localizedDescription ?? "Unknown error")")
+//                    }
+//                }
     }
+
 
 }

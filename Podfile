@@ -12,8 +12,6 @@ target 'VibeCheck' do
   pod 'AlamofireImage', '~> 4.1'
   pod 'MessageKit'
   pod 'MessageInputBar'
-  pod 'AWSCore'
-  pod 'AWSCognito'
   pod 'SwiftLint'
 
   target 'VibeCheckTests' do

@@ -21,6 +21,7 @@ class LoginViewController: UIViewController
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         initializeHideKeyboard()
+        passwordField.isSecureTextEntry = true
     }
     
     // Logging into existing account implementation

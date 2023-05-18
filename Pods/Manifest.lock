@@ -2,9 +2,6 @@ PODS:
   - Alamofire (5.6.4)
   - AlamofireImage (4.2.0):
     - Alamofire (~> 5.4)
-  - AWSCognito (2.19.1):
-    - AWSCore (= 2.19.1)
-  - AWSCore (2.19.1)
   - Bolts/Tasks (1.9.1)
   - InputBarAccessoryView (5.5.0):
     - InputBarAccessoryView/Core (= 5.5.0)
@@ -23,8 +20,6 @@ PODS:
 DEPENDENCIES:
   - Alamofire
   - AlamofireImage (~> 4.1)
-  - AWSCognito
-  - AWSCore
   - MessageInputBar
   - MessageKit
   - Parse
@@ -34,8 +29,6 @@ SPEC REPOS:
   trunk:
     - Alamofire
     - AlamofireImage
-    - AWSCognito
-    - AWSCore
     - Bolts
     - InputBarAccessoryView
     - MessageInputBar
@@ -46,8 +39,6 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Alamofire: 4e95d97098eacb88856099c4fc79b526a299e48c
   AlamofireImage: 34a2d90b0e5fe6a5605f85ae4b7b01e784c60192
-  AWSCognito: f50de600804941d083af37a7568905f31a774727
-  AWSCore: 55c154ae27efc5c98bdc30a0eeea5a35d10a2ab5
   Bolts: 8c1e8aab2f603387b8b9924f57d1d64f43d3ffdc
   InputBarAccessoryView: 1d7b0a672b36e370f01f264b3907ef39d03328e3
   MessageInputBar: e81c7535347f1f7b923de7080409a535a004b6e4
@@ -55,6 +46,6 @@ SPEC CHECKSUMS:
   Parse: 6d572042e2c171414c677acabcd9bab7bbf51264
   SwiftLint: 1b7561918a19e23bfed960e40759086e70f4dba5
 
-PODFILE CHECKSUM: 37d7f57fd51e67d5ed0737123e76cdcdb4a779de
+PODFILE CHECKSUM: 35adf8eaa683c3d149a52b15753b79018d202479
 
-COCOAPODS: 1.12.0
+COCOAPODS: 1.12.1

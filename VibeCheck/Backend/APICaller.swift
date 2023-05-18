@@ -10,10 +10,10 @@ import Alamofire
 class APICaller {
     static let shared = APICaller()
     
-    private let baseURL = "http://localhost:3000"
+    private let baseURL = "http://localhost:3001"
     
     func login(email: String, password: String, completion: @escaping (Result<Bool, Error>) -> Void) {
-        let endpoint = "/login"
+        let endpoint = "/api/login"
         let parameters = ["email": email, "password": password]
         
         AF.request(baseURL + endpoint, method: .post, parameters: parameters)
@@ -21,6 +21,7 @@ class APICaller {
             .responseJSON { response in
                 switch response.result {
                 case .success:
+                    print("Login is connected!")
                     completion(.success(true))
                 case .failure(let error):
                     completion(.failure(error))
@@ -29,14 +30,40 @@ class APICaller {
     }
     
     func signUp(email: String, username: String, password: String, completion: @escaping (Result<Bool, Error>) -> Void) {
-        let endpoint = "/signup"
+        let endpoint = "/api/signUp"
         let parameters = ["email": email, "username": username, "password": password]
         
         AF.request(baseURL + endpoint, method: .post, parameters: parameters)
+                .validate(statusCode: 200..<300)
+                .responseJSON { response in
+                    switch response.result {
+                    case .success:
+                        print("User signed up successfully!")
+                        // Call createProfile method to save user info to the API's database
+                        self.createProfile(firstname: "", lastname: "", dateofbirth: "") { result in
+                            switch result {
+                            case .success:
+                                completion(.success(true))
+                            case .failure(let error):
+                                completion(.failure(error))
+                            }
+                        }
+                    case .failure(let error):
+                        completion(.failure(error))
+                    }
+                }
+    }
+    
+    func createProfile(firstname: String, lastname: String, dateofbirth: String, completion: @escaping (Result<Bool, Error>) -> Void) {
+        let endpoint = "/api/ProfileCreation"
+        let paremeters = ["firstname": firstname, "lastname": lastname, "dateofbirth": dateofbirth]
+        
+        AF.request(baseURL + endpoint, method: .post, parameters: paremeters)
             .validate(statusCode: 200..<300)
             .responseJSON { response in
                 switch response.result {
                 case .success:
+                    print("Profile Creation is connected!")
                     completion(.success(true))
                 case .failure(let error):
                     completion(.failure(error))

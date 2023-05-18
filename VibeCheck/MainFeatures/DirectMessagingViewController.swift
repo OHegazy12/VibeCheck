@@ -8,29 +8,34 @@ import UIKit
 import MessageKit
 import Parse
 
-class DirectMessagingViewController: UIViewController, UITableViewDelegate, UITableViewDataSource
+class DirectMessagingViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate
 {   var otherUsers = [PFUser]()
     var currentUser: PFUser!
+    var filteredUsers = [PFUser]()
+    var searchBar: UISearchBar!
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return otherUsers.count
+        return filteredUsers.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = otherUsers[indexPath.row].username
+        cell.textLabel?.text = filteredUsers[indexPath.row].username
         cell.accessoryType = .disclosureIndicator
         return cell
     }
+
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
         // Show chat messages
         let vc = ChatViewController()
-        vc.title = otherUsers[indexPath.row].username
+        vc.title = filteredUsers[indexPath.row].username
         navigationController?.pushViewController(vc, animated: true)
     }
+
     
     @IBOutlet var myTable: UITableView!
     
@@ -56,5 +61,23 @@ class DirectMessagingViewController: UIViewController, UITableViewDelegate, UITa
                    print("Error querying for users: \(error?.localizedDescription ?? "")")
                }
            })
+           
+           searchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 50))
+              searchBar.delegate = self
+              myTable.tableHeaderView = searchBar
        }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        // Filter otherUsers array based on searchText
+        if searchText.isEmpty {
+            // If search bar is empty, show all users
+            filteredUsers = otherUsers
+        } else {
+            // Filter otherUsers by username containing searchText
+            filteredUsers = otherUsers.filter { $0.username?.range(of: searchText, options: .caseInsensitive) != nil }
+        }
+        
+        myTable.reloadData()
+    }
+
    }
