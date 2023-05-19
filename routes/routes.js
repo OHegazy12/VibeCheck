@@ -900,18 +900,40 @@ router.post('/dislikeComment', cookieJwtAuth, async (req, res) => {
 // ================================ BEGIN SEARCHING ================================
 // Display all users for search
 router.get('/users', cookieJwtAuth, async (req, res) => {
+    // ----------------------- Begin version 1 -----------------------
+    // try {
+    //     const currentUserId = req.user.user_id;
+
+    //     const users = await db('users')
+    //         .whereNot('id', currentUserId)
+    //         .select('id', 'username');
+
+    //     res.json(users);
+    // } catch (error) {
+    //     console.error('Error retrieving users:', error);
+    //     res.status(500).json({ error: 'Failed to retrieve users' });
+    // }
+    // ----------------------- End version 1 -----------------------
+    // ----------------------- Begin version 2 -----------------------
     try {
         const currentUserId = req.user.user_id;
+        const { searchQuery } = req.body;
 
-        const users = await db('users')
-            .whereNot('id', currentUserId)
-            .select('id', 'username');
+        let query = db('users').whereNot('id', currentUserId);
+        console.log(searchQuery)
+        if (searchQuery) {
+            // Add search filter if searchQuery is provided
+            query = query.where('username', 'ilike', `%${searchQuery}%`);
+        }
+
+        const users = await query.select(['id', 'username']);
 
         res.json(users);
     } catch (error) {
         console.error('Error retrieving users:', error);
         res.status(500).json({ error: 'Failed to retrieve users' });
     }
+    // ----------------------- End version 2 -----------------------
 });
 // Display all interests for search
 router.get('/interests', cookieJwtAuth, async (req, res) => {
@@ -1012,7 +1034,7 @@ router.get('/displayNotifications', cookieJwtAuth, async (req, res) => {
     }
 })
 // ================================ END NOTIFICATIONS ================================
-
+// ================================ BEGIN EXECUTIVE ROUTES ================================
 // VERY POWERFUL REQUEST -- ONLY FOR TESTING -- DELETE LATER
 router.delete('/deleteAll', async (req, res) => {
     // delete ALL accounts
@@ -1049,5 +1071,52 @@ router.post('/makeAdmin', cookieJwtAuth, async (req, res) => {
     }
 })
 
+async function getUsrInfo(userId) {
+    try {
+        // Retrieve the user's information from the database
+        const user = await db('users').where('id', userId).first();
 
+        if (!user) {
+            // If user not found, return null or an appropriate response
+            return null;
+        }
+
+        // Exclude the password_hash from the user object
+        const { password_hash, ...userInfo } = user;
+
+        return userInfo;
+    } catch (error) {
+        // Handle any errors
+        console.error(error);
+        throw new Error('Failed to retrieve user information');
+    }
+}
+
+// Return info for a specific user
+router.get('/getUserInfo', async (req, res) => {
+    try {
+        const { id } = req.body;
+
+        if (!id) {
+            return res.status(400).json({ error: 'Missing id in the request body' });
+        }
+
+        // Call the getUserInfo function to retrieve the user's information
+        const userInfo = await getUsrInfo(id);
+
+        if (!userInfo) {
+            // If user not found, return a 404 response or an appropriate message
+            return res.status(404).json({ error: 'User not found' });
+        }
+
+        // Return the user's information in the response
+        return res.json(userInfo);
+    } catch (error) {
+        // Handle any errors
+        console.error(error);
+        return res.status(500).json({ error: 'Failed to retrieve user information' });
+    }
+});
+// ================================ END EXECUTIVE ROUTES ================================
 module.exports = router;
+
