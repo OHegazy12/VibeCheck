@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Parse
 
 class CommunityPostsCell: UITableViewCell {
     
@@ -42,6 +43,7 @@ class CommunityPostsCell: UITableViewCell {
     // Variables to track the upvote and downvote states
     private var isUpvoted: Bool = false
     private var isDownvoted: Bool = false
+    private var postId: String? // Store the post ID for reference
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -82,28 +84,92 @@ class CommunityPostsCell: UITableViewCell {
     func configure(with post: [String: Any]) {
         postLabel.text = post["title"] as? String
         postCaption.text = post["caption"] as? String
+        postId = post["objectId"] as? String // Assuming "objectId" is the unique identifier for the post
+        loadButtonStates()
+    }
+    
+    func loadButtonStates() {
+        guard let postId = postId else {
+            return
+        }
+        
+        let currentUser = PFUser.current()
+        
+        // Query the Parse server for the user's upvote/downvote for the post
+        let query = PFQuery(className: "PostVotes")
+        query.whereKey("postId", equalTo: postId)
+        query.whereKey("userId", equalTo: currentUser)
+        query.findObjectsInBackground { (votes, error) in
+            if let error = error {
+                print("Error loading post votes: \(error.localizedDescription)")
+            } else if let votes = votes, !votes.isEmpty {
+                // User has voted on the post
+                if let vote = votes.first,
+                   let upvoted = vote["upvoted"] as? Bool,
+                   let downvoted = vote["downvoted"] as? Bool {
+                    self.isUpvoted = upvoted
+                    self.isDownvoted = downvoted
+                    
+                    // Update the button states based on the vote
+                    DispatchQueue.main.async {
+                        self.updateButtonStates()
+                    }
+                }
+            }
+        }
     }
     
     @objc func didTapUpvote() {
         isUpvoted.toggle()
-        let upvoteImage = isUpvoted ? UIImage(named: "upvoteFilled") : UIImage(named: "upvoteEmpty")
-        upvoteButton.setImage(upvoteImage, for: .normal)
+        updateButtonStates()
         
-        if isUpvoted {
-            isDownvoted = false
-            downvoteButton.setImage(UIImage(named: "downvoteEmpty"), for: .normal)
+        if let postId = postId {
+            saveVoteToParse(upvoted: isUpvoted, downvoted: false, for: postId)
         }
     }
     
     @objc func didTapDownvote() {
         isDownvoted.toggle()
-        let downvoteImage = isDownvoted ? UIImage(named: "downvoteFilled") : UIImage(named: "downvoteEmpty")
-        downvoteButton.setImage(downvoteImage, for: .normal)
+        updateButtonStates()
         
-        if isDownvoted {
-            isUpvoted = false
-            upvoteButton.setImage(UIImage(named: "upvoteEmpty"), for: .normal)
+        if let postId = postId {
+            saveVoteToParse(upvoted: false, downvoted: isDownvoted, for: postId)
         }
     }
     
+    func updateButtonStates() {
+        let upvoteImage = isUpvoted ? UIImage(named: "upvoteFilled") : UIImage(named: "upvoteEmpty")
+        let downvoteImage = isDownvoted ? UIImage(named: "downvoteFilled") : UIImage(named: "downvoteEmpty")
+        
+        upvoteButton.setImage(upvoteImage, for: .normal)
+        downvoteButton.setImage(downvoteImage, for: .normal)
+    }
+    
+    func saveVoteToParse(upvoted: Bool, downvoted: Bool, for postId: String) {
+        let currentUser = PFUser.current()
+        
+        // Query the Parse server for the user's vote on the post
+        let query = PFQuery(className: "PostVotes")
+        query.whereKey("postId", equalTo: postId)
+        query.whereKey("userId", equalTo: currentUser)
+        query.getFirstObjectInBackground { (vote, error) in
+            if let error = error {
+                print("Error saving post vote: \(error.localizedDescription)")
+            } else if let vote = vote {
+                // Update the existing vote
+                vote["upvoted"] = upvoted
+                vote["downvoted"] = downvoted
+                vote.saveInBackground()
+            } else {
+                // Create a new vote object
+                let vote = PFObject(className: "PostVotes")
+                vote["postId"] = postId
+                vote["userId"] = currentUser
+                vote["upvoted"] = upvoted
+                vote["downvoted"] = downvoted
+                vote.saveInBackground()
+            }
+        }
+    }
 }
+

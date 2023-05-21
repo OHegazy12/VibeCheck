@@ -13,9 +13,8 @@ struct Message: MessageType {
 class ChatViewController: MessagesViewController, MessagesDataSource, MessagesLayoutDelegate, MessagesDisplayDelegate, InputBarAccessoryViewDelegate {
     let currentUser = PFUser.current()!
     var otherUser: PFUser!
-    var messages = [MessageType]()
+    var messages = [Message]()
     var chatId: String!
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,8 +43,7 @@ class ChatViewController: MessagesViewController, MessagesDataSource, MessagesLa
     
     func fetchMessages() {
         let messageQuery = PFQuery(className: "Message")
-        messageQuery.whereKey("sender", containedIn: [currentUser, otherUser])
-        messageQuery.whereKey("recipient", containedIn: [currentUser, otherUser])
+        messageQuery.whereKey("messageId", equalTo: chatId)
         messageQuery.order(byAscending: "createdAt")
         messageQuery.findObjectsInBackground { (objects, error) in
             if let messages = objects {
@@ -73,8 +71,6 @@ class ChatViewController: MessagesViewController, MessagesDataSource, MessagesLa
             }
         }
     }
-
-
     
     @objc func sendButtonPressed() {
         let messageText = messageInputBar.inputTextView.text.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -82,7 +78,7 @@ class ChatViewController: MessagesViewController, MessagesDataSource, MessagesLa
             return
         }
         
-        let messageId = "\(currentUser.objectId!)-\(otherUser.objectId!)-\(Int(Date().timeIntervalSince1970))"
+        let messageId = UUID().uuidString
         let message = Message(sender: currentSender(), messageId: messageId, sentDate: Date(), kind: .text(messageText))
         messages.append(message)
         messageInputBar.inputTextView.text = ""
@@ -99,12 +95,13 @@ class ChatViewController: MessagesViewController, MessagesDataSource, MessagesLa
         parseMessage.saveInBackground { (success, error) in
             if success {
                 print("Message saved!")
+                
+                // Send push notification to the recipient user here if desired
             } else if let error = error {
                 print("Error saving message: \(error.localizedDescription)")
             }
         }
     }
-
     
     func currentSender() -> SenderType {
         return Sender(senderId: currentUser.objectId!, displayName: currentUser.username ?? "")
