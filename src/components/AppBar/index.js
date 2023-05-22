@@ -26,17 +26,26 @@ import {
   TextField,
   InputAdornment,
 } from "@mui/material";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import "./style.css";
 import { Link, useLocation } from "react-router-dom";
 import MuiTextField from "../TextField";
 import logo from "../../assets/new-logo.png";
 import { AuthAction } from "../../context/AuthContext";
+import { SearchAction } from "../../context/SearchContext";
 
 function MuiAppBar() {
   const { onLogOut } = useContext(AuthAction);
+  const { getSearchList } = useContext(SearchAction);
+
   const { state, pathname } = useLocation();
-  console.log("hello ", state, pathname);
+
+  const [search, setSearch] = useState("");
+
+  // console.log("hello ", state, pathname);
+  const handleSearch = () => {
+    getSearchList(search);
+  };
 
   return (
     <Box sx={{ flexGrow: 1, width: "100%" }}>
@@ -148,14 +157,18 @@ function MuiAppBar() {
           </Box>
           <MuiTextField
             InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <Search />
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton color="black" onClick={handleSearch}>
+                    <Search />
+                  </IconButton>
                 </InputAdornment>
               ),
             }}
             label="Search Bar"
             sx={{ width: "300px", borderColor: "#000000" }}
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
           />
 
           <IconButton

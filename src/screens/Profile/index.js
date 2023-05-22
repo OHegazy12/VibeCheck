@@ -34,9 +34,10 @@ function Profile() {
           {/* Map over the user post array and render the post component for each post */}
 
           {profilePost?.length > 0 &&
-            profilePost?.map((data) => {
+            profilePost?.map((data, index) => {
               return (
                 <Post
+                  key={data._id || index}
                   userName={data.name}
                   location={data.location}
                   avatar={data.avatar}
@@ -44,6 +45,8 @@ function Profile() {
                   postImage={data.image}
                   headerRightIcon="Remove"
                   handleHeaderRightIcon={() => alert("Post removed!")}
+                  title={data.title}
+                  // id={data._id}
                 />
               );
             })}

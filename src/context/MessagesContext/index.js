@@ -1,6 +1,10 @@
 import React, { createContext, useEffect, useState } from "react";
 import RobertPicture from "../../assets/profilepicture/image1.jpg";
 import StevePicture from "../../assets/profilepicture/image2.jpg";
+import MarcusPicture from "../../assets/profilepicture/image3.jpg";
+import GaryPicture from "../../assets/profilepicture/image4.jpg";
+import KevinPicture from "../../assets/profilepicture/image5.jpg";
+import MelindaPicture from "../../assets/profilepicture/image6.jpg";
 
 export const MessagesContext = createContext();
 export const MessagesAction = createContext();
@@ -25,22 +29,22 @@ function MessagesContextProvider({ children }) {
     },
     {
       title: "Melinda",
-      avatar: RobertPicture,
+      avatar: MelindaPicture,
       subtitle: "Paris, France",
     },
     {
       title: "Marcus",
-      avatar: RobertPicture,
+      avatar: MarcusPicture,
       subtitle: "London, UK",
     },
     {
       title: "Gary",
-      avatar: RobertPicture,
+      avatar: GaryPicture,
       subtitle: "Toronto,Canada",
     },
     {
       title: "Kevin",
-      avatar: RobertPicture,
+      avatar: KevinPicture,
       subtitle: "Paris, France",
     },
   ];

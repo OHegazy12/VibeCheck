@@ -14,13 +14,14 @@ function Suggested({ SuggestedPeopleData }) {
       </Typography>
       {/* State hook "more" to keep trac of the number of suggested people to display  */}
       {/* uses the array method slice to only display the first more (3) number of suggested people */}
-      {SuggestedPeopleData.slice(0, more).map((data) => {
+      {SuggestedPeopleData.slice(0, more).map((data, index) => {
         return (
           <UserHeader
             avatar={data.avatar}
             name={data.name}
             location={data.location}
             rightIcon="PersonAdd"
+            key={data?._id || index}
           />
         );
       })}

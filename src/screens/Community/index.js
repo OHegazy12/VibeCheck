@@ -78,7 +78,7 @@ function Community() {
                 }}
               />
               {homePost?.length > 0 &&
-                homePost?.map((data) => {
+                homePost?.map((data, index) => {
                   return (
                     <Post
                       userName={data.name}
@@ -87,6 +87,7 @@ function Community() {
                       caption={data.caption}
                       postImage={data.image}
                       onPostBodyClick={() => handlePostClick()}
+                      key={data?._id || index}
                     />
                   );
                 })}

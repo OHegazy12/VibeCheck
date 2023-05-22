@@ -34,9 +34,11 @@ function AuthContextProvider({ children }) {
       .then((response) => {
         alert(response.response);
         console.log(response.user);
-        setIsAuth(response.response === "Logging in" ? true : false);
-        setUser(response.user);
-        localStorage.setItem("user", JSON.stringify(response.user));
+        if (response.response === "Logging in") {
+          setIsAuth(response.response === "Logging in" ? true : false);
+          setUser(response.user);
+          localStorage.setItem("user", JSON.stringify(response.user));
+        }
       })
       .catch((error) => console.error(error));
   };

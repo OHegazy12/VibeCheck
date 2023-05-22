@@ -4,6 +4,7 @@ import StevePicture from "../../assets/profilepicture/image2.jpg";
 import postImg from "../../assets/logo.png";
 import Hulk from "../../assets/profilepicture/image.jpg";
 import { AuthContext } from "../AuthContext";
+import { GET } from "../../constant/constant";
 
 export const ProfileContext = createContext();
 export const ProfileAction = createContext();
@@ -127,10 +128,30 @@ function ProfileContextProvider({ children }) {
     },
   ];
 
-  const getProfilePost = () => {
+  const getProfilePost = async () => {
     // Data should be call here from the data base
+    await GET("profilePost")
+      .then((res) => {
+        const postProfileData =
+          res?.length > 0
+            ? res?.reverse().map((data) => {
+                return {
+                  name: `${user?.first_name} ${user?.last_name}`,
+                  avatar: user?.profile_picture,
+                  location: data.type,
+                  title: data.title,
+                  caption: data.body_text,
+                  image: data.img_link,
+                  _id: data.post_id,
+                };
+              })
+            : [];
 
-    setProfilePost(ProfilePost);
+        setProfilePost(postProfileData);
+      })
+      .catch((error) => console.error("enconter error getting post: ", error));
+
+    // setProfilePost(ProfilePost);
     // Replace this profile post with the data you receive
   };
   const getSuggestedPeople = () => {
@@ -143,13 +164,15 @@ function ProfileContextProvider({ children }) {
   useEffect(() => {
     getProfilePost();
     getSuggestedPeople();
-  }, []);
+  }, [user]);
 
   return (
     <ProfileContext.Provider
       value={{ profilePost, userDetails, suggestedPeople }}
     >
-      <ProfileAction.Provider value={{}}>{children}</ProfileAction.Provider>
+      <ProfileAction.Provider value={{ getProfilePost }}>
+        {children}
+      </ProfileAction.Provider>
     </ProfileContext.Provider>
   );
 }

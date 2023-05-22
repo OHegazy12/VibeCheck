@@ -62,13 +62,14 @@ function Notifications() {
               }}
             />
             {filterList.length > 0 &&
-              filterList.slice(0, more).map((data) => {
+              filterList.slice(0, more).map((data, index) => {
                 return (
                   <MuiListItem
                     title={data.title}
                     subtitle={data.subtitle}
                     avatar={data.avatar}
                     icon={data.icon}
+                    key={data?._id || index}
                   />
                 );
               })}

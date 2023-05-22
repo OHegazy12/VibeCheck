@@ -15,7 +15,7 @@ function Home() {
         <div className="HomeScreen">
           <CreatePost />
           {homePost?.length > 0 &&
-            homePost?.map((data) => {
+            homePost?.map((data, index) => {
               return (
                 <Post
                   userName={data.name}
@@ -23,6 +23,7 @@ function Home() {
                   avatar={data.avatar}
                   caption={data.caption}
                   postImage={data.image}
+                  key={data?._id || index}
                 />
               );
             })}

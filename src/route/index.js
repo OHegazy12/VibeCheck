@@ -11,6 +11,7 @@ import Messages from "../screens/Messages";
 import Notifications from "../screens/Notifications";
 import PostScreen from "../screens/PostScreen";
 import { AuthContext } from "../context/AuthContext";
+import Search from "../screens/Search";
 
 function Router() {
   const { user } = useContext(AuthContext);
@@ -47,6 +48,7 @@ function Router() {
           path="/post"
           element={<ProtectedRoute component={PostScreen} />}
         />
+        <Route path="/search" element={<ProtectedRoute component={Search} />} />
         {/* </Switch> */}
       </Routes>
     </BrowserRouter>

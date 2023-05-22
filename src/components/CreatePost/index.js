@@ -17,6 +17,15 @@ function CreatePost() {
   const [title, setTitle] = useState("");
   const [postText, setPostText] = useState("");
   const [postImage, setPostImage] = useState("");
+  const [disbleBTN, setDisbleBTN] = useState(false);
+
+  const handleReset = (boolean = false) => {
+    setTopic("");
+    setTitle("");
+    setPostText("");
+    setPostImage("");
+    setDisbleBTN(boolean);
+  };
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -26,10 +35,12 @@ function CreatePost() {
   };
 
   const handlePost = () => {
+    setDisbleBTN(true);
     if (topic !== "" && title !== "" && postText !== "") {
-      createPost(topic, title, postText, postImage);
+      createPost(topic, title, postText, postImage, handleReset);
     } else {
       alert("Topic, title and post text should not be empty!");
+      setDisbleBTN(false);
     }
   };
 
@@ -117,6 +128,7 @@ function CreatePost() {
         variant="contained"
         fullWidth
         onClick={handlePost}
+        disabled={disbleBTN}
       />
     </div>
   );

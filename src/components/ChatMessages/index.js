@@ -33,9 +33,9 @@ function ChatMessages({ chatMessages }) {
       </div>
       <div className="ChatBody">
         {chatMessages.length > 0 &&
-          chatMessages.map((data) => {
+          chatMessages.map((data, index) => {
             return data.type === "user" ? (
-              <div className="ChatMessages">
+              <div className="ChatMessages" key={data?._id || index}>
                 <Typography
                   className="UserMessages"
                   variant="body2"
@@ -57,6 +57,7 @@ function ChatMessages({ chatMessages }) {
                 <div
                   className="ChatMessages"
                   style={{ alignItems: "flex-end" }}
+                  key={data?._id || index}
                 >
                   <Typography
                     className="MyMessages"

@@ -20,6 +20,8 @@ function Post({
   onPostBodyClick,
   headerRightIcon,
   handleHeaderRightIcon,
+  title,
+  // id,
 }) {
   const [showComment, setShowComment] = useState(false);
   return (
@@ -34,6 +36,7 @@ function Post({
 
       <div className="PostBody" onClick={onPostBodyClick}>
         {/* Checks if the caption prop is truthy.If it is, then it renders a typography  */}
+        {title && <Typography variant="h5">{title}</Typography>}
         {caption && <Typography variant="body1">{caption}</Typography>}
         {postImage && (
           // check if the postImage is truthy. If it is, then it renders an 'img' element with the 'src' attribute

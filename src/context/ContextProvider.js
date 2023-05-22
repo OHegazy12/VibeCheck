@@ -5,19 +5,22 @@ import HomeContextProvider from "./HomeContext";
 import MessagesContextProvider from "./MessagesContext";
 import NotificationContextProvider from "./NotificationContext";
 import ProfileContextProvider from "./ProfileContext";
+import SearchContextProvider from "./SearchContext";
 
 function ContextProvider({ children }) {
   return (
     <AuthContextProvider>
-      <ProfileContextProvider>
-        <HomeContextProvider>
-          <NotificationContextProvider>
-            <MessagesContextProvider>
-              <CommunityContextProvider>{children}</CommunityContextProvider>
-            </MessagesContextProvider>
-          </NotificationContextProvider>
-        </HomeContextProvider>
-      </ProfileContextProvider>
+      <SearchContextProvider>
+        <ProfileContextProvider>
+          <HomeContextProvider>
+            <NotificationContextProvider>
+              <MessagesContextProvider>
+                <CommunityContextProvider>{children}</CommunityContextProvider>
+              </MessagesContextProvider>
+            </NotificationContextProvider>
+          </HomeContextProvider>
+        </ProfileContextProvider>
+      </SearchContextProvider>
     </AuthContextProvider>
   );
 }

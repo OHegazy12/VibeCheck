@@ -12,12 +12,13 @@ function Interests({ InterestData }) {
       <Typography variant="h5" fontWeight={700} marginBottom={2}>
         Interests
       </Typography>
-      {InterestData.map((data) => {
+      {InterestData.map((data, index) => {
         return (
           <UserHeader
             leftIcon={data.icon}
             name={data.name || data.title}
             badge={data.badge}
+            key={data?._id || index}
           />
         );
       })}
